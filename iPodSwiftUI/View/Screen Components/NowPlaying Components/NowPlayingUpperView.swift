@@ -242,7 +242,7 @@ struct NowPlayingUpperView: View {
                                                 .offset(x: upperTextOffsetTrigger ? -naturalSize.width - DesignSystem.Soft.Dimension.rowTextSlidingIndentation : 0)
                                                 .frame(width: adjustedSize.width)
                                                 .clipped()
-                                                .animation(.linear(duration: DesignSystem.Time.nowPlayingUpperTextSlidingAnimationTimePerWidth * (naturalSize.width + DesignSystem.Soft.Dimension.rowTextSlidingIndentation) / DesignSystem.Soft.Dimension.w ).delay(DesignSystem.Time.nowPlayingUpperTextLagTime).repeatForever(autoreverses: false), value: upperTextOffsetTrigger)
+                                                .animation(.linear(duration: DesignSystem.Time.nowPlayingUpperTextSlidingAnimationTimePerWidth * (naturalSize.width + DesignSystem.Soft.Dimension.rowTextSlidingIndentation) / DesignSystem.Soft.Dimension.w ).delay(DesignSystem.Time.nowPlayingUpperTextRestTime).repeatForever(autoreverses: false), value: upperTextOffsetTrigger)
                                             }
                                             // if not truncated
                                             else {
@@ -307,7 +307,7 @@ struct NowPlayingUpperView: View {
                                                 .offset(x: upperTextOffsetTrigger ? -naturalSize.width - DesignSystem.Soft.Dimension.rowTextSlidingIndentation : 0)
                                                 .frame(width: adjustedSize.width)
                                                 .clipped()
-                                                .animation(.linear(duration: DesignSystem.Time.nowPlayingUpperTextSlidingAnimationTimePerWidth * (naturalSize.width + DesignSystem.Soft.Dimension.rowTextSlidingIndentation) / DesignSystem.Soft.Dimension.w ).delay(DesignSystem.Time.nowPlayingUpperTextLagTime).repeatForever(autoreverses: false), value: upperTextOffsetTrigger)
+                                                .animation(.linear(duration: DesignSystem.Time.nowPlayingUpperTextSlidingAnimationTimePerWidth * (naturalSize.width + DesignSystem.Soft.Dimension.rowTextSlidingIndentation) / DesignSystem.Soft.Dimension.w ).delay(DesignSystem.Time.nowPlayingUpperTextRestTime).repeatForever(autoreverses: false), value: upperTextOffsetTrigger)
                                             }
                                             // if not truncated
                                             else {

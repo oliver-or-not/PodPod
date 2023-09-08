@@ -399,8 +399,10 @@ extension DesignSystem.Time {
     static let longLagTime = 0.8
     static let rowTextSlidingAnimationTimePerWidth = 5.5
     static let nowPlayingUpperTextSlidingAnimationTimePerWidth = 11.0
+    static let rowTextRestTime = 1.3
+    static let nowPlayingUpperTextRestTime = 1.3
     static let rowTextLagTime = 1.5
-    static let nowPlayingUpperTextLagTime = 2.6
+    static let nowPlayingUpperTextLagTime = 1.5
     static let videoSymbolFadeOutTime = 0.8
 }
 
