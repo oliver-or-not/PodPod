@@ -136,7 +136,7 @@ final class PodObservable: ObservableObject {
     @Published var nowPlayingTransitionState: NowPlayingTransitionState = .stable {
         didSet {
             if nowPlayingTransitionState == .stable {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.longLagTime) {
                     self.nowPlayingUpperTextFlick()
                 }
             }
@@ -350,7 +350,7 @@ final class PodObservable: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             self.nowPlayingUpperTextFlicker = true
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.longLagTime * 1.5) {
             self.nowPlayingUpperTextOffsetTrigger = true
         }
     }

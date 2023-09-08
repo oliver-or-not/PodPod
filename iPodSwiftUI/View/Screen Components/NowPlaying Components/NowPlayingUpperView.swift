@@ -37,6 +37,20 @@ struct NowPlayingUpperView: View {
     }
     @State private var isTruncated = false
     
+    init(currentSongIndex: Int, lineupCount: Int, repeatState: RepeatState, shuffleIsActivated: Bool, currentSongArtwork: Artwork? = nil, currentArtworkUIImage_thumb: UIImage? = nil, currentSongTitle: String, currentSongArtistName: String, currentSongAlbumTitle: String, upperTextFlicker: Bool, upperTextOffsetTrigger: Bool) {
+        self.currentSongIndex = currentSongIndex
+        self.lineupCount = lineupCount
+        self.repeatState = repeatState
+        self.shuffleIsActivated = shuffleIsActivated
+        self.currentSongArtwork = currentSongArtwork
+        self.currentArtworkUIImage_thumb = currentArtworkUIImage_thumb
+        self.currentSongTitle = currentSongTitle
+        self.currentSongArtistName = currentSongArtistName
+        self.currentSongAlbumTitle = currentSongAlbumTitle
+        self.upperTextFlicker = upperTextFlicker
+        self.upperTextOffsetTrigger = upperTextOffsetTrigger
+    }
+    
     var body: some View {
             ZStack {
                 // get adjustedSize; hidden
