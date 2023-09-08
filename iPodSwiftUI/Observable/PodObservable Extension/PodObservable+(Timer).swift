@@ -92,7 +92,7 @@ extension PodObservable {
     }
     
     func setPlayInfoRefresher() {
-        playInfoRefresher = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { timer in
+        playInfoRefresher = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
             if !self.musicHandler.virtuallyStopped {
                 switch self.musicHandler.musicPlayer.state.playbackStatus {
                     case .playing:
