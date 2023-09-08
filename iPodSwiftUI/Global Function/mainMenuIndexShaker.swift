@@ -22,14 +22,12 @@ func mainMenuIndexShaker(_ n: Int) -> Int {
             return 6
         case 5: // composers
             return 7
-        case 6: // libraryRefresh
-            return 8
-        case 7: // photos
+        case 6: // photos
             return 1
-        case 8: // videos
+        case 7: // videos
             return 2
-        case 9: // shufflesongs
-            return 10
+        case 8: // shufflesongs
+            return 9
         default:
             return 0
     }

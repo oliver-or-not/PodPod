@@ -466,7 +466,7 @@ struct RowView: View {
                                             .foregroundColor(isFocused ? .white : .black)
                                             .lineLimit(1)
                                     }
-                                case .libraryRefresh:
+                                case .mediaRefresh:
                                     switch libraryUpdateSymbolState {
                                         case .notShown:
                                             EmptyView()

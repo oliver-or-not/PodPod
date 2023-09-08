@@ -68,9 +68,7 @@ extension PodObservable {
                     RowData(text: "아티스트", actionStyle: .chevronMove, key: .artists),
                     RowData(text: "앨범", actionStyle: .chevronMove, key: .albums),
                     RowData(text: "노래", actionStyle: .chevronMove, key: .songs),
-//                    RowData(text: "장르", actionStyle: .chevronMove, key: .genres),
-                    RowData(text: "작곡가", actionStyle: .chevronMove, key: .composers),
-                    RowData(text: "보관함 새로고침", actionStyle: .change, handlingProperty: .libraryRefresh)
+                    RowData(text: "작곡가", actionStyle: .chevronMove, key: .composers)
                 ]
                 return pd
             case .photos:
@@ -89,6 +87,7 @@ extension PodObservable {
                     RowData(text: "탭틱 피드백", actionStyle: .change, handlingProperty: .clickVibe),
                     RowData(text: "비디오 확대", actionStyle: .change, handlingProperty: .videoZoom),
                     RowData(text: "비디오 자동 재생", actionStyle: .change, handlingProperty: .videoAutoplay),
+                    RowData(text: "미디어 새로고침", actionStyle: .change, handlingProperty: .mediaRefresh),
                     RowData(text: "추가 설정", actionStyle: .link, handlingProperty: .settingsLink)
                 ]
                 return pd
@@ -332,7 +331,6 @@ extension PodObservable {
                     RowData(text: "     앨범", actionStyle: .change, handlingProperty: .mainMenu),
                     RowData(text: "     노래", actionStyle: .change, handlingProperty: .mainMenu),
                     RowData(text: "     작곡가", actionStyle: .change, handlingProperty: .mainMenu),
-                    RowData(text: "     보관함 새로고침", actionStyle: .change, handlingProperty: .mainMenu),
                     RowData(text: "사진", actionStyle: .change, handlingProperty: .mainMenu),
                     RowData(text: "비디오", actionStyle: .change, handlingProperty: .mainMenu),
                     RowData(text: "노래 임의 재생", actionStyle: .change, handlingProperty: .mainMenu),
