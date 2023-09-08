@@ -136,7 +136,7 @@ final class PodObservable: ObservableObject {
     @Published var nowPlayingTransitionState: NowPlayingTransitionState = .stable {
         didSet {
             if nowPlayingTransitionState == .stable {
-                DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.longLagTime) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.nowPlayingUpperTextLagTime) {
                     self.nowPlayingUpperTextFlick()
                 }
             }
@@ -176,6 +176,7 @@ final class PodObservable: ObservableObject {
     // check whether seek manipulation happened or not; true -> next page is .stable; false -> next page is .fullArtwork
     var seekIsUsed = false
     var nowPlayingTransitionCounter: Int = 0
+    var nowPlayingUpperTextFlickCounter: Int = 0
     
     @Published var nowPlayingBodyOffsetTrigger = false
     @Published var nowPlayingLowerOffsetTrigger = false
@@ -345,13 +346,17 @@ final class PodObservable: ObservableObject {
     //MARK: - manual refresh method
     
     func nowPlayingUpperTextFlick() {
+        nowPlayingUpperTextFlickCounter += 1
+        let capturedCounter = nowPlayingUpperTextFlickCounter
         nowPlayingUpperTextOffsetTrigger = false
         nowPlayingUpperTextFlicker = false
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             self.nowPlayingUpperTextFlicker = true
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.longLagTime * 1.5) {
-            self.nowPlayingUpperTextOffsetTrigger = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.nowPlayingUpperTextLagTime) {
+            if capturedCounter == self.nowPlayingUpperTextFlickCounter {
+                self.nowPlayingUpperTextOffsetTrigger = true
+            }
         }
     }
 }
