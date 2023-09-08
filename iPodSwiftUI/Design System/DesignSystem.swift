@@ -401,7 +401,7 @@ extension DesignSystem.Time {
     static let nowPlayingUpperTextSlidingAnimationTimePerWidth = 11.0
     static let rowTextLagTime = 1.3
     static let nowPlayingUpperTextLagTime = 2.6
-    static let videoSymbolFadeOutTime = 1.0
+    static let videoSymbolFadeOutTime = 0.8
 }
 
 //MARK: - DesignSystem > String

@@ -221,16 +221,14 @@ extension PodObservable {
                 if let safeKey = safeRowDataArray[focusedIndex].key {
                     switch rowHandlingProperty {
                         case .nothing:
-                            if [.photos, .videos, .nowPlayingVideo].contains(safeKey) {
-                                if safeKey == .nowPlayingVideo {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.longLagTime) {
-                                        self.videoHandler.restart()
-                                    }
-                                    videoPlayerIsVisible = true
-                                    videoPlayingStateSymbolIsVisible = true
-                                    videoBatterySymbolIsVisible = true
-                                    resetVideoSymbolTimer_short()
+                            if safeKey == .nowPlayingVideo {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.longLagTime) {
+                                    self.videoHandler.restart()
                                 }
+                                videoPlayerIsVisible = true
+                                videoPlayingStateSymbolIsVisible = true
+                                videoBatterySymbolIsVisible = true
+                                resetVideoSymbolTimer_short()
                                 goRight(newPageKey: safeKey, needLongLag: true)
                             } else {
                                 goRight(newPageKey: safeKey)
@@ -278,8 +276,8 @@ extension PodObservable {
                             doCenterButtonAction_videoAutoplay()
                         case .settingsLink:
                             doCenterButtonAction_settingsLink()
-                        case .libraryRefresh:
-                            doCenterButtonAciton_libraryRefresh()
+                        case .mediaRefresh:
+                            doCenterButtonAciton_mediaRefresh()
                         case .nothing:
                             switch safeRowDataArray[focusedIndex].actionStyle {
                                 case .changeBack:
@@ -596,70 +594,74 @@ extension PodObservable {
             UIApplication.shared.open(settingsUrl)
         }
     }
-    func doCenterButtonAciton_libraryRefresh() {
+    func doCenterButtonAciton_mediaRefresh() {
         libraryUpdateSymbolState = .loading
-        musicHandler.requestUpdateLibrary() {
-            self.musicHandler.requestUpdatePlaylists() {
-                DispatchQueue.main.async {
-                    self.libraryUpdateSymbolState = .done
-                    if let sk = self.statusModel.pageSKDictionary[.songs] {
-                        sk.focusedIndex = 0
-                        sk.discreteScrollMark = 0
-                        self.statusModel.pageSKDictionary[.songs] = sk
+        videoHandler.fetchFavoriteVideoAssets {
+            self.photoHandler.fetchFavoritePhotos {
+                self.musicHandler.requestUpdateLibrary() {
+                    self.musicHandler.requestUpdatePlaylists() {
+                        DispatchQueue.main.async {
+                            self.libraryUpdateSymbolState = .done
+                            if let sk = self.statusModel.pageSKDictionary[.songs] {
+                                sk.focusedIndex = 0
+                                sk.discreteScrollMark = 0
+                                self.statusModel.pageSKDictionary[.songs] = sk
+                            }
+                            if let sk = self.statusModel.pageSKDictionary[.playlists] {
+                                sk.focusedIndex = 0
+                                sk.discreteScrollMark = 0
+                                self.statusModel.pageSKDictionary[.playlists] = sk
+                            }
+                            if let sk = self.statusModel.pageSKDictionary[.composers] {
+                                sk.focusedIndex = 0
+                                sk.discreteScrollMark = 0
+                                self.statusModel.pageSKDictionary[.composers] = sk
+                            }
+                            if let sk = self.statusModel.pageSKDictionary[.genres] {
+                                sk.focusedIndex = 0
+                                sk.discreteScrollMark = 0
+                                self.statusModel.pageSKDictionary[.genres] = sk
+                            }
+                            if let sk = self.statusModel.pageSKDictionary[.artists] {
+                                sk.focusedIndex = 0
+                                sk.discreteScrollMark = 0
+                                self.statusModel.pageSKDictionary[.artists] = sk
+                            }
+                            if let sk = self.statusModel.pageSKDictionary[.albums] {
+                                sk.focusedIndex = 0
+                                sk.discreteScrollMark = 0
+                                self.statusModel.pageSKDictionary[.albums] = sk
+                            }
+                            if let sk = self.statusModel.pageSKDictionary[.chosenPlaylist] {
+                                sk.focusedIndex = 0
+                                sk.discreteScrollMark = 0
+                                self.statusModel.pageSKDictionary[.chosenPlaylist] = sk
+                            }
+                            if let sk = self.statusModel.pageSKDictionary[.chosenComposer] {
+                                sk.focusedIndex = 0
+                                sk.discreteScrollMark = 0
+                                self.statusModel.pageSKDictionary[.chosenComposer] = sk
+                            }
+                            if let sk = self.statusModel.pageSKDictionary[.chosenGenre] {
+                                sk.focusedIndex = 0
+                                sk.discreteScrollMark = 0
+                                self.statusModel.pageSKDictionary[.chosenGenre] = sk
+                            }
+                            if let sk = self.statusModel.pageSKDictionary[.chosenArtist] {
+                                sk.focusedIndex = 0
+                                sk.discreteScrollMark = 0
+                                self.statusModel.pageSKDictionary[.chosenArtist] = sk
+                            }
+                            if let sk = self.statusModel.pageSKDictionary[.chosenAlbum] {
+                                sk.focusedIndex = 0
+                                sk.discreteScrollMark = 0
+                                self.statusModel.pageSKDictionary[.chosenAlbum] = sk
+                            }
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                            self.libraryUpdateSymbolState = .notShown
+                        }
                     }
-                    if let sk = self.statusModel.pageSKDictionary[.playlists] {
-                        sk.focusedIndex = 0
-                        sk.discreteScrollMark = 0
-                        self.statusModel.pageSKDictionary[.playlists] = sk
-                    }
-                    if let sk = self.statusModel.pageSKDictionary[.composers] {
-                        sk.focusedIndex = 0
-                        sk.discreteScrollMark = 0
-                        self.statusModel.pageSKDictionary[.composers] = sk
-                    }
-                    if let sk = self.statusModel.pageSKDictionary[.genres] {
-                        sk.focusedIndex = 0
-                        sk.discreteScrollMark = 0
-                        self.statusModel.pageSKDictionary[.genres] = sk
-                    }
-                    if let sk = self.statusModel.pageSKDictionary[.artists] {
-                        sk.focusedIndex = 0
-                        sk.discreteScrollMark = 0
-                        self.statusModel.pageSKDictionary[.artists] = sk
-                    }
-                    if let sk = self.statusModel.pageSKDictionary[.albums] {
-                        sk.focusedIndex = 0
-                        sk.discreteScrollMark = 0
-                        self.statusModel.pageSKDictionary[.albums] = sk
-                    }
-                    if let sk = self.statusModel.pageSKDictionary[.chosenPlaylist] {
-                        sk.focusedIndex = 0
-                        sk.discreteScrollMark = 0
-                        self.statusModel.pageSKDictionary[.chosenPlaylist] = sk
-                    }
-                    if let sk = self.statusModel.pageSKDictionary[.chosenComposer] {
-                        sk.focusedIndex = 0
-                        sk.discreteScrollMark = 0
-                        self.statusModel.pageSKDictionary[.chosenComposer] = sk
-                    }
-                    if let sk = self.statusModel.pageSKDictionary[.chosenGenre] {
-                        sk.focusedIndex = 0
-                        sk.discreteScrollMark = 0
-                        self.statusModel.pageSKDictionary[.chosenGenre] = sk
-                    }
-                    if let sk = self.statusModel.pageSKDictionary[.chosenArtist] {
-                        sk.focusedIndex = 0
-                        sk.discreteScrollMark = 0
-                        self.statusModel.pageSKDictionary[.chosenArtist] = sk
-                    }
-                    if let sk = self.statusModel.pageSKDictionary[.chosenAlbum] {
-                        sk.focusedIndex = 0
-                        sk.discreteScrollMark = 0
-                        self.statusModel.pageSKDictionary[.chosenAlbum] = sk
-                    }
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self.libraryUpdateSymbolState = .notShown
                 }
             }
         }

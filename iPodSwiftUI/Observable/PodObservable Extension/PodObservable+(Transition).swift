@@ -136,13 +136,9 @@ extension PodObservable {
         
         // refresh photo array; set currenetRowCount and wheelProperty
         if key == .photos {
-            photoHandler.fetchFavoritePhotos() {
-                self.currentRowCount = self.dataModel.favoritePhotoArray.count
-            }
+            self.currentRowCount = self.dataModel.favoritePhotoArray.count
         } else if key == .videos {
-            videoHandler.fetchFavoriteVideoAssets {
-                self.currentRowCount = self.dataModel.favoriteVideoThumbnailArray.count
-            }
+            self.currentRowCount = self.dataModel.favoriteVideoThumbnailArray.count
         } else {
             currentRowCount = pageData.rowDataArray?.count
         }
@@ -169,7 +165,7 @@ extension PodObservable {
             case .nothing, .volume, .soundLimit, .brightness:
                 _ = 0
             case .focusedIndex:
-                // reset focusedIndex and discrereScrollMark if (e.g.) chosen artist is different from the prev chosen artist; album, genre, composer, playlist, ... the same.
+                // reset focusedIndex and discrereScrollMark if (e.g.) chosen artist is different from the prev chosen artist; album, genre, composer, playlist, ... the same.q
                 var needReset = false
                 switch key {
                     case .chosenPlaylist:

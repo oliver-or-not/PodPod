@@ -20,6 +20,6 @@ enum RowHandlingPropertyKey {
     case videoZoom
     case videoAutoplay
     case settingsLink
-    case libraryRefresh
+    case mediaRefresh
     case nothing
 }

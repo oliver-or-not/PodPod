@@ -153,7 +153,7 @@ struct RowView_ghost: View {
                                         .foregroundColor(isFocused ? .white : .black)
                                         .lineLimit(1)
                                 }
-                            case .libraryRefresh:
+                            case .mediaRefresh:
                                 switch libraryUpdateSymbolState {
                                     case .notShown:
                                         EmptyView()
@@ -304,7 +304,7 @@ struct RowView_ghost: View {
                                         .foregroundColor(isFocused ? .white : .black)
                                         .lineLimit(1)
                                 }
-                            case .libraryRefresh:
+                            case .mediaRefresh:
                                 switch libraryUpdateSymbolState {
                                     case .notShown:
                                         EmptyView()
@@ -494,7 +494,7 @@ struct RowView_ghost: View {
                                             .foregroundColor(isFocused ? .white : .black)
                                             .lineLimit(1)
                                     }
-                                case .libraryRefresh:
+                                case .mediaRefresh:
                                     switch libraryUpdateSymbolState {
                                         case .notShown:
                                             EmptyView()

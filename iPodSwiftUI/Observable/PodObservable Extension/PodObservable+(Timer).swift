@@ -35,7 +35,7 @@ extension PodObservable {
     
     func resetVideoSymbolTimer_short() {
         videoSymbolTimer?.invalidate()
-        videoSymbolTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
+        videoSymbolTimer = Timer.scheduledTimer(withTimeInterval: 1.8, repeats: false) { timer in
             if (self.key == .videos && self.videoDetailIsShown) || self.key == .nowPlayingVideo {
                 if self.videoPlayingStateSymbolIsVisible {
                     withAnimation(.linear(duration: DesignSystem.Time.videoSymbolFadeOutTime)) {
@@ -64,7 +64,7 @@ extension PodObservable {
     
     func resetVideoSymbolTimer_long() {
         videoSymbolTimer?.invalidate()
-        videoSymbolTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { timer in
+        videoSymbolTimer = Timer.scheduledTimer(withTimeInterval: 4.8, repeats: false) { timer in
             if (self.key == .videos && self.videoDetailIsShown) || self.key == .nowPlayingVideo {
                 if self.videoPlayingStateSymbolIsVisible {
                     withAnimation(.linear(duration: DesignSystem.Time.videoSymbolFadeOutTime)) {
