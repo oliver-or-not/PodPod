@@ -348,7 +348,7 @@ struct RowView: View {
                             .clipped()
                             .animation(.linear(duration: DesignSystem.Time.rowTextSlidingAnimationTimePerWidth * (naturalSize.width + DesignSystem.Soft.Dimension.rowTextSlidingIndentation) / DesignSystem.Soft.Dimension.w ).delay(DesignSystem.Time.rowTextLagTime).repeatForever(autoreverses: false), value: slideTrigger)
                             .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.slidingAnimationTime) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.longLagTime * 1.5 +  DesignSystem.Time.slidingAnimationTime) {
                                     slideTrigger = true
                                 }
                             }
