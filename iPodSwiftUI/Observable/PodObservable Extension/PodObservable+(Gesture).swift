@@ -317,12 +317,11 @@ extension PodObservable {
                         videoHandler.clearPlayer()
                         DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.longLagTime) {
                             self.videoHandler.videoIndex = focusedIndex
-                            let asset = self.dataModel.favoriteVideoArray[focusedIndex]
                             self.videoPlayerIsVisible = true
                             self.videoDetailIsShown = true
                             self.videoPlayingStateSymbolIsVisible = true
                             self.videoBatterySymbolIsVisible = true
-                            self.videoHandler.play(asset)
+                            self.videoHandler.play(self.dataModel.favoriteVideoArray[focusedIndex])
                             self.resetVideoSymbolTimer_short()
                             
                         }
@@ -682,6 +681,7 @@ extension PodObservable {
         
         if key == .videos && videoDetailIsShown {
             self.wheelProperty = .focusedIndex
+            self.focusedIndex = videoHandler.videoIndex
             videoPlayerIsVisible = false
             videoControlState = .stable
             videoHandler.pause()

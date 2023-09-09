@@ -184,7 +184,7 @@ struct GestureView: View {
 struct GestureView_Previews: PreviewProvider {
     static var previews: some View {
         GestureView()
-            .environmentObject(PodObservable())
+            .environmentObject(PodObservable.shared)
     }
 }
 

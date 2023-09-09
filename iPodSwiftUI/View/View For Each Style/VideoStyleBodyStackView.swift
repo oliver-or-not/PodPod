@@ -29,8 +29,6 @@ struct VideoStyleBodyStackView: View {
     
     private var player = VideoHandler.shared.player
     
-    @State var textIsShown: Bool = false
-    
     private var ratio: CGFloat {
         CGFloat(DataModel.shared.favoriteVideoRatioArray[VideoHandler.shared.videoIndex!])
     }
@@ -135,16 +133,10 @@ struct VideoStyleBodyStackView: View {
                             Spacer()
                                 .frame(width: basicIndentation)
                             
-                            Text("표시할 비디오가 없습니다.\n사진 앱에서 추가할 비디오를 선택하고\n즐겨찾기 버튼(♡)을 누르세요.")
+                            Text("표시할 비디오가 없습니다.\n1. 사진 앱에서 추가할 비디오를 선택하고\n즐겨찾기 버튼(♡)을 누르세요.\n2. 설정에서 미디어를 새로고침하세요.")
                                 .multilineTextAlignment(.center)
                                 .font(.system(size: nowPlayingFontSize, weight: .semibold))
                                 .foregroundColor(.black)
-                                .opacity(textIsShown ? 1 : 0)
-                                .onAppear {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                                        textIsShown = true
-                                    }
-                                }
                             
                             Spacer()
                                 .frame(width: basicIndentation)

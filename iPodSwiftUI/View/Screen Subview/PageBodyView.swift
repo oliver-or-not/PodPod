@@ -185,7 +185,7 @@ struct PageBodyView: View {
 struct PageBodyView_Previews: PreviewProvider {
     static var previews: some View {
         PageBodyView(isGhost: false)
-            .environmentObject(PodObservable())
+            .environmentObject(PodObservable.shared)
     }
 }
 
