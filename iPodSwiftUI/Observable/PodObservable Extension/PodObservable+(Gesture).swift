@@ -318,11 +318,11 @@ extension PodObservable {
                         DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.longLagTime) {
                             self.videoHandler.videoIndex = focusedIndex
                             let asset = self.dataModel.favoriteVideoArray[focusedIndex]
-                            self.videoHandler.play(asset)
                             self.videoPlayerIsVisible = true
                             self.videoDetailIsShown = true
                             self.videoPlayingStateSymbolIsVisible = true
                             self.videoBatterySymbolIsVisible = true
+                            self.videoHandler.play(asset)
                             self.resetVideoSymbolTimer_short()
                             
                         }

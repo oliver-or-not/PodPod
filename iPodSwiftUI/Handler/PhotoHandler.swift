@@ -50,7 +50,6 @@ final class PhotoHandler {
     func getUIImage(for asset: PHAsset, completion: @escaping (UIImage?) -> Void) {
         let options = PHImageRequestOptions()
         options.isNetworkAccessAllowed = true
-        
         PHImageManager.default()
             .requestImage(for: asset, targetSize: CGSize(width: 800, height: 800), contentMode: .aspectFit, options: options) { image, _ in
                 if let image {

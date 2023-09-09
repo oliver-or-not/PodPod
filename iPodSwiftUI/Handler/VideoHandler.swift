@@ -83,7 +83,9 @@ final class VideoHandler {
     
     func play(_ asset: PHAsset) {
         MusicHandler.shared.virtuallyStopped = true
-        PHImageManager.default().requestAVAsset(forVideo: asset, options: nil) { avAsset, _, _ in
+        let options = PHVideoRequestOptions()
+        options.isNetworkAccessAllowed = true
+        PHImageManager.default().requestAVAsset(forVideo: asset, options: options) { avAsset, _, _ in
             if let avAsset {
                 do {
                     try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
@@ -98,6 +100,7 @@ final class VideoHandler {
                 self.player = player
                 self.player.play()
             }
+            print("avAsset nil")
         }
     }
     
