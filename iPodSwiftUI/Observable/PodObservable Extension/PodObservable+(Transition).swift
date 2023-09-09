@@ -134,7 +134,7 @@ extension PodObservable {
             nowPlayingTransitionState = .stable
         }
         
-        // refresh photo array; set currenetRowCount and wheelProperty
+        // set currenetRowCount and wheelProperty
         if key == .photos {
             self.currentRowCount = self.dataModel.favoritePhotoArray.count
         } else if key == .videos {
