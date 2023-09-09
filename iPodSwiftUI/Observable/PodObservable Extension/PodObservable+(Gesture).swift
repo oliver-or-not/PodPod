@@ -24,6 +24,8 @@ extension PodObservable {
         if newValue != nil && prevValue == nil {
             stableTimer?.invalidate()
             videoSymbolTimer?.invalidate()
+            headerTimeIsShown = false
+            headerTimeTimer?.invalidate()
 
             // .nowPlaying page transition from .stable to .volume
             if key == .nowPlaying {
@@ -194,6 +196,8 @@ extension PodObservable {
             else {
                 resetStableTimer_fromOutsideToNowPlaying()
             }
+            
+            resetHeaderTimeTimer()
         }
     }
     
@@ -205,6 +209,8 @@ extension PodObservable {
         else {
             resetStableTimer_fromOutsideToNowPlaying()
         }
+        headerTimeIsShown = false
+        resetHeaderTimeTimer()
         
         guard transitionState == .normal && buttonsAreAvailable else {
             return
@@ -608,11 +614,14 @@ extension PodObservable {
     
     func topButtonTapped() {
         vibeHandler.heavyVibe(if: vibeIsActivated)
-        resetStableTimer_fromOutsideToNowPlaying()
-
+        
         guard transitionState == .normal && buttonsAreAvailable else {
             return
         }
+        
+        resetStableTimer_fromOutsideToNowPlaying()
+        headerTimeIsShown = false
+        resetHeaderTimeTimer()
         
         if key == .photos && photoDetailIsShown {
             photoDetailIsShown = false
@@ -671,6 +680,8 @@ extension PodObservable {
         else {
             resetStableTimer_fromOutsideToNowPlaying()
         }
+        headerTimeIsShown = false
+        resetHeaderTimeTimer()
         
         // when playing
         if playingState == .playing {
@@ -828,6 +839,8 @@ extension PodObservable {
         else {
             resetStableTimer_fromOutsideToNowPlaying()
         }
+        headerTimeIsShown = false
+        resetHeaderTimeTimer()
         
         if [.playing, .paused].contains(playingState) {
             if let timePassed {
@@ -876,6 +889,8 @@ extension PodObservable {
         else {
             resetStableTimer_fromOutsideToNowPlaying()
         }
+        headerTimeIsShown = false
+        resetHeaderTimeTimer()
         
         if [.playing, .paused].contains(playingState) {
             Task {
@@ -910,6 +925,9 @@ extension PodObservable {
         else {
             resetStableTimer_fromOutsideToNowPlaying()
         }
+        headerTimeIsShown = false
+        resetHeaderTimeTimer()
+        
         musicHandler.musicPlayer.beginSeekingBackward()
     }
     
@@ -928,6 +946,9 @@ extension PodObservable {
         else {
             resetStableTimer_fromOutsideToNowPlaying()
         }
+        headerTimeIsShown = false
+        resetHeaderTimeTimer()
+        
         musicHandler.musicPlayer.beginSeekingForward()
     }
     

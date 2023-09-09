@@ -15,6 +15,7 @@ struct RowView_ghost: View {
     
     var isFocused: Bool
     
+    var wantsToSeeTimeInHeader: Bool
     var repeatState: RepeatState
     var alwaysShuffle: Bool
     
@@ -172,6 +173,17 @@ struct RowView_ghost: View {
                                             .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.4)
                                             .foregroundColor(isFocused ? .white : .black)
                                 }
+                                if wantsToSeeTimeInHeader {
+                                    Text("켬")
+                                        .font(.system(size: DesignSystem.Soft.Dimension.basicFontSize, weight: .semibold))
+                                        .foregroundColor(isFocused ? .white : .black)
+                                        .lineLimit(1)
+                                } else {
+                                    Text("끔")
+                                        .font(.system(size: DesignSystem.Soft.Dimension.basicFontSize, weight: .semibold))
+                                        .foregroundColor(isFocused ? .white : .black)
+                                        .lineLimit(1)
+                                }
                             default:
                                 EmptyView()
                         }
@@ -322,6 +334,17 @@ struct RowView_ghost: View {
                                             .fontWeight(.heavy)
                                             .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.4)
                                             .foregroundColor(isFocused ? .white : .black)
+                                }
+                                if wantsToSeeTimeInHeader {
+                                    Text("켬")
+                                        .font(.system(size: DesignSystem.Soft.Dimension.basicFontSize, weight: .semibold))
+                                        .foregroundColor(isFocused ? .white : .black)
+                                        .lineLimit(1)
+                                } else {
+                                    Text("끔")
+                                        .font(.system(size: DesignSystem.Soft.Dimension.basicFontSize, weight: .semibold))
+                                        .foregroundColor(isFocused ? .white : .black)
+                                        .lineLimit(1)
                                 }
                             default:
                                 EmptyView()
@@ -513,6 +536,17 @@ struct RowView_ghost: View {
                                                 .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.4)
                                                 .foregroundColor(isFocused ? .white : .black)
                                     }
+                                    if wantsToSeeTimeInHeader {
+                                        Text("켬")
+                                            .font(.system(size: DesignSystem.Soft.Dimension.basicFontSize, weight: .semibold))
+                                            .foregroundColor(isFocused ? .white : .black)
+                                            .lineLimit(1)
+                                    } else {
+                                        Text("끔")
+                                            .font(.system(size: DesignSystem.Soft.Dimension.basicFontSize, weight: .semibold))
+                                            .foregroundColor(isFocused ? .white : .black)
+                                            .lineLimit(1)
+                                    }
                                 default:
                                     EmptyView()
                             }
@@ -540,6 +574,6 @@ struct RowView_ghost: View {
 
 struct RowView_ghost_Previews: PreviewProvider {
     static var previews: some View {
-        RowView_ghost(rowData: RowData(text: "음악", actionStyle: .chevronMove, key: .music), indexInList: 0, isFocused: true, repeatState: .all, alwaysShuffle: true, vibeIsActivated: true, videoZoomMode: .fit, videoAutoplayMode: .off, libraryUpdateSymbolState: .done, mainMenuBoolArray: StatusModel.initialValueOfMainMenuBoolArray)
+        RowView_ghost(rowData: RowData(text: "음악", actionStyle: .chevronMove, key: .music), indexInList: 0, isFocused: true, wantsToSeeTimeInHeader: false, repeatState: .all, alwaysShuffle: true, vibeIsActivated: true, videoZoomMode: .fit, videoAutoplayMode: .off, libraryUpdateSymbolState: .done, mainMenuBoolArray: StatusModel.initialValueOfMainMenuBoolArray)
     }
 }

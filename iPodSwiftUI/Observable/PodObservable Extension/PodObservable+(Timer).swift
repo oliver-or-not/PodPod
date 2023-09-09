@@ -15,7 +15,7 @@ extension PodObservable {
     func resetHeaderTimeTimer() {
         headerTimeTimer?.invalidate()
         headerTimeTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { timer in
-            _ = 0
+            self.headerTimeIsShown = true
         }
     }
     
@@ -253,6 +253,14 @@ extension PodObservable {
                 if self.currentVideoTotalTime != nil {
                     self.currentVideoTotalTime = nil
                 }
+            }
+            
+            // header time title
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeStyle = .short
+            let tempString = dateFormatter.string(from: Date())
+            if tempString != self.timeTitle {
+                self.timeTitle = tempString
             }
         }
     }

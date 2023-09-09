@@ -38,6 +38,7 @@ final class PodObservable: ObservableObject {
     @Published var batteryState: BatteryState = .unplugged
     @Published var batteryLevel: Float = 1.0
     @Published var volume: Float = 0.0
+    @Published var timeTitle: String = ""
     @Published var wantsToSeeTimeInHeader = false // user default variable
     @Published var vibeIsActivated = true // user default variable
     @Published var videoZoomMode: VideoZoomMode = .fit // user default variable
@@ -444,6 +445,7 @@ final class PodObservable: ObservableObject {
             
         //MARK: -  set refresher
         
+        resetHeaderTimeTimer()
         setPlayInfoRefresher()
         setBatteryInfoRefresher()
     }
