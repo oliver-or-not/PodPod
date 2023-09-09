@@ -137,6 +137,7 @@ final class PodObservable: ObservableObject {
         }
     }
     @Published var photoDetailIsShown = false
+    @Published var videoIsBeingLoaded = false
     @Published var videoDetailIsShown = false
     @Published var videoPlayerIsVisible = false
     @Published var videoPlayingStateSymbolIsVisible = false
@@ -276,7 +277,7 @@ final class PodObservable: ObservableObject {
     @Published var nowPlayingLowerOffsetTrigger = false
     @Published var nowPlayingUpperTextFlicker = true
     @Published var nowPlayingUpperTextOffsetTrigger = false
-    @Published var currentKeyIsNowPlayingVideo = false
+    @Published var currentKeyIsNowPlayingVideo = false // need to slide header
     
     //MARK: - timer
     

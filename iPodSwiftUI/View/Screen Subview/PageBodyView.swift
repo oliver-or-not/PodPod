@@ -72,7 +72,8 @@ struct PageBodyView: View {
                             playingStateSymbolIsVisible: podObservable.videoPlayingStateSymbolIsVisible,
                             batterySymbolIsVisible: podObservable.videoBatterySymbolIsVisible,
                             volumeBarIsVisible: podObservable.videoVolumeBarIsVisible,
-                            seekBarIsVisible: podObservable.videoSeekBarIsVisible
+                            seekBarIsVisible: podObservable.videoSeekBarIsVisible,
+                            videoIsBeingLoaded: podObservable.videoIsBeingLoaded
                         )
                     case .nowPlayingVideo:
                         NowPlayingVideoStyleView(
@@ -88,7 +89,8 @@ struct PageBodyView: View {
                             batterySymbolIsVisible:
                                 podObservable.videoBatterySymbolIsVisible,
                             volumeBarIsVisible: podObservable.videoVolumeBarIsVisible,
-                            seekBarIsVisible: podObservable.videoSeekBarIsVisible
+                            seekBarIsVisible: podObservable.videoSeekBarIsVisible,
+                            videoIsBeingLoaded: podObservable.videoIsBeingLoaded
                         )
                     case .text:
                         TextStyleBodyView(title: podObservable.getPageData(.main).headerTitle)
@@ -155,7 +157,8 @@ struct PageBodyView: View {
                             batterySymbolIsVisible:
                                 podObservable.videoBatterySymbolIsVisible,
                             volumeBarIsVisible: podObservable.videoVolumeBarIsVisible,
-                            seekBarIsVisible: podObservable.videoSeekBarIsVisible
+                            seekBarIsVisible: podObservable.videoSeekBarIsVisible,
+                            videoIsBeingLoaded: podObservable.videoIsBeingLoaded
                         )
                     case .nowPlayingVideo:
                         NowPlayingVideoStyleView(
@@ -171,7 +174,8 @@ struct PageBodyView: View {
                             batterySymbolIsVisible:
                                 podObservable.videoBatterySymbolIsVisible,
                             volumeBarIsVisible: podObservable.videoVolumeBarIsVisible,
-                            seekBarIsVisible: podObservable.videoSeekBarIsVisible
+                            seekBarIsVisible: podObservable.videoSeekBarIsVisible,
+                            videoIsBeingLoaded: podObservable.videoIsBeingLoaded
                         )
                     case .text:
                         TextStyleBodyView(title: podObservable.getPageData(.main).headerTitle)

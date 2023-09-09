@@ -24,6 +24,7 @@ struct NowPlayingVideoStyleView: View {
     var batterySymbolIsVisible: Bool = false
     var volumeBarIsVisible: Bool = false
     var seekBarIsVisible: Bool = false
+    var videoIsBeingLoaded: Bool = false
     
     private var player = VideoHandler.shared.player
     
@@ -42,7 +43,7 @@ struct NowPlayingVideoStyleView: View {
         DesignSystem.Soft.Dimension.h
     }
     
-    init(playingState: PlayingState = .paused, batteryLevel: Float = 0.0, volume: Float = 0.0, videoTimePassed: CMTime? = nil, currentVideoTotalTime: CMTime? = nil, zoomMode: VideoZoomMode = .fit, detailIsShown: Bool = false, playerIsVisible: Bool = false, playingStateSymbolIsVisible: Bool = false, batterySymbolIsVisible: Bool = false, volumeBarIsVisible: Bool = false, seekBarIsVisible: Bool = false) {
+    init(playingState: PlayingState = .paused, batteryLevel: Float = 0.0, volume: Float = 0.0, videoTimePassed: CMTime? = nil, currentVideoTotalTime: CMTime? = nil, zoomMode: VideoZoomMode = .fit, detailIsShown: Bool = false, playerIsVisible: Bool = false, playingStateSymbolIsVisible: Bool = false, batterySymbolIsVisible: Bool = false, volumeBarIsVisible: Bool = false, seekBarIsVisible: Bool = false, videoIsBeingLoaded: Bool = false) {
         self.playingState = playingState
         self.batteryLevel = batteryLevel
         self.volume = volume
@@ -55,12 +56,14 @@ struct NowPlayingVideoStyleView: View {
         self.batterySymbolIsVisible = batterySymbolIsVisible
         self.volumeBarIsVisible = volumeBarIsVisible
         self.seekBarIsVisible = seekBarIsVisible
+        self.videoIsBeingLoaded = videoIsBeingLoaded
     }
     
     var body: some View {
         // video detail
         ZStack {
             Color(.black)
+            
             Group {
                 if playerIsVisible {
                     switch zoomMode {
@@ -75,6 +78,11 @@ struct NowPlayingVideoStyleView: View {
                     }
                 }
             }
+            
+            ProgressView()
+                .foregroundColor(.white)
+                .frame(width: w * 0.25, height: w * 0.25)
+                .opacity(videoIsBeingLoaded ? 1 : 0)
             
             // playing state symbol
             Group {
@@ -120,6 +128,6 @@ struct NowPlayingVideoStyleView: View {
 
 struct NowPlayingVideoStyleView_Previews: PreviewProvider {
     static var previews: some View {
-        NowPlayingVideoStyleView(playingState: .playingVideo, videoTimePassed: CMTime(value: 60000, timescale: 600), currentVideoTotalTime: CMTime(value: 180000, timescale: 600), detailIsShown: true, playingStateSymbolIsVisible: true, batterySymbolIsVisible: true, volumeBarIsVisible: true, seekBarIsVisible: true)
+        NowPlayingVideoStyleView(playingState: .playingVideo, videoTimePassed: CMTime(value: 60000, timescale: 600), currentVideoTotalTime: CMTime(value: 180000, timescale: 600), detailIsShown: true, playingStateSymbolIsVisible: true, batterySymbolIsVisible: true, volumeBarIsVisible: true, seekBarIsVisible: true, videoIsBeingLoaded: false)
     }
 }
