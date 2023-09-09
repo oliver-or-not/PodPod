@@ -66,6 +66,6 @@ struct PageBodyStackView: View {
 struct BodyStackView_Previews: PreviewProvider {
     static var previews: some View {
         PageBodyStackView()
-            .environmentObject(PodObservable())
+            .environmentObject(PodObservable.shared)
     }
 }

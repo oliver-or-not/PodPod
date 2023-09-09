@@ -17,6 +17,7 @@ final class VideoHandler {
     var player: AVPlayer = AVPlayer()
     
     var videoIndex: Int?
+    var currentAsset: PHAsset?
     
     private init() {}
 
@@ -81,10 +82,11 @@ final class VideoHandler {
             }
     }
     
-    func play(_ asset: PHAsset) {
+    func play(_ asset: PHAsset, networkAccessIsAllowed: Bool = false) {
         MusicHandler.shared.virtuallyStopped = true
+        currentAsset = asset
         let options = PHVideoRequestOptions()
-        options.isNetworkAccessAllowed = true
+        options.isNetworkAccessAllowed = networkAccessIsAllowed
         PHImageManager.default().requestAVAsset(forVideo: asset, options: options) { avAsset, _, _ in
             if let avAsset {
                 do {
@@ -99,8 +101,9 @@ final class VideoHandler {
                 player.preventsDisplaySleepDuringVideoPlayback = true
                 self.player = player
                 self.player.play()
+            } else {
+                PodObservable.shared.networkAlertIsPresented = true
             }
-            print("avAsset nil")
         }
     }
     
@@ -109,6 +112,7 @@ final class VideoHandler {
     }
     
     func clearPlayer() {
+        currentAsset = nil
         player.replaceCurrentItem(with: nil)
     }
     

@@ -13,7 +13,7 @@ import SwiftUI
 
 
 struct DeviceView: View {
-	@StateObject var podObservable = PodObservable()
+    @StateObject var podObservable = PodObservable.shared
         
     var deviceColor: String {
         if let deviceColor = UserDefaults.standard.object(forKey: "deviceColor") as? String {
@@ -79,15 +79,30 @@ struct DeviceView: View {
 				GestureView()
 					.environmentObject(podObservable)
 			}
-            .statusBarHidden(true)
-            .alert(Text("구독 상태 안내"), isPresented: $podObservable.subscriptionAlertIsPresented, actions: {
+            .statusBarHidden(!(podObservable.subscriptionAlertIsPresented || podObservable.networkAlertIsPresented))
+            .alert(Text("구독 상태 안내"), isPresented: $podObservable.subscriptionAlertIsPresented) {
                 Button {
                     podObservable.subscriptionAlertIsPresented = false
                 } label: {
                     Text("OK")
                 }
-            }, message: {Text("현재 Apple Music을 구독하고 있지 않습니다. 앱에서 음악을 재생하려면 Apple Music을 구독해야 합니다.")
-            })
+            } message: {Text("현재 Apple Music을 구독하고 있지 않습니다. 앱에서 음악을 재생하려면 Apple Music을 구독해야 합니다.")
+            }
+            .alert(Text("데이터 통신 안내"), isPresented: $podObservable.networkAlertIsPresented) {
+                Button {
+                    podObservable.userAllowedNetworkLoading = false
+                    podObservable.networkAlertIsPresented = false
+                } label: {
+                    Text("허용하지 않음")
+                }
+                Button {
+                    podObservable.userAllowedNetworkLoading = true
+                    podObservable.networkAlertIsPresented = false
+                } label: {
+                    Text("허용")
+                }
+            } message: {Text("iCloud에서 영상을 불러오시겠습니까? 현재의 네트워크 연결 상태와 데이터 요금제에 따라 통신 요금이 발생할 수 있습니다.")
+            }
 		}
 	}
 }

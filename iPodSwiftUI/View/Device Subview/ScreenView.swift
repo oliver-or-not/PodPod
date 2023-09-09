@@ -34,6 +34,6 @@ struct ScreenView: View {
 struct ScreenView_Previews: PreviewProvider {
     static var previews: some View {
         ScreenView()
-			.environmentObject(PodObservable())
+            .environmentObject(PodObservable.shared)
     }
 }

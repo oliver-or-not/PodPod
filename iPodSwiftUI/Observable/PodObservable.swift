@@ -12,6 +12,8 @@ import UIKit
 
 final class PodObservable: ObservableObject {
     
+    static let shared = PodObservable()
+    
     //MARK: - singleton object
     
     // contains songs and photos
@@ -42,6 +44,17 @@ final class PodObservable: ObservableObject {
     @Published var libraryUpdateSymbolState: LibraryUpdateSymbolState = .notShown
     @Published var mainMenuBoolArray: [Bool] = StatusModel.initialValueOfMainMenuBoolArray
     @Published var subscriptionAlertIsPresented = false
+    @Published var networkAlertIsPresented = false
+    @Published var userAllowedNetworkLoading = false {
+        didSet {
+            if userAllowedNetworkLoading {
+                if let currentAsset = videoHandler.currentAsset {
+                    videoHandler.play(currentAsset, networkAccessIsAllowed: true)
+                }
+                userAllowedNetworkLoading = false
+            }
+        }
+    }
     @Published var photoDetailIsShown = false
     @Published var videoDetailIsShown = false
     @Published var videoPlayerIsVisible = false
@@ -192,7 +205,7 @@ final class PodObservable: ObservableObject {
 
     //MARK: - initializer
     
-    init() {
+    private init() {
         
         //MARK: - volume and battery
         
