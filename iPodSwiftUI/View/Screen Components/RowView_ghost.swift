@@ -173,6 +173,7 @@ struct RowView_ghost: View {
                                             .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.4)
                                             .foregroundColor(isFocused ? .white : .black)
                                 }
+                            case .timeInHeader:
                                 if wantsToSeeTimeInHeader {
                                     Text("켬")
                                         .font(.system(size: DesignSystem.Soft.Dimension.basicFontSize, weight: .semibold))
@@ -335,6 +336,7 @@ struct RowView_ghost: View {
                                             .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.4)
                                             .foregroundColor(isFocused ? .white : .black)
                                 }
+                            case .timeInHeader:
                                 if wantsToSeeTimeInHeader {
                                     Text("켬")
                                         .font(.system(size: DesignSystem.Soft.Dimension.basicFontSize, weight: .semibold))
@@ -536,6 +538,7 @@ struct RowView_ghost: View {
                                                 .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.4)
                                                 .foregroundColor(isFocused ? .white : .black)
                                     }
+                                case .timeInHeader:
                                     if wantsToSeeTimeInHeader {
                                         Text("켬")
                                             .font(.system(size: DesignSystem.Soft.Dimension.basicFontSize, weight: .semibold))

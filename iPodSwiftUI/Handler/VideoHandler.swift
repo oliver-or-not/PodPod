@@ -84,6 +84,7 @@ final class VideoHandler {
     
     func play(_ asset: PHAsset, networkAccessIsAllowed: Bool = false) {
         MusicHandler.shared.virtuallyStopped = true
+        PodObservable.shared.videoIsBeingLoaded = true
         currentAsset = asset
         let options = PHVideoRequestOptions()
         options.isNetworkAccessAllowed = networkAccessIsAllowed
@@ -100,10 +101,23 @@ final class VideoHandler {
                 player.isMuted = false
                 player.preventsDisplaySleepDuringVideoPlayback = true
                 self.player = player
+                DispatchQueue.main.async {
+                    PodObservable.shared.videoIsBeingLoaded = false
+                }
                 self.player.play()
             } else {
                 DispatchQueue.main.async {
-                    PodObservable.shared.videoNetworkAlertIsPresented = true
+                    if let omitsDataAlert = UserDefaults.standard.object(forKey: "omitsDataAlert") as? Bool {
+                        if omitsDataAlert {
+                            self.play(asset, networkAccessIsAllowed: true)
+                        } else {
+                            PodObservable.shared.videoIsBeingLoaded = false
+                            PodObservable.shared.videoNetworkAlertIsPresented = true
+                        }
+                    } else {
+                        PodObservable.shared.videoIsBeingLoaded = false
+                        PodObservable.shared.videoNetworkAlertIsPresented = true
+                    }
                 }
             }
         }

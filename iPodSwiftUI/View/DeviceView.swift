@@ -101,7 +101,7 @@ struct DeviceView: View {
                 } label: {
                     Text("예")
                 }
-            } message: {Text("iCloud에서 영상을 다운로드하시겠습니까? 현재의 네트워크 연결 상태와 데이터 요금제에 따라 통신 요금이 발생할 수 있습니다.")
+            } message: {Text("iCloud에서 영상을 다운로드하시겠습니까?\n\n현재의 네트워크 연결 상태와 데이터 요금제에 따라 통신 요금이 발생할 수 있습니다.")
             }
             .alert(Text("데이터 통신 안내"), isPresented: $podObservable.mediaRefreshNetworkAlertIsPresented) {
                 Button {
@@ -116,7 +116,7 @@ struct DeviceView: View {
                 } label: {
                     Text("예")
                 }
-            } message: {Text("iCloud에서 미디어를 다운로드하시겠습니까? 현재의 네트워크 연결 상태와 데이터 요금제에 따라 통신 요금이 발생할 수 있습니다.\n\n음악과 비디오 파일은 지금 다운로드하지 않고 재생 화면에서 다운로드합니다.")
+            } message: {Text("미디어 목록과 이미지를 다운로드하시겠습니까?\n\n현재의 네트워크 연결 상태와 데이터 요금제에 따라 통신 요금이 발생할 수 있습니다.\n\n음악과 비디오 파일은 지금 다운로드하지 않고 재생 화면에서 다운로드합니다.")
             }
 		}
 	}

@@ -66,7 +66,6 @@ extension PodObservable {
     func doThingsBeforeGoingRight(newPageKey: PageKey) {
         // initialize new page's property-flat view model
         statusModel.pageKeyArray.append(newPageKey)
-        
         key = newPageKey
         
         // update filteredSong, chosenComposer etc.
