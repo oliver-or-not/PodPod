@@ -332,9 +332,15 @@ extension DesignSystem.Soft.Color {
     static let headerBatteryRedStripe3 = Color("headerBatteryRedStripe3")
     static let headerBatteryRedStripe4 = Color("headerBatteryRedStripe4")
     
-    static let headerBatteryBaseStripe0 = Color("headerBatteryBaseStripe0")
-    static let headerBatteryBaseStripe1 = Color("headerBatteryBaseStripe1")
-    static let headerBatteryBaseStripe2 = Color("headerBatteryBaseStripe2")
+    static let headerBatteryUnpluggedBaseStripe0 = Color("headerBatteryUnpluggedBaseStripe0")
+    static let headerBatteryUnpluggedBaseStripe1 = Color("headerBatteryUnpluggedBaseStripe1")
+
+    static let headerBatteryChargingBaseStripe0 = Color("headerBatteryChargingBaseStripe0")
+    static let headerBatteryChargingBaseStripe1 = Color("headerBatteryChargingBaseStripe1")
+    static let headerBatteryChargingBaseStripe2 = Color("headerBatteryChargingBaseStripe2")
+    static let headerBatteryChargingBaseStripe3 = Color("headerBatteryChargingBaseStripe3")
+    static let headerBatteryChargingBaseStripe4 = Color("headerBatteryChargingBaseStripe4")
+    
     static let headerBatteryLine = Color("headerBatteryLine")
     static let headerBatteryThunder = Color("headerBatteryThunder")
     

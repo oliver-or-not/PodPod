@@ -32,8 +32,8 @@ struct HeaderBatteryUnpluggedSymbolView: View {
     ]
     
     private let batteryBaseColorArray = [
-        DesignSystem.Soft.Color.headerBatteryBaseStripe0,
-        DesignSystem.Soft.Color.headerBatteryBaseStripe1
+        DesignSystem.Soft.Color.headerBatteryUnpluggedBaseStripe0,
+        DesignSystem.Soft.Color.headerBatteryUnpluggedBaseStripe1
     ]
     
     var body: some View {
@@ -63,7 +63,7 @@ struct HeaderBatteryUnpluggedSymbolView: View {
             
             ZStack {
                 Rectangle()
-                    .fill(DesignSystem.Soft.Color.headerBatteryBaseStripe1)
+                    .fill(DesignSystem.Soft.Color.headerBatteryUnpluggedBaseStripe1)
                     .frame(width: headerHeight * 0.07, height: headerHeight * 0.18)
                 Rectangle()
                     .stroke(DesignSystem.Soft.Color.headerBatteryLine, lineWidth: DesignSystem.Soft.Dimension.basicThinValue)
