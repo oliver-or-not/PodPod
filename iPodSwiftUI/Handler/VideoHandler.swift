@@ -102,7 +102,9 @@ final class VideoHandler {
                 self.player = player
                 self.player.play()
             } else {
-                PodObservable.shared.networkAlertIsPresented = true
+                DispatchQueue.main.async {
+                    PodObservable.shared.videoNetworkAlertIsPresented = true
+                }
             }
         }
     }
