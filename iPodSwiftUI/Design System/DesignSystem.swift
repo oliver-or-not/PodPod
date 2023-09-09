@@ -396,7 +396,6 @@ extension DesignSystem.Soft.Color {
 extension DesignSystem.Time {
     static let slidingAnimationTime = 0.27
     static let lagTime = 0.1
-    static let longLagTime = 0.8
     static let rowTextSlidingAnimationTimePerWidth = 5.5
     static let nowPlayingUpperTextSlidingAnimationTimePerWidth = 11.0
     static let rowTextRestTime = 1.3

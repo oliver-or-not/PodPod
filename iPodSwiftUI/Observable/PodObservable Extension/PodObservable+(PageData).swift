@@ -82,6 +82,7 @@ extension PodObservable {
                 pd.rowDataArray = [
                     RowData(text: "정보", actionStyle: .chevronMove, key: .about),
                     RowData(text: "주 메뉴", actionStyle: .chevronMove, key: .mainMenu),
+                    RowData(text: "제목막대에 시간표시", actionStyle: .change, handlingProperty: .timeInHeader),
                     RowData(text: "임의 재생", actionStyle: .change, handlingProperty: .songShuffle),
                     RowData(text: "반복", actionStyle: .change, handlingProperty: .songRepeat),
                     RowData(text: "탭틱 피드백", actionStyle: .change, handlingProperty: .clickVibe),

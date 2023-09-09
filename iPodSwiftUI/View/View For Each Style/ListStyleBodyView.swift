@@ -15,6 +15,7 @@ struct ListStyleBodyView: View {
     var discreteScrollMark: Int?
     var rowCount: Int?
     
+    var wantsToSeeTimeInHeader: Bool
     var repeatState: RepeatState
     var alwaysShuffle: Bool
     
@@ -34,12 +35,13 @@ struct ListStyleBodyView: View {
         DesignSystem.Soft.Dimension.basicIndentation
     }
     
-    init(key: PageKey, pageData: PageData, focusedIndex: Int? = nil, discreteScrollMark: Int? = nil, rowCount: Int? = nil, repeatState: RepeatState, alwaysShuffle: Bool, vibeIsActivated: Bool, videoZoomMode: VideoZoomMode, videoAutoplayMode: VideoAutoplayMode, libraryUpdateSymbolState: LibraryUpdateSymbolState, mainMenuBoolArray: [Bool])  {
+    init(key: PageKey, pageData: PageData, focusedIndex: Int? = nil, discreteScrollMark: Int? = nil, rowCount: Int? = nil, wantsToSeeTimeInHeader: Bool, repeatState: RepeatState, alwaysShuffle: Bool, vibeIsActivated: Bool, videoZoomMode: VideoZoomMode, videoAutoplayMode: VideoAutoplayMode, libraryUpdateSymbolState: LibraryUpdateSymbolState, mainMenuBoolArray: [Bool])  {
         self.key = key
         self.pageData = pageData
         self.focusedIndex = focusedIndex
         self.discreteScrollMark = discreteScrollMark
         self.rowCount = rowCount
+        self.wantsToSeeTimeInHeader = wantsToSeeTimeInHeader
         self.repeatState = repeatState
         self.alwaysShuffle = alwaysShuffle
         self.vibeIsActivated = vibeIsActivated
@@ -100,7 +102,7 @@ struct ListStyleBodyView: View {
                             HStack(spacing: 0) {
                                 VStack(spacing: 0) {
                                     ForEach(min(discreteScrollMark, rowDataArray.count)..<min(discreteScrollMark + DesignSystem.Soft.Dimension.rangeOfRows, rowDataArray.count), id: \.self) { i in
-                                        RowView(rowData: rowDataArray[i], indexInList: i, isFocused: i == focusedIndex, repeatState: repeatState, alwaysShuffle: alwaysShuffle, vibeIsActivated: vibeIsActivated, videoZoomMode: videoZoomMode, videoAutoplayMode: videoAutoplayMode, libraryUpdateSymbolState: libraryUpdateSymbolState, mainMenuBoolArray: mainMenuBoolArray)
+                                        RowView(rowData: rowDataArray[i], indexInList: i, isFocused: i == focusedIndex, wantsToSeeTimeInHeader: wantsToSeeTimeInHeader, repeatState: repeatState, alwaysShuffle: alwaysShuffle, vibeIsActivated: vibeIsActivated, videoZoomMode: videoZoomMode, videoAutoplayMode: videoAutoplayMode, libraryUpdateSymbolState: libraryUpdateSymbolState, mainMenuBoolArray: mainMenuBoolArray)
                                     }
                                     Spacer()
                                         .frame(minHeight: 0)
@@ -131,6 +133,6 @@ struct ListStyleBodyView_Previews: PreviewProvider {
     ])
     
     static var previews: some View {
-        ListStyleBodyView(key: .songs, pageData: pd, focusedIndex: 0, discreteScrollMark: 0, rowCount: pd.rowDataArray?.count, repeatState: .all, alwaysShuffle: true, vibeIsActivated: true, videoZoomMode: .fit, videoAutoplayMode: .off, libraryUpdateSymbolState: .done, mainMenuBoolArray: StatusModel.initialValueOfMainMenuBoolArray)
+        ListStyleBodyView(key: .songs, pageData: pd, focusedIndex: 0, discreteScrollMark: 0, rowCount: pd.rowDataArray?.count, wantsToSeeTimeInHeader: false, repeatState: .all, alwaysShuffle: true, vibeIsActivated: true, videoZoomMode: .fit, videoAutoplayMode: .off, libraryUpdateSymbolState: .done, mainMenuBoolArray: StatusModel.initialValueOfMainMenuBoolArray)
     }
 }
