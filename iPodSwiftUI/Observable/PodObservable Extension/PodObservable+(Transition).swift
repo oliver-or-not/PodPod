@@ -12,7 +12,7 @@ extension PodObservable {
     //MARK: - page transition
     
     func goRight(newPageKey: PageKey) {
-        var lagTime = DesignSystem.Time.lagTime
+        let lagTime = DesignSystem.Time.lagTime
         
         doThingsBeforeMakingGhost_goingRightVer()
         doThingsBeforeGoingRight(newPageKey: newPageKey)
@@ -26,7 +26,7 @@ extension PodObservable {
     }
     
     func goLeft() {
-        var lagTime = DesignSystem.Time.lagTime
+        let lagTime = DesignSystem.Time.lagTime
         
         doThingsBeforeMakingGhost_goingLeftVer()
         doThingsBeforeGoingLeft()
