@@ -84,7 +84,10 @@ final class VideoHandler {
     
     func play(_ asset: PHAsset, networkAccessIsAllowed: Bool = false) {
         MusicHandler.shared.virtuallyStopped = true
-        PodObservable.shared.videoIsBeingLoaded = true
+        if networkAccessIsAllowed {
+            if !PodObservable.shared.videoIsBeingLoaded { PodObservable.shared.videoIsBeingLoaded = true
+            }
+        }
         currentAsset = asset
         let options = PHVideoRequestOptions()
         options.isNetworkAccessAllowed = networkAccessIsAllowed
@@ -102,21 +105,42 @@ final class VideoHandler {
                 player.preventsDisplaySleepDuringVideoPlayback = true
                 self.player = player
                 DispatchQueue.main.async {
-                    PodObservable.shared.videoIsBeingLoaded = false
+                    if PodObservable.shared.videoIsBeingLoaded { PodObservable.shared.videoIsBeingLoaded = false
+                    }
                 }
                 self.player.play()
             } else {
                 DispatchQueue.main.async {
                     if let omitsDataAlert = UserDefaults.standard.object(forKey: "omitsDataAlert") as? Bool {
-                        if omitsDataAlert {
-                            self.play(asset, networkAccessIsAllowed: true)
-                        } else {
-                            PodObservable.shared.videoIsBeingLoaded = false
+                        if !networkAccessIsAllowed {
+                            if omitsDataAlert {
+                                self.play(asset, networkAccessIsAllowed: true)
+                            }
+                            // if doesnt omit data alert
+                            else {
+                                PodObservable.shared.videoNetworkAlertIsPresented = true
+                            }
+                        }
+                        // if network access is already allowed; serious failure
+                        else {
+                            DispatchQueue.main.async {
+                                if PodObservable.shared.videoIsBeingLoaded { PodObservable.shared.videoIsBeingLoaded = false
+                                }
+                            }
+                        }
+                    }
+                    // omitsDataAlert is nil; see as false
+                    else {
+                        if !networkAccessIsAllowed {
                             PodObservable.shared.videoNetworkAlertIsPresented = true
                         }
-                    } else {
-                        PodObservable.shared.videoIsBeingLoaded = false
-                        PodObservable.shared.videoNetworkAlertIsPresented = true
+                        // if network access is already allowed; serious failure
+                        else {
+                            DispatchQueue.main.async {
+                                if PodObservable.shared.videoIsBeingLoaded { PodObservable.shared.videoIsBeingLoaded = false
+                                }
+                            }
+                        }
                     }
                 }
             }

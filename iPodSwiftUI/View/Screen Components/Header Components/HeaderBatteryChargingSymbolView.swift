@@ -30,8 +30,11 @@ struct HeaderBatteryChargingSymbolView: View {
     ]
     
     private let batteryBaseColorArray = [
-        DesignSystem.Soft.Color.headerBatteryBaseStripe2,
-        DesignSystem.Soft.Color.headerBatteryBaseStripe0
+        DesignSystem.Soft.Color.headerBatteryChargingBaseStripe0,
+        DesignSystem.Soft.Color.headerBatteryChargingBaseStripe1,
+        DesignSystem.Soft.Color.headerBatteryChargingBaseStripe2,
+        DesignSystem.Soft.Color.headerBatteryChargingBaseStripe3,
+        DesignSystem.Soft.Color.headerBatteryChargingBaseStripe4
     ]
     
     private var headerHeight: CGFloat {
@@ -61,7 +64,7 @@ struct HeaderBatteryChargingSymbolView: View {
                 
                 ZStack {
                     Rectangle()
-                        .fill(DesignSystem.Soft.Color.headerBatteryBaseStripe1)
+                        .fill(DesignSystem.Soft.Color.headerBatteryChargingBaseStripe4)
                         .frame(width: headerHeight * 0.07, height: headerHeight * 0.18)
                     Rectangle()
                         .stroke(DesignSystem.Soft.Color.headerBatteryLine, lineWidth: DesignSystem.Soft.Dimension.basicThinValue)
