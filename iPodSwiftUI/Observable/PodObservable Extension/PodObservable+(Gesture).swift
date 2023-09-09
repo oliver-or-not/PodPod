@@ -685,6 +685,9 @@ extension PodObservable {
                 mediaRefreshNetworkAlertIsPresented = true
             }
         }
+        else {
+            mediaRefreshNetworkAlertIsPresented = true
+        }
     }
     
     func topButtonTapped() {
@@ -705,7 +708,22 @@ extension PodObservable {
         
         if key == .videos && videoDetailIsShown {
             self.wheelProperty = .focusedIndex
-            self.focusedIndex = videoHandler.videoIndex
+            if self.focusedIndex != nil && self.discreteScrollMark != nil {
+                self.focusedIndex = videoHandler.videoIndex
+                let hNum = DesignSystem.Soft.Dimension.videoThumbnailHorizontalNum
+                let vNum = DesignSystem.Soft.Dimension.videoThumbnailVerticalNum
+                if self.discreteScrollMark! < self.focusedIndex! {
+                    while self.discreteScrollMark! < self.focusedIndex! - hNum * vNum + 1 {
+                        self.discreteScrollMark! += hNum
+                    }
+                } else {
+                    while self.discreteScrollMark! > self.focusedIndex! {
+                        self.discreteScrollMark! -= hNum
+                    }
+                }
+                self.discreteScrollMark = min(max(0, self.discreteScrollMark!), dataModel.favoritePhotoArray.count - 1)
+            }
+            
             videoPlayerIsVisible = false
             videoControlState = .stable
             videoHandler.pause()

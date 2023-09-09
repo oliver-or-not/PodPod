@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MediaPlayer
 import SwiftUI
 
 extension PodObservable {
@@ -261,6 +262,26 @@ extension PodObservable {
             let tempString = dateFormatter.string(from: Date())
             if tempString != self.timeTitle {
                 self.timeTitle = tempString
+            }
+            
+            //volume
+            if self.wheelValue == nil {
+                if (self.key == .nowPlaying && self.nowPlayingTransitionState == .volume) {
+                    MPVolumeView.getVolume { value in
+                        if abs(self.volume - value) > 0.01 {
+                            self.volume = value
+                            self.resetStableTimer_fromVolumeToStable()
+                        }
+                    }
+                } else if self.videoVolumeBarIsVisible {
+                    MPVolumeView.getVolume { value in
+                        if abs(self.volume - value) > 0.01 {
+                            self.volume = value
+                            self.resetVideoSymbolTimer_short()
+                        }
+                    }
+                }
+                
             }
         }
     }

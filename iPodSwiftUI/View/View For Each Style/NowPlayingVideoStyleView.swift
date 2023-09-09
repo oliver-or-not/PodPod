@@ -80,7 +80,7 @@ struct NowPlayingVideoStyleView: View {
             }
             
             ProgressView()
-                .foregroundColor(.white)
+                .tint(.white)
                 .frame(width: w * 0.25, height: w * 0.25)
                 .opacity(videoIsBeingLoaded ? 1 : 0)
             
