@@ -21,5 +21,6 @@ enum RowHandlingPropertyKey {
     case videoAutoplay
     case settingsLink
     case mediaRefresh
+    case timeInHeader
     case nothing
 }

@@ -12,6 +12,13 @@ extension PodObservable {
     
     //MARK: - handle timer
     
+    func resetHeaderTimeTimer() {
+        headerTimeTimer?.invalidate()
+        headerTimeTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { timer in
+            _ = 0
+        }
+    }
+    
     func resetStableTimer_fromOutsideToNowPlaying() {
         stableTimer?.invalidate()
         stableTimer = Timer.scheduledTimer(withTimeInterval: 9.0, repeats: false) { timer in

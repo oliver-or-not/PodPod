@@ -16,10 +16,10 @@ struct ScreenView: View {
 				.fill(.white)
             VStack(spacing: 0) {
                 HeaderView(title: podObservable.pageData.headerTitle, playingState: podObservable.playingState, batteryState: podObservable.batteryState, batteryLevel: podObservable.batteryLevel)
-                    .offset(x: podObservable.photoDetailIsShown ? -DesignSystem.Soft.Dimension.w : 0)
-                    .offset(x: podObservable.videoDetailIsShown ? -DesignSystem.Soft.Dimension.w : 0)
+                    .offset(x: (podObservable.photoDetailIsShown || podObservable.videoDetailIsShown || podObservable.currentKeyIsNowPlayingVideo) ? -DesignSystem.Soft.Dimension.w : 0)
                     .animation(.linear(duration: DesignSystem.Time.slidingAnimationTime).delay(DesignSystem.Time.lagTime), value: podObservable.photoDetailIsShown)
                     .animation(.linear(duration: DesignSystem.Time.slidingAnimationTime).delay(DesignSystem.Time.lagTime), value: podObservable.videoDetailIsShown)
+                    .animation(.linear(duration: DesignSystem.Time.slidingAnimationTime).delay(DesignSystem.Time.lagTime * 2.0), value: podObservable.currentKeyIsNowPlayingVideo)
 				PageBodyStackView()
 					.environmentObject(podObservable)
 			}

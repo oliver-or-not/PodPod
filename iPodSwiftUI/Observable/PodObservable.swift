@@ -38,11 +38,13 @@ final class PodObservable: ObservableObject {
     @Published var batteryState: BatteryState = .unplugged
     @Published var batteryLevel: Float = 1.0
     @Published var volume: Float = 0.0
-    @Published var vibeIsActivated = true
-    @Published var videoZoomMode: VideoZoomMode = .fit
-    @Published var videoAutoplayMode: VideoAutoplayMode = .one
+    @Published var wantsToSeeTimeInHeader = false // user default variable
+    @Published var vibeIsActivated = true // user default variable
+    @Published var videoZoomMode: VideoZoomMode = .fit // user default variable
+    @Published var videoAutoplayMode: VideoAutoplayMode = .one // user default variable
     @Published var libraryUpdateSymbolState: LibraryUpdateSymbolState = .notShown
-    @Published var mainMenuBoolArray: [Bool] = StatusModel.initialValueOfMainMenuBoolArray
+    @Published var mainMenuBoolArray: [Bool] = StatusModel.initialValueOfMainMenuBoolArray // user default variable
+    @Published var headerTimeIsShown = false
     @Published var subscriptionAlertIsPresented = false
     @Published var videoNetworkAlertIsPresented = false
     @Published var userAllowedVideoNetworkLoading = false {
@@ -146,9 +148,9 @@ final class PodObservable: ObservableObject {
     //MARK: - iPod current state (2) (stuffs about playing)
     
     @Published var playingState: PlayingState = .stopped
-    @Published var repeatState: RepeatState = .off
-    @Published var alwaysShuffle = false
-    @Published var shuffleIsActivated = false
+    @Published var repeatState: RepeatState = .off // user default variable
+    @Published var alwaysShuffle = false // user default variable
+    @Published var shuffleIsActivated = false 
     @Published var currentSongIndex: Int?
     @Published var timePassed: TimeInterval?
     @Published var lineup: MusicItemCollection<Song>?
@@ -273,9 +275,11 @@ final class PodObservable: ObservableObject {
     @Published var nowPlayingLowerOffsetTrigger = false
     @Published var nowPlayingUpperTextFlicker = true
     @Published var nowPlayingUpperTextOffsetTrigger = false
+    @Published var currentKeyIsNowPlayingVideo = false
     
     //MARK: - timer
     
+    var headerTimeTimer: Timer?
     var stableTimer: Timer?
     var videoSymbolTimer: Timer?
     var playInfoRefresher: Timer?
@@ -343,6 +347,16 @@ final class PodObservable: ObservableObject {
             .store(in: &cancellables)
         
         //MARK: - user default
+        
+        if let wantsToSeeTimeInHeaderFromUserDefault = UserDefaults.standard.object(forKey: "wantsToSeeTimeInHeader") as? Bool {
+            wantsToSeeTimeInHeader = wantsToSeeTimeInHeaderFromUserDefault
+        }
+        // no save -> false
+        else {
+            wantsToSeeTimeInHeader = false
+            UserDefaults.standard.set(wantsToSeeTimeInHeader, forKey: "wantsToSeeTimeInHeader")
+        }
+        
         
         if let repeatStateRawValueFromUserDefault = UserDefaults.standard.object(forKey: "repeatState.rawValue") as? Int {
             switch repeatStateRawValueFromUserDefault {

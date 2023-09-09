@@ -222,14 +222,17 @@ extension PodObservable {
                     switch rowHandlingProperty {
                         case .nothing:
                             if safeKey == .nowPlayingVideo {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.longLagTime) {
+                                currentKeyIsNowPlayingVideo = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime) {
+                                    self.videoPlayerIsVisible = true
+                                    self.videoPlayingStateSymbolIsVisible = true
+                                    self.videoBatterySymbolIsVisible = true
+                                    self.resetVideoSymbolTimer_short()
+                                    self.goRight(newPageKey: safeKey)
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime * 2.0) {
                                     self.videoHandler.restart()
                                 }
-                                videoPlayerIsVisible = true
-                                videoPlayingStateSymbolIsVisible = true
-                                videoBatterySymbolIsVisible = true
-                                resetVideoSymbolTimer_short()
-                                goRight(newPageKey: safeKey, needLongLag: true)
                             } else {
                                 goRight(newPageKey: safeKey)
                             }
@@ -239,7 +242,7 @@ extension PodObservable {
                             musicHandler.getUserSubscriptionAvailability { userSubscripts in
                                 if userSubscripts {
                                     self.doCenterButtonAction_play()
-                                    self.goRight(newPageKey: safeKey, needLongLag: true)
+                                    self.goRight(newPageKey: safeKey)
                                 } else {
                                     self.subscriptionAlertIsPresented = true
                                 }
@@ -248,7 +251,7 @@ extension PodObservable {
                             musicHandler.getUserSubscriptionAvailability { userSubscripts in
                                 if userSubscripts {
                                     self.doCenterButtonAction_shufflePlay()
-                                    self.goRight(newPageKey: safeKey, needLongLag: true)
+                                    self.goRight(newPageKey: safeKey)
                                 } else {
                                     self.subscriptionAlertIsPresented = true
                                 }
@@ -260,6 +263,8 @@ extension PodObservable {
                 // if page transition does not occur
                 else {
                     switch rowHandlingProperty {
+                        case .timeInHeader:
+                            doCenterButtonAction_timeInHeader()
                         case .songRepeat:
                             doCenterButtonAction_songRepeat()
                         case .songShuffle:
@@ -310,12 +315,12 @@ extension PodObservable {
                 if !videoDetailIsShown {
                     if let focusedIndex {
                         buttonsAreAvailable = false
-                        DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.longLagTime) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime) {
                             self.buttonsAreAvailable = true
                         }
                         self.wheelProperty = .volume
                         videoHandler.clearPlayer()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.longLagTime) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime) {
                             self.videoHandler.videoIndex = focusedIndex
                             self.videoPlayerIsVisible = true
                             self.videoDetailIsShown = true
@@ -484,6 +489,10 @@ extension PodObservable {
             }
         }
     }
+    func doCenterButtonAction_timeInHeader() {
+        wantsToSeeTimeInHeader.toggle()
+        UserDefaults.standard.set(wantsToSeeTimeInHeader, forKey: "wantsToSeeTimeInHeader")
+    }
     func doCenterButtonAction_songRepeat() {
         switch repeatState {
             case .all:
@@ -626,14 +635,17 @@ extension PodObservable {
             }
             return
         } else if key == .nowPlayingVideo {
-            videoPlayerIsVisible = false
-            videoControlState = .stable
-            videoHandler.pause()
-            videoPlayingStateSymbolIsVisible = false
-            videoBatterySymbolIsVisible = false
-            videoVolumeBarIsVisible = false
-            videoSeekBarIsVisible = false
-            videoSymbolTimer?.invalidate()
+            currentKeyIsNowPlayingVideo = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime) {
+                self.videoPlayerIsVisible = false
+                self.videoControlState = .stable
+                self.videoHandler.pause()
+                self.videoPlayingStateSymbolIsVisible = false
+                self.videoBatterySymbolIsVisible = false
+                self.videoVolumeBarIsVisible = false
+                self.videoSeekBarIsVisible = false
+                self.videoSymbolTimer?.invalidate()
+            }
             // do not return here
         }
         
@@ -700,7 +712,7 @@ extension PodObservable {
                                     }
                                     
                                     self.doBottomButtonAction_canPlay()
-                                    self.goRight(newPageKey: .nowPlaying, needLongLag: true)
+                                    self.goRight(newPageKey: .nowPlaying)
                                 } else {
                                     self.subscriptionAlertIsPresented = true
                                 }
@@ -753,8 +765,11 @@ extension PodObservable {
                         resetVideoSymbolTimer_short()
                     } else {
                         videoPlayerIsVisible = true
-                        goRight(newPageKey: .nowPlayingVideo, needLongLag: true)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.longLagTime) {
+                        currentKeyIsNowPlayingVideo = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime) {
+                            self.goRight(newPageKey: .nowPlayingVideo)
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime * 2.0) {
                             self.videoHandler.restart()
                             self.videoPlayingStateSymbolIsVisible = true
                             self.videoBatterySymbolIsVisible = true
