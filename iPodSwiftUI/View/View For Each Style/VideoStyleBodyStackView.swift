@@ -205,11 +205,13 @@ struct VideoStyleBodyStackView: View {
                             case .fit:
                                 VideoPlayer(player: player)
                                     .frame(width: w, height: h)
+                                    .disabled(true)
                             case .zoom:
                                 VideoPlayer(player: player)
                                     .frame(width: w * scalingFactor, height: h * scalingFactor)
                                     .frame(width: w, height: h)
                                     .clipped()
+                                    .disabled(true)
                         }
                     }
                 }

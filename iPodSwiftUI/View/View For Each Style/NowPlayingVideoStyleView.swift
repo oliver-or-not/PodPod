@@ -70,11 +70,13 @@ struct NowPlayingVideoStyleView: View {
                         case .fit:
                             VideoPlayer(player: player)
                                 .frame(width: DesignSystem.Soft.Dimension.w, height: DesignSystem.Soft.Dimension.h)
+                                .disabled(true)
                         case .zoom:
                             VideoPlayer(player: player)
                                 .frame(width: DesignSystem.Soft.Dimension.w * scalingFactor, height: DesignSystem.Soft.Dimension.h * scalingFactor)
                                 .frame(width: DesignSystem.Soft.Dimension.w, height: DesignSystem.Soft.Dimension.h)
                                 .clipped()
+                                .disabled(true)
                     }
                 }
             }
