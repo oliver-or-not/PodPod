@@ -31,6 +31,7 @@
 		576A61B52AA4B58800A10A0B /* PodObservable+(Gesture).swift in Sources */ = {isa = PBXBuildFile; fileRef = 576A61B42AA4B58800A10A0B /* PodObservable+(Gesture).swift */; };
 		576A61B72AA4B71F00A10A0B /* PodObservable+(Volume).swift in Sources */ = {isa = PBXBuildFile; fileRef = 576A61B62AA4B71F00A10A0B /* PodObservable+(Volume).swift */; };
 		576A61B92AA4B78200A10A0B /* PodObservable+(PageData).swift in Sources */ = {isa = PBXBuildFile; fileRef = 576A61B82AA4B78200A10A0B /* PodObservable+(PageData).swift */; };
+		5774BC642AAD49F2006747EE /* VideoLoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5774BC632AAD49F2006747EE /* VideoLoadingState.swift */; };
 		5781F3592A430DF8004C5B21 /* GestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5781F3582A430DF8004C5B21 /* GestureView.swift */; };
 		57867D962A3CC2F100129450 /* iPodSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867D952A3CC2F100129450 /* iPodSwiftUIApp.swift */; };
 		57867D982A3CC2F100129450 /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867D972A3CC2F100129450 /* DeviceView.swift */; };
@@ -121,6 +122,7 @@
 		576A61B42AA4B58800A10A0B /* PodObservable+(Gesture).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PodObservable+(Gesture).swift"; sourceTree = "<group>"; };
 		576A61B62AA4B71F00A10A0B /* PodObservable+(Volume).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PodObservable+(Volume).swift"; sourceTree = "<group>"; };
 		576A61B82AA4B78200A10A0B /* PodObservable+(PageData).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PodObservable+(PageData).swift"; sourceTree = "<group>"; };
+		5774BC632AAD49F2006747EE /* VideoLoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLoadingState.swift; sourceTree = "<group>"; };
 		5781F3582A430DF8004C5B21 /* GestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureView.swift; sourceTree = "<group>"; };
 		57867D922A3CC2F100129450 /* PodPod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodPod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57867D952A3CC2F100129450 /* iPodSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPodSwiftUIApp.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				579E2FC72AA62BE1001BF603 /* VideoRealPlayingState.swift */,
 				579E2FD82AA9522D001BF603 /* VideoZoomMode.swift */,
 				579E2FDA2AA952DB001BF603 /* VideoAutoplayMode.swift */,
+				5774BC632AAD49F2006747EE /* VideoLoadingState.swift */,
 			);
 			path = Enumeration;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				576A61B32AA4B52100A10A0B /* PodObservable+(Timer).swift in Sources */,
 				579E2FC82AA62BE1001BF603 /* VideoRealPlayingState.swift in Sources */,
 				57EF7E3A2A7A81B100C2A56D /* PageBodyStackView.swift in Sources */,
+				5774BC642AAD49F2006747EE /* VideoLoadingState.swift in Sources */,
 				57EFC51E2A98C17900E26487 /* PhotoStyleBodyStackView.swift in Sources */,
 				57EFC5212A98E67A00E26487 /* PhotoHandler.swift in Sources */,
 				57DFD0D12A8914F500080546 /* HorizontalBarView.swift in Sources */,

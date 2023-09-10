@@ -26,7 +26,7 @@ struct VideoStyleBodyStackView: View {
     var batterySymbolIsVisible: Bool = false
     var volumeBarIsVisible: Bool = false
     var seekBarIsVisible: Bool = false
-    var videoIsBeingLoaded: Bool = false
+    var videoLoadingState: VideoLoadingState = .notLoading
     
     private var player = VideoHandler.shared.player
     
@@ -105,7 +105,7 @@ struct VideoStyleBodyStackView: View {
         DesignSystem.Soft.Dimension.basicIndentation
     }
     
-    init(focusedIndex: Int = 0, discreteScrollMark: Int = 0, playingState: PlayingState = .paused, batteryLevel: Float = 0.0, volume: Float = 0.0, videoTimePassed: CMTime? = nil, currentVideoTotalTime: CMTime? = nil, zoomMode: VideoZoomMode = .fit, detailIsShown: Bool = false, playerIsVisible: Bool = false, playingStateSymbolIsVisible: Bool = false, batterySymbolIsVisible: Bool = false, volumeBarIsVisible: Bool = false, seekBarIsVisible: Bool = false, videoIsBeingLoaded: Bool = false) {
+    init(focusedIndex: Int = 0, discreteScrollMark: Int = 0, playingState: PlayingState = .paused, batteryLevel: Float = 0.0, volume: Float = 0.0, videoTimePassed: CMTime? = nil, currentVideoTotalTime: CMTime? = nil, zoomMode: VideoZoomMode = .fit, detailIsShown: Bool = false, playerIsVisible: Bool = false, playingStateSymbolIsVisible: Bool = false, batterySymbolIsVisible: Bool = false, volumeBarIsVisible: Bool = false, seekBarIsVisible: Bool = false, videoLoadingState: VideoLoadingState = .notLoading) {
         self.focusedIndex = focusedIndex
         self.discreteScrollMark = discreteScrollMark
         self.playingState = playingState
@@ -120,7 +120,7 @@ struct VideoStyleBodyStackView: View {
         self.batterySymbolIsVisible = batterySymbolIsVisible
         self.volumeBarIsVisible = volumeBarIsVisible
         self.seekBarIsVisible = seekBarIsVisible
-        self.videoIsBeingLoaded = videoIsBeingLoaded
+        self.videoLoadingState = videoLoadingState
     }
     
     var body: some View {
@@ -218,8 +218,15 @@ struct VideoStyleBodyStackView: View {
                 
                 ProgressView()
                     .tint(.white)
-                    .frame(width: w * 0.25, height: w * 0.25)
-                    .opacity(videoIsBeingLoaded ? 1 : 0)
+                    .controlSize(.large)
+                    .opacity((videoLoadingState == .loading) ? 1 : 0)
+                
+                Image(systemName: "play.slash.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: w * 0.1, height: w * 0.1)
+                    .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
+                    .opacity((videoLoadingState == .fail) ? 1 : 0)
                 
                 // playing state symbol
                 Group {
@@ -268,6 +275,6 @@ struct VideoStyleBodyStackView: View {
 
 struct VideoStyleBodyStackView_Previews: PreviewProvider {
     static var previews: some View {
-        VideoStyleBodyStackView(playingState: .playingVideo, videoTimePassed: CMTime(value: 60000, timescale: 600), currentVideoTotalTime: CMTime(value: 180000, timescale: 600), detailIsShown: true, playingStateSymbolIsVisible: true, batterySymbolIsVisible: true, volumeBarIsVisible: false, seekBarIsVisible: true, videoIsBeingLoaded: false)
+        VideoStyleBodyStackView(playingState: .playingVideo, videoTimePassed: CMTime(value: 60000, timescale: 600), currentVideoTotalTime: CMTime(value: 180000, timescale: 600), detailIsShown: true, playingStateSymbolIsVisible: true, batterySymbolIsVisible: true, volumeBarIsVisible: false, seekBarIsVisible: true, videoLoadingState: .notLoading)
     }
 }
