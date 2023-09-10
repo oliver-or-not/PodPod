@@ -137,7 +137,7 @@ final class PodObservable: ObservableObject {
         }
     }
     @Published var photoDetailIsShown = false
-    @Published var videoIsBeingLoaded = false
+    @Published var videoLoadingState: VideoLoadingState = .notLoading
     @Published var videoDetailIsShown = false
     @Published var videoPlayerIsVisible = false
     @Published var videoPlayingStateSymbolIsVisible = false

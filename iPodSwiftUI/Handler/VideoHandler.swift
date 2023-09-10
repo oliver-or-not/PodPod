@@ -85,7 +85,8 @@ final class VideoHandler {
     func play(_ asset: PHAsset, networkAccessIsAllowed: Bool = false) {
         MusicHandler.shared.virtuallyStopped = true
         if networkAccessIsAllowed {
-            if !PodObservable.shared.videoIsBeingLoaded { PodObservable.shared.videoIsBeingLoaded = true
+            if PodObservable.shared.videoLoadingState != .loading {
+                PodObservable.shared.videoLoadingState = .loading
             }
         }
         currentAsset = asset
@@ -105,7 +106,8 @@ final class VideoHandler {
                 player.preventsDisplaySleepDuringVideoPlayback = true
                 self.player = player
                 DispatchQueue.main.async {
-                    if PodObservable.shared.videoIsBeingLoaded { PodObservable.shared.videoIsBeingLoaded = false
+                    if PodObservable.shared.videoLoadingState == .loading {
+                        PodObservable.shared.videoLoadingState = .notLoading
                     }
                 }
                 self.player.play()
@@ -124,8 +126,7 @@ final class VideoHandler {
                         // if network access is already allowed; serious failure
                         else {
                             DispatchQueue.main.async {
-                                if PodObservable.shared.videoIsBeingLoaded { PodObservable.shared.videoIsBeingLoaded = false
-                                }
+                                PodObservable.shared.videoLoadingState = .fail
                             }
                         }
                     }
@@ -137,8 +138,7 @@ final class VideoHandler {
                         // if network access is already allowed; serious failure
                         else {
                             DispatchQueue.main.async {
-                                if PodObservable.shared.videoIsBeingLoaded { PodObservable.shared.videoIsBeingLoaded = false
-                                }
+                                PodObservable.shared.videoLoadingState = .fail
                             }
                         }
                     }

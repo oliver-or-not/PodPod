@@ -707,6 +707,8 @@ extension PodObservable {
         }
         
         if key == .videos && videoDetailIsShown {
+            
+            // match index
             self.wheelProperty = .focusedIndex
             if self.focusedIndex != nil && self.discreteScrollMark != nil {
                 self.focusedIndex = videoHandler.videoIndex
@@ -731,6 +733,8 @@ extension PodObservable {
             videoBatterySymbolIsVisible = false
             videoVolumeBarIsVisible = false
             videoSeekBarIsVisible = false
+            videoLoadingState = .notLoading
+            
             videoSymbolTimer?.invalidate()
             DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime) {
                 self.videoDetailIsShown = false
@@ -746,6 +750,8 @@ extension PodObservable {
                 self.videoBatterySymbolIsVisible = false
                 self.videoVolumeBarIsVisible = false
                 self.videoSeekBarIsVisible = false
+                self.videoLoadingState = .notLoading
+                
                 self.videoSymbolTimer?.invalidate()
                 self.goLeft()
             }
@@ -950,11 +956,12 @@ extension PodObservable {
                     }
                 }
             }
-        } else if ((key == .videos && videoDetailIsShown) || key == .nowPlayingVideo) && [.playingVideo, .pausedVideo].contains(playingState) {
+        } else if ((key == .videos && videoDetailIsShown) || key == .nowPlayingVideo) && [.playingVideo, .pausedVideo, .stopped].contains(playingState) {
             if let videoTimePassed {
                 if videoTimePassed > CMTime(value: 1800, timescale: 600) {
                     videoHandler.seekToBeginning()
                 } else {
+                    self.videoLoadingState = .notLoading
                     self.videoPlayerIsVisible = false
                     videoHandler.playPrev()
                     self.videoPlayerIsVisible = true
@@ -962,6 +969,14 @@ extension PodObservable {
                     self.videoBatterySymbolIsVisible = true
                     self.resetVideoSymbolTimer_short()
                 }
+            } else {
+                self.videoLoadingState = .notLoading
+                self.videoPlayerIsVisible = false
+                videoHandler.playPrev()
+                self.videoPlayerIsVisible = true
+                self.videoPlayingStateSymbolIsVisible = true
+                self.videoBatterySymbolIsVisible = true
+                self.resetVideoSymbolTimer_short()
             }
         }
     }
@@ -994,7 +1009,8 @@ extension PodObservable {
                     print("PodObservable | trailingButtonTapped() | error forward-skipping music: \(error.localizedDescription)")
                 }
             }
-        } else if ((key == .videos && videoDetailIsShown) || key == .nowPlayingVideo) && [.playingVideo, .pausedVideo].contains(playingState) {
+        } else if ((key == .videos && videoDetailIsShown) || key == .nowPlayingVideo) && [.playingVideo, .pausedVideo, .stopped].contains(playingState) {
+            self.videoLoadingState = .notLoading
             self.videoPlayerIsVisible = false
             self.videoHandler.playNext()
             self.videoPlayerIsVisible = true
