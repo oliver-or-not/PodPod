@@ -25,6 +25,12 @@ final class PhotoHandler {
         
         let resultCount = fetchResult.count
         
+        guard resultCount > 0 else {
+            DataModel.shared.favoritePhotoArray = []
+            completion()
+            return
+        }
+        
         var asyncCounter = 0
         var tempPhotoArray: [UIImage?] = Array(repeating: nil, count: resultCount)
 
@@ -53,7 +59,7 @@ final class PhotoHandler {
         PHImageManager.default()
             .requestImage(for: asset, targetSize: CGSize(width: 800, height: 800), contentMode: .aspectFit, options: options) { image, _ in
                 if let image {
-                    if image.size.width >= 600 || image.size.height >= 600 {
+                    if image.size.width >= 400 || image.size.height >= 400 {
                         completion(image)
                         return
                     }

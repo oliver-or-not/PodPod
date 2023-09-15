@@ -33,10 +33,18 @@ final class VideoHandler {
         
         let resultCount = fetchResult.count
         
+        guard resultCount > 0 else {
+            DataModel.shared.favoriteVideoThumbnailArray = []
+            DataModel.shared.favoriteVideoArray = []
+            DataModel.shared.favoriteVideoRatioArray = []
+            completion()
+            return
+        }
+        
         var asyncCounter = 0
         var tempThumbnailArray: [UIImage?] = Array(repeating: nil, count: resultCount)
         var tempVideoArray: [PHAsset?] = Array(repeating: nil, count: resultCount)
-
+        
         fetchResult.enumerateObjects { asset, index, _ in
             // getUIImage completion starts in order;  but works concurrently.
             // need to do countings below to preserve the order of photos
@@ -66,7 +74,7 @@ final class VideoHandler {
         PHImageManager.default()
             .requestImage(for: asset, targetSize: CGSize(width: 400, height: 400), contentMode: .aspectFit, options: options) { image, _ in
                 if let image {
-                    if image.size.width >= 300 || image.size.height >= 300 {
+                    if image.size.width >= 250 || image.size.height >= 250 {
                         completion(image)
                         return
                     }

@@ -76,6 +76,7 @@ final class MusicHandler {
                 completion()
             } catch {
                 self.reset(&DataModel.shared.librarySongs)
+                completion()
             }
         }
     }
@@ -96,6 +97,7 @@ final class MusicHandler {
                 completion()
             } catch {
                 self.reset(&DataModel.shared.playlists)
+                completion()
             }
         }
     }
