@@ -36,6 +36,9 @@ extension PodObservable {
                     RowData(text: "설정", actionStyle: .chevronMove, key: .settings),
                     RowData(text: "노래 임의 재생", actionStyle: .emptyMove, key: .nowPlaying, handlingProperty: .shufflePlay)
                 ]
+                pd.rowDataArray! += [
+                    RowData(text: "미디어 새로고침", actionStyle: .change, handlingProperty: .mediaRefresh)
+                ]
                 
                 var tempArray: [RowData] = []
                 for i in 0..<min(pd.rowDataArray!.count, mainMenuBoolArray.count) {
@@ -88,7 +91,6 @@ extension PodObservable {
                     RowData(text: "탭틱 피드백", actionStyle: .change, handlingProperty: .clickVibe),
                     RowData(text: "비디오 확대", actionStyle: .change, handlingProperty: .videoZoom),
                     RowData(text: "비디오 자동 재생", actionStyle: .change, handlingProperty: .videoAutoplay),
-                    RowData(text: "미디어 새로고침", actionStyle: .change, handlingProperty: .mediaRefresh),
                     RowData(text: "추가 설정", actionStyle: .link, handlingProperty: .settingsLink)
                 ]
                 return pd
@@ -121,6 +123,7 @@ extension PodObservable {
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = [RowData(text: "모두\t", actionStyle: .chevronMove, key: .chosenArtist, handlingProperty: .canPlay)]
                 guard let librarySongs = dataModel.librarySongs else {
+                    pd.rowDataArray = [RowData()]
                     return pd
                 }
                 
@@ -141,7 +144,7 @@ extension PodObservable {
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = [RowData(text: "모두\t", actionStyle: .chevronMove, key: .chosenAlbum, handlingProperty: .canPlay)]
                 guard let librarySongs = dataModel.librarySongs else {
-                    pd.rowDataArray!.append(RowData())
+                    pd.rowDataArray = [RowData()]
                     return pd
                 }
                 
@@ -183,7 +186,7 @@ extension PodObservable {
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = [RowData(text: "모두\t", actionStyle: .chevronMove, key: .chosenGenre, handlingProperty: .canPlay)]
                 guard let librarySongs = dataModel.librarySongs else {
-                    pd.rowDataArray!.append(RowData())
+                    pd.rowDataArray! = [RowData()]
                     return pd
                 }
                 
@@ -200,7 +203,7 @@ extension PodObservable {
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = [RowData(text: "모두\t", actionStyle: .chevronMove, key: .chosenComposer, handlingProperty: .canPlay)]
                 guard let librarySongs = dataModel.librarySongs else {
-                    pd.rowDataArray!.append(RowData())
+                    pd.rowDataArray = [RowData()]
                     return pd
                 }
                 

@@ -159,18 +159,22 @@ struct RowView_ghost: View {
                                     case .notShown:
                                         EmptyView()
                                     case .loading:
-                                        Image(systemName: "ellipsis")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .fontWeight(.heavy)
-                                            .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.15)
-                                            .foregroundColor(isFocused ? .white : .black)
+                                        ProgressView()
+                                            .controlSize(.mini)
+                                            .tint(isFocused ? .white : .black)
                                     case .done:
                                         Image(systemName: "checkmark")
                                             .resizable()
                                             .scaledToFit()
                                             .fontWeight(.heavy)
                                             .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.4)
+                                            .foregroundColor(isFocused ? .white : .black)
+                                    case .error:
+                                        Image(systemName: "questionmark")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .fontWeight(.heavy)
+                                            .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.47)
                                             .foregroundColor(isFocused ? .white : .black)
                                 }
                             case .timeInHeader:
@@ -322,18 +326,22 @@ struct RowView_ghost: View {
                                     case .notShown:
                                         EmptyView()
                                     case .loading:
-                                        Image(systemName: "ellipsis")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .fontWeight(.heavy)
-                                            .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.15)
-                                            .foregroundColor(isFocused ? .white : .black)
+                                        ProgressView()
+                                            .controlSize(.mini)
+                                            .tint(isFocused ? .white : .black)
                                     case .done:
                                         Image(systemName: "checkmark")
                                             .resizable()
                                             .scaledToFit()
                                             .fontWeight(.heavy)
                                             .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.4)
+                                            .foregroundColor(isFocused ? .white : .black)
+                                    case .error:
+                                        Image(systemName: "questionmark")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .fontWeight(.heavy)
+                                            .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.47)
                                             .foregroundColor(isFocused ? .white : .black)
                                 }
                             case .timeInHeader:
@@ -524,18 +532,22 @@ struct RowView_ghost: View {
                                         case .notShown:
                                             EmptyView()
                                         case .loading:
-                                            Image(systemName: "ellipsis")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .fontWeight(.heavy)
-                                                .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.15)
-                                                .foregroundColor(isFocused ? .white : .black)
+                                            ProgressView()
+                                                .controlSize(.mini)
+                                                .tint(isFocused ? .white : .black)
                                         case .done:
                                             Image(systemName: "checkmark")
                                                 .resizable()
                                                 .scaledToFit()
                                                 .fontWeight(.heavy)
                                                 .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.4)
+                                                .foregroundColor(isFocused ? .white : .black)
+                                        case .error:
+                                            Image(systemName: "questionmark")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .fontWeight(.heavy)
+                                                .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.47)
                                                 .foregroundColor(isFocused ? .white : .black)
                                     }
                                 case .timeInHeader:

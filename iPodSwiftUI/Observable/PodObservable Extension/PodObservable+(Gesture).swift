@@ -243,15 +243,23 @@ extension PodObservable {
                                 goRight(newPageKey: safeKey)
                             }
                         case .canPlay:
-                            goRight(newPageKey: safeKey)
+                            if dataModel.librarySongs?.count ?? 0 > 0 {
+                                goRight(newPageKey: safeKey)
+                            } else {
+                                _ = 0
+                            }
                         case .play:
-                            musicHandler.getUserSubscriptionAvailability { userSubscripts in
-                                if userSubscripts {
-                                    self.doCenterButtonAction_play()
-                                    self.goRight(newPageKey: safeKey)
-                                } else {
-                                    self.subscriptionAlertIsPresented = true
+                            if dataModel.librarySongs?.count ?? 0 > 0 {
+                                musicHandler.getUserSubscriptionAvailability { userSubscripts in
+                                    if userSubscripts {
+                                        self.doCenterButtonAction_play()
+                                        self.goRight(newPageKey: safeKey)
+                                    } else {
+                                        self.subscriptionAlertIsPresented = true
+                                    }
                                 }
+                            } else {
+                                _ = 0
                             }
                         case .shufflePlay:
                             musicHandler.getUserSubscriptionAvailability { userSubscripts in
@@ -314,55 +322,61 @@ extension PodObservable {
                         _ = 0
                 }
             case .photo:
-                if !photoDetailIsShown {
-                    photoDetailIsShown = true
+                if dataModel.favoritePhotoArray.count > 0 {
+                    if !photoDetailIsShown {
+                        photoDetailIsShown = true
+                    }
+                } else {
+                    _ = 0
                 }
             case .video:
-                if !videoDetailIsShown {
-                    if let focusedIndex {
-                        buttonsAreAvailable = false
-                        DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime) {
-                            self.buttonsAreAvailable = true
-                        }
-                        self.wheelProperty = .volume
-                        videoHandler.clearPlayer()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime) {
-                            self.videoHandler.videoIndex = focusedIndex
-                            self.videoPlayerIsVisible = true
-                            self.videoDetailIsShown = true
-                            self.videoPlayingStateSymbolIsVisible = true
-                            self.videoBatterySymbolIsVisible = true
-                            self.videoHandler.play(self.dataModel.favoriteVideoArray[focusedIndex])
-                            self.resetVideoSymbolTimer_short()
-                            
+                if dataModel.favoriteVideoThumbnailArray.count > 0 {
+                    if !videoDetailIsShown {
+                        if let focusedIndex {
+                            buttonsAreAvailable = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime) {
+                                self.buttonsAreAvailable = true
+                            }
+                            self.wheelProperty = .volume
+                            videoHandler.clearPlayer()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime) {
+                                self.videoHandler.videoIndex = focusedIndex
+                                self.videoPlayerIsVisible = true
+                                self.videoDetailIsShown = true
+                                self.videoPlayingStateSymbolIsVisible = true
+                                self.videoBatterySymbolIsVisible = true
+                                self.videoHandler.play(self.dataModel.favoriteVideoArray[focusedIndex])
+                                self.resetVideoSymbolTimer_short()
+                                
+                            }
                         }
                     }
-                }
-                // if video detail is shown
-                else {
-                    switch videoControlState {
-                        case .stable:
-                            videoControlState = .seek
-                            wheelProperty = .seekVideo
-                            videoBatterySymbolIsVisible = true
-                            videoSeekBarIsVisible = true
-                            resetVideoSymbolTimer_long()
-                        case .volume:
-                            videoControlState = .stable
-                            wheelProperty = .volume
-                            withAnimation(.linear(duration: DesignSystem.Time.videoSymbolFadeOutTime)) {
-                                videoPlayingStateSymbolIsVisible = false
-                                videoBatterySymbolIsVisible = false
-                                videoVolumeBarIsVisible = false
-                            }
-                        case .seek:
-                            videoControlState = .stable
-                            wheelProperty = .volume
-                            withAnimation(.linear(duration: DesignSystem.Time.videoSymbolFadeOutTime)) {
-                                videoPlayingStateSymbolIsVisible = false
-                                videoBatterySymbolIsVisible = false
-                                videoSeekBarIsVisible = false
-                            }
+                    // if video detail is shown
+                    else {
+                        switch videoControlState {
+                            case .stable:
+                                videoControlState = .seek
+                                wheelProperty = .seekVideo
+                                videoBatterySymbolIsVisible = true
+                                videoSeekBarIsVisible = true
+                                resetVideoSymbolTimer_long()
+                            case .volume:
+                                videoControlState = .stable
+                                wheelProperty = .volume
+                                withAnimation(.linear(duration: DesignSystem.Time.videoSymbolFadeOutTime)) {
+                                    videoPlayingStateSymbolIsVisible = false
+                                    videoBatterySymbolIsVisible = false
+                                    videoVolumeBarIsVisible = false
+                                }
+                            case .seek:
+                                videoControlState = .stable
+                                wheelProperty = .volume
+                                withAnimation(.linear(duration: DesignSystem.Time.videoSymbolFadeOutTime)) {
+                                    videoPlayingStateSymbolIsVisible = false
+                                    videoBatterySymbolIsVisible = false
+                                    videoSeekBarIsVisible = false
+                                }
+                        }
                     }
                 }
             case .nowPlayingVideo:
@@ -461,17 +475,19 @@ extension PodObservable {
             // adjust focusedIndex of .main
             // if added
             if statusModel.pageSKDictionary[.main] != nil && statusModel.pageSKDictionary[.main]!.focusedIndex != nil && statusModel.pageSKDictionary[.main]!.discreteScrollMark != nil {
-                if mainMenuBoolArray[mainMenuIndexShaker(focusedIndex)] {
-                    statusModel.pageSKDictionary[.main]!.focusedIndex! += 1
-                    if statusModel.pageSKDictionary[.main]!.focusedIndex! >= statusModel.pageSKDictionary[.main]!.discreteScrollMark! + DesignSystem.Soft.Dimension.rangeOfRows {
-                        statusModel.pageSKDictionary[.main]!.discreteScrollMark! += 1
+                if mainMenuIndexShaker(focusedIndex) < StatusModel.indexOfSettingsInMainMenuSetting {
+                    if mainMenuBoolArray[mainMenuIndexShaker(focusedIndex)] {
+                        statusModel.pageSKDictionary[.main]!.focusedIndex! += 1
+                        if statusModel.pageSKDictionary[.main]!.focusedIndex! >= statusModel.pageSKDictionary[.main]!.discreteScrollMark! + DesignSystem.Soft.Dimension.rangeOfRows {
+                            statusModel.pageSKDictionary[.main]!.discreteScrollMark! += 1
+                        }
                     }
-                }
-                // if subtracted
-                else {
-                    statusModel.pageSKDictionary[.main]!.focusedIndex! = max(0, statusModel.pageSKDictionary[.main]!.focusedIndex! - 1)
-                    if statusModel.pageSKDictionary[.main]!.focusedIndex! < statusModel.pageSKDictionary[.main]!.discreteScrollMark! {
-                        statusModel.pageSKDictionary[.main]!.discreteScrollMark! -= 1
+                    // if subtracted
+                    else {
+                        statusModel.pageSKDictionary[.main]!.focusedIndex! = max(0, statusModel.pageSKDictionary[.main]!.focusedIndex! - 1)
+                        if statusModel.pageSKDictionary[.main]!.focusedIndex! < statusModel.pageSKDictionary[.main]!.discreteScrollMark! {
+                            statusModel.pageSKDictionary[.main]!.discreteScrollMark! -= 1
+                        }
                     }
                 }
             }
@@ -612,8 +628,8 @@ extension PodObservable {
         if let omitsDataAlert = UserDefaults.standard.object(forKey: "omitsDataAlert") as? Bool {
             if omitsDataAlert {
                 libraryUpdateSymbolState = .loading
-                videoHandler.fetchFavoriteVideoAssets {
-                    self.photoHandler.fetchFavoritePhotos {
+                videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: true) {
+                    self.photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: true) {
                         self.musicHandler.requestUpdateLibrary() {
                             self.musicHandler.requestUpdatePlaylists() {
                                 DispatchQueue.main.async {
@@ -710,8 +726,8 @@ extension PodObservable {
             
             // match index
             self.wheelProperty = .focusedIndex
-            if self.focusedIndex != nil && self.discreteScrollMark != nil {
-                self.focusedIndex = videoHandler.videoIndex
+            if self.focusedIndex != nil && self.discreteScrollMark != nil && videoHandler.videoIndex != nil {
+                self.focusedIndex = max(0, min(videoHandler.videoIndex!, dataModel.favoriteVideoThumbnailArray.count - 1))
                 let hNum = DesignSystem.Soft.Dimension.videoThumbnailHorizontalNum
                 let vNum = DesignSystem.Soft.Dimension.videoThumbnailVerticalNum
                 if self.discreteScrollMark! < self.focusedIndex! {
@@ -943,32 +959,20 @@ extension PodObservable {
         resetHeaderTimeTimer()
         
         if [.playing, .paused].contains(playingState) {
-            if let timePassed {
-                if timePassed > 3.0 {
-                    musicHandler.musicPlayer.restartCurrentEntry()
-                } else {
-                    Task {
-                        do {
-                            try await musicHandler.musicPlayer.skipToPreviousEntry()
-                        } catch {
-                            print("PodObservable | leadingButtonTapped() | error backward-skipping music: \(error.localizedDescription)")
-                        }
+            if musicHandler.musicPlayer.playbackTime > 3.0 {
+                musicHandler.musicPlayer.restartCurrentEntry()
+            } else {
+                Task {
+                    do {
+                        try await musicHandler.musicPlayer.skipToPreviousEntry()
+                    } catch {
+                        print("PodObservable | leadingButtonTapped() | error backward-skipping music: \(error.localizedDescription)")
                     }
                 }
             }
         } else if ((key == .videos && videoDetailIsShown) || key == .nowPlayingVideo) && [.playingVideo, .pausedVideo, .stopped].contains(playingState) {
-            if let videoTimePassed {
-                if videoTimePassed > CMTime(value: 1800, timescale: 600) {
-                    videoHandler.seekToBeginning()
-                } else {
-                    self.videoLoadingState = .notLoading
-                    self.videoPlayerIsVisible = false
-                    videoHandler.playPrev()
-                    self.videoPlayerIsVisible = true
-                    self.videoPlayingStateSymbolIsVisible = true
-                    self.videoBatterySymbolIsVisible = true
-                    self.resetVideoSymbolTimer_short()
-                }
+            if videoHandler.player.currentTime() > CMTime(value: 1800, timescale: 600) {
+                videoHandler.seekToBeginning()
             } else {
                 self.videoLoadingState = .notLoading
                 self.videoPlayerIsVisible = false
@@ -978,6 +982,15 @@ extension PodObservable {
                 self.videoBatterySymbolIsVisible = true
                 self.resetVideoSymbolTimer_short()
             }
+        } else {
+            self.videoLoadingState = .notLoading
+            self.videoPlayerIsVisible = false
+            videoHandler.playPrev()
+            self.videoPlayerIsVisible = true
+            self.videoPlayingStateSymbolIsVisible = true
+            self.videoBatterySymbolIsVisible = true
+            self.resetVideoSymbolTimer_short()
+            
         }
     }
     

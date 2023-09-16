@@ -14,7 +14,7 @@ final class PhotoHandler {
     
     private init() {}
 
-    func fetchFavoritePhotos(completion: @escaping () -> Void) {
+    func fetchFavoritePhotos(networkAccessIsAllowed: Bool, completion: @escaping () -> Void) {
         DataModel.shared.favoritePhotoArray = []
         
         let fetchOptions = PHFetchOptions()
@@ -25,13 +25,19 @@ final class PhotoHandler {
         
         let resultCount = fetchResult.count
         
+        guard resultCount > 0 else {
+            DataModel.shared.favoritePhotoArray = []
+            completion()
+            return
+        }
+        
         var asyncCounter = 0
         var tempPhotoArray: [UIImage?] = Array(repeating: nil, count: resultCount)
 
         fetchResult.enumerateObjects { asset, index, _ in
             // getUIImage completion starts in order;  but works concurrently.
             // need to do countings below to preserve the order of photos
-            self.getUIImage(for: asset) { image in
+            self.getUIImage(for: asset, networkAccessIsAllowed: networkAccessIsAllowed) { image in
                 if let image = image {
                     tempPhotoArray[index] = image
                     asyncCounter += 1
@@ -47,21 +53,16 @@ final class PhotoHandler {
         }
     }
 
-    func getUIImage(for asset: PHAsset, completion: @escaping (UIImage?) -> Void) {
+    func getUIImage(for asset: PHAsset, networkAccessIsAllowed: Bool, completion: @escaping (UIImage?) -> Void) {
         let options = PHImageRequestOptions()
-        options.isNetworkAccessAllowed = true
+        options.isNetworkAccessAllowed = networkAccessIsAllowed
+        options.deliveryMode = .highQualityFormat
+        options.resizeMode = .fast
         PHImageManager.default()
             .requestImage(for: asset, targetSize: CGSize(width: 800, height: 800), contentMode: .aspectFit, options: options) { image, _ in
                 if let image {
-                    if image.size.width >= 600 || image.size.height >= 600 {
                         completion(image)
                         return
-                    }
-                    // ignore low-resolution temporary image
-                    else {
-                        _ = 0
-                        return
-                    }
                 } else {
                     completion(nil)
                     return

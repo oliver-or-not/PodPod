@@ -135,7 +135,7 @@ struct VideoStyleBodyStackView: View {
                             Spacer()
                                 .frame(width: basicIndentation)
                             
-                            Text("표시할 비디오가 없습니다.\n1. 사진 앱에서 추가할 비디오를 선택하고\n즐겨찾기 버튼(♡)을 누르세요.\n2. 설정에서 미디어를 새로고침하세요.")
+                            Text("표시할 비디오가 없습니다.\n\n1. 사진 앱에서 추가할 비디오를 선택하고\n즐겨찾기 버튼(♡)을 누르세요.\n2. 첫 화면에서 미디어를 새로고침하세요.")
                                 .multilineTextAlignment(.center)
                                 .font(.system(size: nowPlayingFontSize, weight: .semibold))
                                 .foregroundColor(.black)

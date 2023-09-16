@@ -160,18 +160,22 @@ struct RowView: View {
                                     case .notShown:
                                         EmptyView()
                                     case .loading:
-                                        Image(systemName: "ellipsis")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .fontWeight(.heavy)
-                                            .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.15)
-                                            .foregroundColor(isFocused ? .white : .black)
+                                        ProgressView()
+                                            .controlSize(.mini)
+                                            .tint(isFocused ? .white : .black)
                                     case .done:
                                         Image(systemName: "checkmark")
                                             .resizable()
                                             .scaledToFit()
                                             .fontWeight(.heavy)
                                             .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.4)
+                                            .foregroundColor(isFocused ? .white : .black)
+                                    case .error:
+                                        Image(systemName: "questionmark")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .fontWeight(.heavy)
+                                            .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.47)
                                             .foregroundColor(isFocused ? .white : .black)
                                 }
                             case .timeInHeader:
@@ -323,18 +327,22 @@ struct RowView: View {
                                     case .notShown:
                                         EmptyView()
                                     case .loading:
-                                        Image(systemName: "ellipsis")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .fontWeight(.heavy)
-                                            .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.15)
-                                            .foregroundColor(isFocused ? .white : .black)
+                                        ProgressView()
+                                            .controlSize(.mini)
+                                            .tint(isFocused ? .white : .black)
                                     case .done:
                                         Image(systemName: "checkmark")
                                             .resizable()
                                             .scaledToFit()
                                             .fontWeight(.heavy)
                                             .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.4)
+                                            .foregroundColor(isFocused ? .white : .black)
+                                    case .error:
+                                        Image(systemName: "questionmark")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .fontWeight(.heavy)
+                                            .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.47)
                                             .foregroundColor(isFocused ? .white : .black)
                                 }
                             case .timeInHeader:
@@ -535,18 +543,22 @@ struct RowView: View {
                                         case .notShown:
                                             EmptyView()
                                         case .loading:
-                                            Image(systemName: "ellipsis")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .fontWeight(.heavy)
-                                                .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.15)
-                                                .foregroundColor(isFocused ? .white : .black)
+                                            ProgressView()
+                                                .controlSize(.mini)
+                                                .tint(isFocused ? .white : .black)
                                         case .done:
                                             Image(systemName: "checkmark")
                                                 .resizable()
                                                 .scaledToFit()
                                                 .fontWeight(.heavy)
                                                 .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.4)
+                                                .foregroundColor(isFocused ? .white : .black)
+                                        case .error:
+                                            Image(systemName: "questionmark")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .fontWeight(.heavy)
+                                                .frame(height: DesignSystem.Soft.Dimension.rowHeight * 0.47)
                                                 .foregroundColor(isFocused ? .white : .black)
                                     }
                                 case .timeInHeader:
@@ -588,6 +600,10 @@ struct RowView: View {
 
 struct RowView_Previews: PreviewProvider {
     static var previews: some View {
-        RowView(rowData: RowData(text: "음악", actionStyle: .chevronMove, key: .music), indexInList: 0, isFocused: true, wantsToSeeTimeInHeader: false, repeatState: .all, alwaysShuffle: true, vibeIsActivated: true, videoZoomMode: .fit, videoAutoplayMode: .off, libraryUpdateSymbolState: .done, mainMenuBoolArray: StatusModel.initialValueOfMainMenuBoolArray)
+        VStack {
+            RowView(rowData: RowData(text: "음악", actionStyle: .change, key: .music, handlingProperty: .mediaRefresh), indexInList: 0, isFocused: true, wantsToSeeTimeInHeader: false, repeatState: .all, alwaysShuffle: true, vibeIsActivated: true, videoZoomMode: .fit, videoAutoplayMode: .off, libraryUpdateSymbolState: .loading, mainMenuBoolArray: StatusModel.initialValueOfMainMenuBoolArray)
+            RowView(rowData: RowData(text: "음악", actionStyle: .change, key: .music, handlingProperty: .mediaRefresh), indexInList: 0, isFocused: true, wantsToSeeTimeInHeader: false, repeatState: .all, alwaysShuffle: true, vibeIsActivated: true, videoZoomMode: .fit, videoAutoplayMode: .off, libraryUpdateSymbolState: .done, mainMenuBoolArray: StatusModel.initialValueOfMainMenuBoolArray)
+            RowView(rowData: RowData(text: "음악", actionStyle: .change, key: .music, handlingProperty: .mediaRefresh), indexInList: 0, isFocused: true, wantsToSeeTimeInHeader: false, repeatState: .all, alwaysShuffle: true, vibeIsActivated: true, videoZoomMode: .fit, videoAutoplayMode: .off, libraryUpdateSymbolState: .error, mainMenuBoolArray: StatusModel.initialValueOfMainMenuBoolArray)
+        }
     }
 }

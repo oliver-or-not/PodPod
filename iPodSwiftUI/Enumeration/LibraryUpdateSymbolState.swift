@@ -11,4 +11,5 @@ enum LibraryUpdateSymbolState {
     case notShown
     case loading
     case done
+    case error
 }

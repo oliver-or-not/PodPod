@@ -22,12 +22,14 @@ class StatusModel {
     //MARK: - constants
     
     static let maxPageCount = 10
-    static let initialValueOfMainMenuBoolArray = [true, true, true, false, false, false, false, false, true, true]
+    static let initialValueOfMainMenuBoolArray = [true, true, true, false, false, false, false, false, true, true, true]
     // 0...2: music, photos, videos
     // 3...7: playlists, artists, albums, songs, composers
     // 8: settings
     // 9: shufflesongs
-    static let initialIndexOfSettings = 4
+    // 10: media refresh
+    static let initialIndexOfSettings = 3
+    static let indexOfSettingsInMainMenuSetting = 8
     
     //MARK: - iPod currentstate, NO need to be subscribed
     

@@ -11,7 +11,7 @@ import SwiftUI
 
 extension PodObservable {
     
-    //MARK: - handle timer
+    //MARK: - reset timer
     
     func resetHeaderTimeTimer() {
         headerTimeTimer?.invalidate()
@@ -98,6 +98,8 @@ extension PodObservable {
             }
         }
     }
+    
+    //MARK: - set refresher
     
     func setPlayInfoRefresher() {
         playInfoRefresher = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
@@ -216,16 +218,21 @@ extension PodObservable {
                 }
             }
             // music time
-            self.timePassed = self.musicHandler.musicPlayer.playbackTime
+            if self.key == .nowPlaying && [.stable, .seek, .seekToStable, .volumeToStable, .fullArtworkToStable, .stableToSeek].contains(self.nowPlayingTransitionState) {
+                self.timePassed = self.musicHandler.musicPlayer.playbackTime
+            }
             
             // video time & ratio
             if let video = self.videoHandler.player.currentItem {
                 if self.currentVideoTotalTime != video.duration {
                     self.currentVideoTotalTime = video.duration
                 }
-                self.videoTimePassed = self.videoHandler.player.currentTime()
                 
-                if self.videoTimePassed == self.currentVideoTotalTime {
+                if self.videoSeekBarIsVisible {
+                    self.videoTimePassed = self.videoHandler.player.currentTime()
+                }
+                
+                if self.videoHandler.player.currentTime() == self.currentVideoTotalTime {
                     switch self.videoAutoplayMode {
                         case .off:
                             _ = 0
@@ -250,7 +257,9 @@ extension PodObservable {
                 }
                 
             } else {
-                self.videoTimePassed = nil
+                if self.videoTimePassed != nil {
+                    self.videoTimePassed = nil
+                }
                 if self.currentVideoTotalTime != nil {
                     self.currentVideoTotalTime = nil
                 }
@@ -288,7 +297,6 @@ extension PodObservable {
     
     func setBatteryInfoRefresher() {
         batteryInfoRefresher = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
-                        
             switch UIDevice.current.batteryState {
                 case .unplugged:
                     if self.batteryState != .unplugged {
