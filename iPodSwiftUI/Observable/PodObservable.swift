@@ -33,18 +33,25 @@ final class PodObservable: ObservableObject {
     //MARK: - iPod current state (1)
     
     @Published var transitionState: TransitionState = .normal
-    @Published var shownPageNum: Int = 0 // shown page
-    @Published var frontierPageNum: Int = 0 // real-time-refresh page
+    // shown page
+    @Published var shownPageNum: Int = 0
+    // real-time-refresh page
+    @Published var frontierPageNum: Int = 0
     @Published var batteryState: BatteryState = .unplugged
     @Published var batteryLevel: Float = 1.0
     @Published var volume: Float = 0.0
     @Published var timeTitle: String = ""
-    @Published var wantsToSeeTimeInHeader = false // user default variable
-    @Published var vibeIsActivated = true // user default variable
-    @Published var videoZoomMode: VideoZoomMode = .fit // user default variable
-    @Published var videoAutoplayMode: VideoAutoplayMode = .one // user default variable
+    // user default variable
+    @Published var wantsToSeeTimeInHeader = false
+    // user default variable
+    @Published var vibeIsActivated = true
+    // user default variable
+    @Published var videoZoomMode: VideoZoomMode = .fit
+    // user default variable
+    @Published var videoAutoplayMode: VideoAutoplayMode = .one
     @Published var libraryUpdateSymbolState: LibraryUpdateSymbolState = .notShown
-    @Published var mainMenuBoolArray: [Bool] = StatusModel.initialValueOfMainMenuBoolArray // user default variable
+    // user default variable
+    @Published var mainMenuBoolArray: [Bool] = StatusModel.initialValueOfMainMenuBoolArray
     @Published var headerTimeIsShown = false
     @Published var subscriptionAlertIsPresented = false
     @Published var videoNetworkAlertIsPresented = false
@@ -150,8 +157,10 @@ final class PodObservable: ObservableObject {
     //MARK: - iPod current state (2) (stuffs about playing)
     
     @Published var playingState: PlayingState = .stopped
-    @Published var repeatState: RepeatState = .off // user default variable
-    @Published var alwaysShuffle = false // user default variable
+    // user default variable
+    @Published var repeatState: RepeatState = .off
+    // user default variable
+    @Published var alwaysShuffle = false
     @Published var shuffleIsActivated = false 
     @Published var currentSongIndex: Int?
     @Published var timePassed: TimeInterval?
