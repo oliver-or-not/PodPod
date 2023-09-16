@@ -71,6 +71,7 @@
 		57A42D702AB5BF8E007E8F3A /* InactiveVariety.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A42D6F2AB5BF8E007E8F3A /* InactiveVariety.swift */; };
 		57A42D742AB5DF9E007E8F3A /* PodObservable+(Fetch).swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A42D732AB5DF9E007E8F3A /* PodObservable+(Fetch).swift */; };
 		57A42D762AB5EC06007E8F3A /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A42D752AB5EC06007E8F3A /* NetworkHandler.swift */; };
+		57A42D782AB60722007E8F3A /* WheelDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A42D772AB60722007E8F3A /* WheelDirection.swift */; };
 		57A746312A7E42E2007BD76D /* MusicHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A746302A7E42E2007BD76D /* MusicHandler.swift */; };
 		57C65E292A8A0BCB0048F149 /* getTimeString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C65E282A8A0BCB0048F149 /* getTimeString.swift */; };
 		57C856EA2A91A93B0036F371 /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C856E92A91A93B0036F371 /* BatteryState.swift */; };
@@ -166,6 +167,7 @@
 		57A42D6F2AB5BF8E007E8F3A /* InactiveVariety.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InactiveVariety.swift; sourceTree = "<group>"; };
 		57A42D732AB5DF9E007E8F3A /* PodObservable+(Fetch).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PodObservable+(Fetch).swift"; sourceTree = "<group>"; };
 		57A42D752AB5EC06007E8F3A /* NetworkHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
+		57A42D772AB60722007E8F3A /* WheelDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelDirection.swift; sourceTree = "<group>"; };
 		57A746302A7E42E2007BD76D /* MusicHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicHandler.swift; sourceTree = "<group>"; };
 		57C65E282A8A0BCB0048F149 /* getTimeString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getTimeString.swift; sourceTree = "<group>"; };
 		57C856E92A91A93B0036F371 /* BatteryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryState.swift; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 				579E2FDA2AA952DB001BF603 /* VideoAutoplayMode.swift */,
 				5774BC632AAD49F2006747EE /* VideoLoadingState.swift */,
 				57A42D6F2AB5BF8E007E8F3A /* InactiveVariety.swift */,
+				57A42D772AB60722007E8F3A /* WheelDirection.swift */,
 			);
 			path = Enumeration;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				57867D982A3CC2F100129450 /* DeviceView.swift in Sources */,
 				579E2FC22AA5CD66001BF603 /* VideoHandler.swift in Sources */,
 				57FC99C52A7426D500388422 /* PageData.swift in Sources */,
+				57A42D782AB60722007E8F3A /* WheelDirection.swift in Sources */,
 				576A61A92AA31F3200A10A0B /* VibeHandler.swift in Sources */,
 				57EF7E382A7A813400C2A56D /* ListStyleBodyView.swift in Sources */,
 				57FC99BA2A73F55E00388422 /* PageKey.swift in Sources */,

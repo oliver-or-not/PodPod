@@ -99,6 +99,13 @@ extension PodObservable {
         }
     }
     
+    func resetWheelAccelerationTimer() {
+        wheelAccelerationTimer?.invalidate()
+        wheelAccelerationTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { timer in
+            self.wheelChangeSummation = max(1.0, self.wheelChangeSummation / 1.7 - 4.0)
+        }
+    }
+    
     //MARK: - set refresher
     
     func setPlayInfoRefresher() {

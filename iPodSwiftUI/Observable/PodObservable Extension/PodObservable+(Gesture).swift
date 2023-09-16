@@ -27,6 +27,10 @@ extension PodObservable {
             videoSymbolTimer?.invalidate()
             headerTimeIsShown = false
             headerTimeTimer?.invalidate()
+            
+            if getPageData(key).pageBodyStyle == .list && wheelProperty == .focusedIndex && focusedIndex != nil {
+                resetWheelAccelerationTimer()
+            }
 
             // .nowPlaying page transition from .stable to .volume
             if key == .nowPlaying {
@@ -89,14 +93,21 @@ extension PodObservable {
                             if newDownInt > prevDownInt {
                                 if focusedIndex! < rowCount - 1 {
                                     vibeHandler.mediumVibe(if: vibeIsActivated)
-                                    focusedIndex! += 1
                                     
                                     let pageBodyStyle = getPageData(key).pageBodyStyle
                                     if  pageBodyStyle == .list {
-                                        if focusedIndex! >= discreteScrollMark + DesignSystem.Soft.Dimension.rangeOfRows {
-                                            self.discreteScrollMark = discreteScrollMark + 1
+                                        if prevWheelDirection == .down {
+                                            wheelAccelerationFactor = 1
+                                            wheelChangeSummation = 1.0
                                         }
+                                        focusedIndex! = min(focusedIndex! + wheelAccelerationFactor, rowCount - 1)
+                                        wheelChangeSummation += CGFloat(wheelAccelerationFactor)
+                                        while focusedIndex! >= self.discreteScrollMark! + DesignSystem.Soft.Dimension.rangeOfRows {
+                                            self.discreteScrollMark! += 1
+                                        }
+                                        prevWheelDirection = .up
                                     } else if pageBodyStyle == .photo {
+                                        focusedIndex! += 1
                                         if focusedIndex! >= discreteScrollMark + DesignSystem.Soft.Dimension.photoHorizontalNum * DesignSystem.Soft.Dimension.photoVerticalNum {
                                             self.discreteScrollMark = discreteScrollMark + DesignSystem.Soft.Dimension.photoHorizontalNum
                                             if !photoDetailIsShown {
@@ -104,6 +115,7 @@ extension PodObservable {
                                             }
                                         }
                                     } else if pageBodyStyle == .video {
+                                        focusedIndex! += 1
                                         if !videoDetailIsShown {
                                             if focusedIndex! >= discreteScrollMark + DesignSystem.Soft.Dimension.videoThumbnailHorizontalNum * DesignSystem.Soft.Dimension.videoThumbnailVerticalNum {
                                                 self.discreteScrollMark = discreteScrollMark + DesignSystem.Soft.Dimension.videoThumbnailHorizontalNum
@@ -118,14 +130,21 @@ extension PodObservable {
                             else if newDownInt < prevDownInt {
                                 if focusedIndex! > 0 {
                                     vibeHandler.mediumVibe(if: vibeIsActivated)
-                                    focusedIndex! -= 1
                                     
                                     let pageBodyStyle = getPageData(key).pageBodyStyle
                                     if pageBodyStyle == .list {
-                                        if focusedIndex! < discreteScrollMark {
-                                            self.discreteScrollMark = discreteScrollMark - 1
+                                        if prevWheelDirection == .up {
+                                            wheelAccelerationFactor = 1
+                                            wheelChangeSummation = 1.0
                                         }
+                                        focusedIndex! = max(0, focusedIndex! - wheelAccelerationFactor)
+                                        wheelChangeSummation += CGFloat(wheelAccelerationFactor)
+                                        while focusedIndex! < self.discreteScrollMark! {
+                                            self.discreteScrollMark! -= 1
+                                        }
+                                        prevWheelDirection = .down
                                     } else if pageBodyStyle == .photo {
+                                        focusedIndex! -= 1
                                         if focusedIndex! < discreteScrollMark {
                                             self.discreteScrollMark = discreteScrollMark - DesignSystem.Soft.Dimension.photoHorizontalNum
                                             if !photoDetailIsShown {
@@ -133,6 +152,7 @@ extension PodObservable {
                                             }
                                         }
                                     } else if pageBodyStyle == .video {
+                                        focusedIndex! -= 1
                                         if !videoDetailIsShown {
                                             if focusedIndex! < discreteScrollMark {
                                                 self.discreteScrollMark = discreteScrollMark - DesignSystem.Soft.Dimension.videoThumbnailHorizontalNum
@@ -199,6 +219,9 @@ extension PodObservable {
             }
             
             resetHeaderTimeTimer()
+            
+            wheelChangeSummation = 1.0
+            wheelAccelerationTimer?.invalidate()
         }
     }
     
@@ -623,7 +646,6 @@ extension PodObservable {
     }
     func doCenterButtonAciton_mediaRefresh() {
         if let omitsDataAlert = UserDefaults.standard.object(forKey: "omitsDataAlert") as? Bool {
-            print("doCenterButtonAciton_mediaRefresh | networkHandler.connectionType: \(networkHandler.connectionType)")
             if omitsDataAlert || networkHandler.connectionType != .cellular {
                 fetchAllMedia(networkAccessIsAllowed: true)
             }
