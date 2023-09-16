@@ -117,10 +117,10 @@ final class VideoHandler {
                 DispatchQueue.main.async {
                     if let omitsDataAlert = UserDefaults.standard.object(forKey: "omitsDataAlert") as? Bool {
                         if !networkAccessIsAllowed {
-                            if omitsDataAlert {
+                            if omitsDataAlert || NetworkHandler.shared.connectionType != .cellular {
                                 self.play(asset, networkAccessIsAllowed: true)
                             }
-                            // if doesnt omit data alert
+                            // if no-omit and cellular
                             else {
                                 PodObservable.shared.videoNetworkAlertIsPresented = true
                             }
@@ -135,7 +135,11 @@ final class VideoHandler {
                     // omitsDataAlert is nil; see as false
                     else {
                         if !networkAccessIsAllowed {
-                            PodObservable.shared.videoNetworkAlertIsPresented = true
+                            if NetworkHandler.shared.connectionType != .cellular {
+                                self.play(asset, networkAccessIsAllowed: true)
+                            } else {
+                                PodObservable.shared.videoNetworkAlertIsPresented = true
+                            }
                         }
                         // if network access is already allowed; serious failure
                         else {

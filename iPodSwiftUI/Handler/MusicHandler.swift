@@ -76,7 +76,7 @@ final class MusicHandler {
                 completion()
             } catch {
                 self.reset(&DataModel.shared.librarySongs)
-                print("MusicHandler | requestUpdateLibrary | response fail")
+                print("MusicHandler | requestUpdateLibrary | response fail: \(error.localizedDescription)")
                 completion()
             }
         }
@@ -98,7 +98,7 @@ final class MusicHandler {
                 completion()
             } catch {
                 self.reset(&DataModel.shared.playlists)
-                print("MusicHandler | requestUpdatePlaylists | response fail")
+                print("MusicHandler | requestUpdatePlaylists | response fail: \(error.localizedDescription)")
                 completion()
             }
         }

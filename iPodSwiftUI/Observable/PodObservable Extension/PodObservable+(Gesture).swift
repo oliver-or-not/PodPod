@@ -8,6 +8,7 @@
 import Combine
 import MediaPlayer
 import MusicKit
+import Network
 import SwiftUI
 
 extension PodObservable {
@@ -622,35 +623,24 @@ extension PodObservable {
     }
     func doCenterButtonAciton_mediaRefresh() {
         if let omitsDataAlert = UserDefaults.standard.object(forKey: "omitsDataAlert") as? Bool {
-            if omitsDataAlert {
-                libraryUpdateSymbolState = .loading
-                fetchCounter = 0
-                videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: true) {
-                    DispatchQueue.main.async {
-                        self.fetchCounter += 1
-                    }
-                }
-                photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: true) {
-                    DispatchQueue.main.async {
-                        self.fetchCounter += 1
-                    }
-                }
-                musicHandler.requestUpdateLibrary() {
-                    DispatchQueue.main.async {
-                        self.fetchCounter += 1
-                    }
-                }
-                musicHandler.requestUpdatePlaylists() {
-                    DispatchQueue.main.async {
-                        self.fetchCounter += 1
-                    }
-                }
-            } else {
+            print("doCenterButtonAciton_mediaRefresh | networkHandler.connectionType: \(networkHandler.connectionType)")
+            if omitsDataAlert || networkHandler.connectionType != .cellular {
+                fetchAllMedia(networkAccessIsAllowed: true)
+            }
+            // no omit and cellular
+            else {
                 mediaRefreshNetworkAlertIsPresented = true
             }
         }
+        // if omitsDataAlert doesnt have a value; see as false
         else {
-            mediaRefreshNetworkAlertIsPresented = true
+            if networkHandler.connectionType != .cellular {
+                fetchAllMedia(networkAccessIsAllowed: true)
+            }
+            // if cellular
+            else {
+                mediaRefreshNetworkAlertIsPresented = true
+            }
         }
     }
     
@@ -931,14 +921,7 @@ extension PodObservable {
                 self.resetVideoSymbolTimer_short()
             }
         } else {
-            self.videoLoadingState = .notLoading
-            self.videoPlayerIsVisible = false
-            videoHandler.playPrev()
-            self.videoPlayerIsVisible = true
-            self.videoPlayingStateSymbolIsVisible = true
-            self.videoBatterySymbolIsVisible = true
-            self.resetVideoSymbolTimer_short()
-            
+            _ = 0
         }
     }
     

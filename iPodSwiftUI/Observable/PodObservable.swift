@@ -29,6 +29,8 @@ final class PodObservable: ObservableObject {
     let videoHandler = VideoHandler.shared
     // handles taptic vibration
     let vibeHandler = VibeHandler.shared
+    // handles network status
+    let networkHandler = NetworkHandler.shared
     
     //MARK: - iPod current state (1)
     
@@ -69,28 +71,7 @@ final class PodObservable: ObservableObject {
     @Published var userAllowedMediaRefreshNetworkLoading = false {
         didSet {
             if userAllowedMediaRefreshNetworkLoading {
-                libraryUpdateSymbolState = .loading
-                fetchCounter = 0
-                videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: true) {
-                    DispatchQueue.main.async {
-                        self.fetchCounter += 1
-                    }
-                }
-                photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: true) {
-                    DispatchQueue.main.async {
-                        self.fetchCounter += 1
-                    }
-                }
-                musicHandler.requestUpdateLibrary() {
-                    DispatchQueue.main.async {
-                        self.fetchCounter += 1
-                    }
-                }
-                musicHandler.requestUpdatePlaylists() {
-                    DispatchQueue.main.async {
-                        self.fetchCounter += 1
-                    }
-                }
+                fetchAllMedia(networkAccessIsAllowed: true)
                 userAllowedMediaRefreshNetworkLoading = false
             }
         }
@@ -482,6 +463,10 @@ final class PodObservable: ObservableObject {
         resetHeaderTimeTimer()
         setPlayInfoRefresher()
         setBatteryInfoRefresher()
+        
+        //MARK: - network monitoring
+        
+        networkHandler.startMonitoring()
     }
     
     //MARK: - manual refresh method
