@@ -62,7 +62,7 @@ struct ListStyleBodyView: View {
                             Spacer()
                                 .frame(width: basicIndentation)
                             
-                            Text("표시할 노래가 없습니다.\n1. Apple Music을 구독하고\n보관함에 노래를 추가하세요.\n2. 설정에서 미디어를 새로고침하세요.")
+                            Text("표시할 노래가 없습니다.\n\n1. Apple Music을 구독하고\n보관함에 노래를 추가하세요.\n2. 첫 화면에서 미디어를 새로고침하세요.")
                                 .multilineTextAlignment(.center)
                                 .font(.system(size: nowPlayingFontSize, weight: .semibold))
                                 .foregroundColor(.black)
@@ -81,7 +81,7 @@ struct ListStyleBodyView: View {
                             Spacer()
                                 .frame(width: basicIndentation)
                             
-                            Text("표시할 재생목록이 없습니다.\n1. Apple Music을 구독하고\n보관함에 플레이리스트를 추가하세요.\n2. 설정에서 미디어를 새로고침하세요.")
+                            Text("표시할 재생목록이 없습니다.\n\n1. Apple Music을 구독하고\n보관함에 플레이리스트를 추가하세요.\n2. 첫 화면에서 미디어를 새로고침하세요.")
                                 .multilineTextAlignment(.center)
                                 .font(.system(size: nowPlayingFontSize, weight: .semibold))
                                 .foregroundColor(.black)

@@ -327,7 +327,7 @@ final class PodObservable: ObservableObject {
         }
         
         //MARK: - fetch photos and videos (network off)
-        
+
         photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: false) {}
         videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: false) {}
         

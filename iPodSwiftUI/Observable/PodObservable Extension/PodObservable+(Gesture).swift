@@ -475,17 +475,19 @@ extension PodObservable {
             // adjust focusedIndex of .main
             // if added
             if statusModel.pageSKDictionary[.main] != nil && statusModel.pageSKDictionary[.main]!.focusedIndex != nil && statusModel.pageSKDictionary[.main]!.discreteScrollMark != nil {
-                if mainMenuBoolArray[mainMenuIndexShaker(focusedIndex)] {
-                    statusModel.pageSKDictionary[.main]!.focusedIndex! += 1
-                    if statusModel.pageSKDictionary[.main]!.focusedIndex! >= statusModel.pageSKDictionary[.main]!.discreteScrollMark! + DesignSystem.Soft.Dimension.rangeOfRows {
-                        statusModel.pageSKDictionary[.main]!.discreteScrollMark! += 1
+                if mainMenuIndexShaker(focusedIndex) < StatusModel.indexOfSettingsInMainMenuSetting {
+                    if mainMenuBoolArray[mainMenuIndexShaker(focusedIndex)] {
+                        statusModel.pageSKDictionary[.main]!.focusedIndex! += 1
+                        if statusModel.pageSKDictionary[.main]!.focusedIndex! >= statusModel.pageSKDictionary[.main]!.discreteScrollMark! + DesignSystem.Soft.Dimension.rangeOfRows {
+                            statusModel.pageSKDictionary[.main]!.discreteScrollMark! += 1
+                        }
                     }
-                }
-                // if subtracted
-                else {
-                    statusModel.pageSKDictionary[.main]!.focusedIndex! = max(0, statusModel.pageSKDictionary[.main]!.focusedIndex! - 1)
-                    if statusModel.pageSKDictionary[.main]!.focusedIndex! < statusModel.pageSKDictionary[.main]!.discreteScrollMark! {
-                        statusModel.pageSKDictionary[.main]!.discreteScrollMark! -= 1
+                    // if subtracted
+                    else {
+                        statusModel.pageSKDictionary[.main]!.focusedIndex! = max(0, statusModel.pageSKDictionary[.main]!.focusedIndex! - 1)
+                        if statusModel.pageSKDictionary[.main]!.focusedIndex! < statusModel.pageSKDictionary[.main]!.discreteScrollMark! {
+                            statusModel.pageSKDictionary[.main]!.discreteScrollMark! -= 1
+                        }
                     }
                 }
             }
@@ -724,8 +726,8 @@ extension PodObservable {
             
             // match index
             self.wheelProperty = .focusedIndex
-            if self.focusedIndex != nil && self.discreteScrollMark != nil {
-                self.focusedIndex = videoHandler.videoIndex
+            if self.focusedIndex != nil && self.discreteScrollMark != nil && videoHandler.videoIndex != nil {
+                self.focusedIndex = max(0, min(videoHandler.videoIndex!, dataModel.favoriteVideoThumbnailArray.count - 1))
                 let hNum = DesignSystem.Soft.Dimension.videoThumbnailHorizontalNum
                 let vNum = DesignSystem.Soft.Dimension.videoThumbnailVerticalNum
                 if self.discreteScrollMark! < self.focusedIndex! {
