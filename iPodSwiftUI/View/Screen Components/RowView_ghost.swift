@@ -159,9 +159,8 @@ struct RowView_ghost: View {
                                     case .notShown:
                                         EmptyView()
                                     case .loading:
-                                        ProgressView()
-                                            .controlSize(.mini)
-                                            .tint(isFocused ? .white : .black)
+                                        DotsProgressView(brightBack: !isFocused)
+                                            .frame(width: DesignSystem.Soft.Dimension.rowHeight * 0.5, height: DesignSystem.Soft.Dimension.rowHeight * 0.5)
                                     case .done:
                                         Image(systemName: "checkmark")
                                             .resizable()
@@ -326,9 +325,8 @@ struct RowView_ghost: View {
                                     case .notShown:
                                         EmptyView()
                                     case .loading:
-                                        ProgressView()
-                                            .controlSize(.mini)
-                                            .tint(isFocused ? .white : .black)
+                                        DotsProgressView(brightBack: !isFocused)
+                                            .frame(width: DesignSystem.Soft.Dimension.rowHeight * 0.5, height: DesignSystem.Soft.Dimension.rowHeight * 0.5)
                                     case .done:
                                         Image(systemName: "checkmark")
                                             .resizable()
@@ -532,9 +530,8 @@ struct RowView_ghost: View {
                                         case .notShown:
                                             EmptyView()
                                         case .loading:
-                                            ProgressView()
-                                                .controlSize(.mini)
-                                                .tint(isFocused ? .white : .black)
+                                            DotsProgressView(brightBack: !isFocused)
+                                                .frame(width: DesignSystem.Soft.Dimension.rowHeight * 0.5, height: DesignSystem.Soft.Dimension.rowHeight * 0.5)
                                         case .done:
                                             Image(systemName: "checkmark")
                                                 .resizable()

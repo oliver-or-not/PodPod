@@ -81,9 +81,8 @@ struct NowPlayingVideoStyleView: View {
                 }
             }
             
-            ProgressView()
-                .tint(.white)
-                .controlSize(.large)
+            DotsProgressView(brightBack: false)
+                .frame(width: w * 0.1, height: w * 0.1)
                 .opacity((videoLoadingState == .loading) ? 1 : 0)
             
             Image(systemName: "play.slash.fill")
@@ -137,6 +136,6 @@ struct NowPlayingVideoStyleView: View {
 
 struct NowPlayingVideoStyleView_Previews: PreviewProvider {
     static var previews: some View {
-        NowPlayingVideoStyleView(playingState: .playingVideo, videoTimePassed: CMTime(value: 60000, timescale: 600), currentVideoTotalTime: CMTime(value: 180000, timescale: 600), detailIsShown: true, playingStateSymbolIsVisible: true, batterySymbolIsVisible: true, volumeBarIsVisible: true, seekBarIsVisible: true, videoLoadingState: .notLoading)
+        NowPlayingVideoStyleView(playingState: .playingVideo, videoTimePassed: CMTime(value: 60000, timescale: 600), currentVideoTotalTime: CMTime(value: 180000, timescale: 600), detailIsShown: true, playingStateSymbolIsVisible: true, batterySymbolIsVisible: true, volumeBarIsVisible: true, seekBarIsVisible: true, videoLoadingState: .loading)
     }
 }
