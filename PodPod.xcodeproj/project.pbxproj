@@ -69,6 +69,8 @@
 		579E2FD92AA9522D001BF603 /* VideoZoomMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579E2FD82AA9522D001BF603 /* VideoZoomMode.swift */; };
 		579E2FDB2AA952DB001BF603 /* VideoAutoplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579E2FDA2AA952DB001BF603 /* VideoAutoplayMode.swift */; };
 		57A42D702AB5BF8E007E8F3A /* InactiveVariety.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A42D6F2AB5BF8E007E8F3A /* InactiveVariety.swift */; };
+		57A42D742AB5DF9E007E8F3A /* PodObservable+(Fetch).swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A42D732AB5DF9E007E8F3A /* PodObservable+(Fetch).swift */; };
+		57A42D762AB5EC06007E8F3A /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A42D752AB5EC06007E8F3A /* NetworkHandler.swift */; };
 		57A746312A7E42E2007BD76D /* MusicHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A746302A7E42E2007BD76D /* MusicHandler.swift */; };
 		57C65E292A8A0BCB0048F149 /* getTimeString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C65E282A8A0BCB0048F149 /* getTimeString.swift */; };
 		57C856EA2A91A93B0036F371 /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C856E92A91A93B0036F371 /* BatteryState.swift */; };
@@ -162,6 +164,8 @@
 		579E2FD82AA9522D001BF603 /* VideoZoomMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoZoomMode.swift; sourceTree = "<group>"; };
 		579E2FDA2AA952DB001BF603 /* VideoAutoplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAutoplayMode.swift; sourceTree = "<group>"; };
 		57A42D6F2AB5BF8E007E8F3A /* InactiveVariety.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InactiveVariety.swift; sourceTree = "<group>"; };
+		57A42D732AB5DF9E007E8F3A /* PodObservable+(Fetch).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PodObservable+(Fetch).swift"; sourceTree = "<group>"; };
+		57A42D752AB5EC06007E8F3A /* NetworkHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		57A746302A7E42E2007BD76D /* MusicHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicHandler.swift; sourceTree = "<group>"; };
 		57C65E282A8A0BCB0048F149 /* getTimeString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getTimeString.swift; sourceTree = "<group>"; };
 		57C856E92A91A93B0036F371 /* BatteryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryState.swift; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 				576A61B42AA4B58800A10A0B /* PodObservable+(Gesture).swift */,
 				576A61B62AA4B71F00A10A0B /* PodObservable+(Volume).swift */,
 				576A61B82AA4B78200A10A0B /* PodObservable+(PageData).swift */,
+				57A42D732AB5DF9E007E8F3A /* PodObservable+(Fetch).swift */,
 			);
 			path = "PodObservable Extension";
 			sourceTree = "<group>";
@@ -452,6 +457,7 @@
 				57A746302A7E42E2007BD76D /* MusicHandler.swift */,
 				576A61A82AA31F3200A10A0B /* VibeHandler.swift */,
 				579E2FC12AA5CD66001BF603 /* VideoHandler.swift */,
+				57A42D752AB5EC06007E8F3A /* NetworkHandler.swift */,
 			);
 			path = Handler;
 			sourceTree = "<group>";
@@ -550,6 +556,7 @@
 				579E2FCF2AA71F0B001BF603 /* VideoPausedSymbolView.swift in Sources */,
 				57C856EC2A91BB730036F371 /* HeaderPlayingSymbolView.swift in Sources */,
 				579D50A12A90A62800248D22 /* SeekBarView.swift in Sources */,
+				57A42D762AB5EC06007E8F3A /* NetworkHandler.swift in Sources */,
 				576A61B72AA4B71F00A10A0B /* PodObservable+(Volume).swift in Sources */,
 				57EF7E352A7A7ADD00C2A56D /* DummyPageBodyView.swift in Sources */,
 				579E2FD32AA71F70001BF603 /* VideoVolumeBarView.swift in Sources */,
@@ -559,6 +566,7 @@
 				57867DA52A3CC7D500129450 /* DesignSystem.swift in Sources */,
 				5726AC1E2A7B7A6D00129FAD /* DiscreteScrollBarView.swift in Sources */,
 				570863C12A8A1F4C00B575BB /* MPVolumeView+.swift in Sources */,
+				57A42D742AB5DF9E007E8F3A /* PodObservable+(Fetch).swift in Sources */,
 				57C856F02A91BBCD0036F371 /* HeaderSeekingForwardSymbolView.swift in Sources */,
 				579E2FC42AA5D964001BF603 /* PHAsset+.swift in Sources */,
 				579E2FD72AA8D39B001BF603 /* TestView.swift in Sources */,
