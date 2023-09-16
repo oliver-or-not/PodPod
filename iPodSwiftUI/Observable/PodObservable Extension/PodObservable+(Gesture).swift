@@ -243,13 +243,11 @@ extension PodObservable {
                                 goRight(newPageKey: safeKey)
                             }
                         case .canPlay:
-                            if dataModel.librarySongs?.count ?? 0 > 0 {
+//                            if dataModel.librarySongs?.count ?? 0 > 0 {
                                 goRight(newPageKey: safeKey)
-                            } else {
-                                _ = 0
-                            }
+//                            }
                         case .play:
-                            if dataModel.librarySongs?.count ?? 0 > 0 {
+//                            if dataModel.librarySongs?.count ?? 0 > 0 {
                                 musicHandler.getUserSubscriptionAvailability { userSubscripts in
                                     if userSubscripts {
                                         self.doCenterButtonAction_play()
@@ -258,9 +256,7 @@ extension PodObservable {
                                         self.subscriptionAlertIsPresented = true
                                     }
                                 }
-                            } else {
-                                _ = 0
-                            }
+//                            }
                         case .shufflePlay:
                             musicHandler.getUserSubscriptionAvailability { userSubscripts in
                                 if userSubscripts {
@@ -628,73 +624,25 @@ extension PodObservable {
         if let omitsDataAlert = UserDefaults.standard.object(forKey: "omitsDataAlert") as? Bool {
             if omitsDataAlert {
                 libraryUpdateSymbolState = .loading
+                fetchCounter = 0
                 videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: true) {
-                    self.photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: true) {
-                        self.musicHandler.requestUpdateLibrary() {
-                            self.musicHandler.requestUpdatePlaylists() {
-                                DispatchQueue.main.async {
-                                    self.libraryUpdateSymbolState = .done
-                                    if let sk = self.statusModel.pageSKDictionary[.songs] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.songs] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.playlists] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.playlists] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.composers] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.composers] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.genres] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.genres] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.artists] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.artists] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.albums] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.albums] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.chosenPlaylist] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.chosenPlaylist] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.chosenComposer] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.chosenComposer] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.chosenGenre] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.chosenGenre] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.chosenArtist] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.chosenArtist] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.chosenAlbum] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.chosenAlbum] = sk
-                                    }
-                                }
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                    self.libraryUpdateSymbolState = .notShown
-                                }
-                            }
-                        }
+                    DispatchQueue.main.async {
+                        self.fetchCounter += 1
+                    }
+                }
+                photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: true) {
+                    DispatchQueue.main.async {
+                        self.fetchCounter += 1
+                    }
+                }
+                musicHandler.requestUpdateLibrary() {
+                    DispatchQueue.main.async {
+                        self.fetchCounter += 1
+                    }
+                }
+                musicHandler.requestUpdatePlaylists() {
+                    DispatchQueue.main.async {
+                        self.fetchCounter += 1
                     }
                 }
             } else {

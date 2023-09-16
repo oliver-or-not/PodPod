@@ -102,4 +102,7 @@ class StatusModel {
     var prevChosenGenre: String?
     var prevChosenArtist: String?
     var prevChosenAlbum: String?
+    
+    // app lifecycle variable
+    var inactiveVariety: InactiveVariety = .initial
 }

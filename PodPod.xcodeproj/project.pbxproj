@@ -68,6 +68,7 @@
 		579E2FD72AA8D39B001BF603 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579E2FD62AA8D39B001BF603 /* TestView.swift */; };
 		579E2FD92AA9522D001BF603 /* VideoZoomMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579E2FD82AA9522D001BF603 /* VideoZoomMode.swift */; };
 		579E2FDB2AA952DB001BF603 /* VideoAutoplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579E2FDA2AA952DB001BF603 /* VideoAutoplayMode.swift */; };
+		57A42D702AB5BF8E007E8F3A /* InactiveVariety.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A42D6F2AB5BF8E007E8F3A /* InactiveVariety.swift */; };
 		57A746312A7E42E2007BD76D /* MusicHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A746302A7E42E2007BD76D /* MusicHandler.swift */; };
 		57C65E292A8A0BCB0048F149 /* getTimeString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C65E282A8A0BCB0048F149 /* getTimeString.swift */; };
 		57C856EA2A91A93B0036F371 /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C856E92A91A93B0036F371 /* BatteryState.swift */; };
@@ -94,7 +95,6 @@
 		57FC99C32A7422F900388422 /* downInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC99C22A7422F900388422 /* downInt.swift */; };
 		57FC99C52A7426D500388422 /* PageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC99C42A7426D500388422 /* PageData.swift */; };
 		57FC99C72A742A6C00388422 /* RowData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC99C62A742A6C00388422 /* RowData.swift */; };
-		57FE86AD2AB578CB00FE1756 /* PodObservable+(Fetch).swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE86AC2AB578CB00FE1756 /* PodObservable+(Fetch).swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -161,6 +161,7 @@
 		579E2FD62AA8D39B001BF603 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		579E2FD82AA9522D001BF603 /* VideoZoomMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoZoomMode.swift; sourceTree = "<group>"; };
 		579E2FDA2AA952DB001BF603 /* VideoAutoplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoAutoplayMode.swift; sourceTree = "<group>"; };
+		57A42D6F2AB5BF8E007E8F3A /* InactiveVariety.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InactiveVariety.swift; sourceTree = "<group>"; };
 		57A746302A7E42E2007BD76D /* MusicHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicHandler.swift; sourceTree = "<group>"; };
 		57C65E282A8A0BCB0048F149 /* getTimeString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getTimeString.swift; sourceTree = "<group>"; };
 		57C856E92A91A93B0036F371 /* BatteryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryState.swift; sourceTree = "<group>"; };
@@ -187,7 +188,6 @@
 		57FC99C22A7422F900388422 /* downInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = downInt.swift; sourceTree = "<group>"; };
 		57FC99C42A7426D500388422 /* PageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageData.swift; sourceTree = "<group>"; };
 		57FC99C62A742A6C00388422 /* RowData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowData.swift; sourceTree = "<group>"; };
-		57FE86AC2AB578CB00FE1756 /* PodObservable+(Fetch).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PodObservable+(Fetch).swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,7 +296,6 @@
 				576A61B42AA4B58800A10A0B /* PodObservable+(Gesture).swift */,
 				576A61B62AA4B71F00A10A0B /* PodObservable+(Volume).swift */,
 				576A61B82AA4B78200A10A0B /* PodObservable+(PageData).swift */,
-				57FE86AC2AB578CB00FE1756 /* PodObservable+(Fetch).swift */,
 			);
 			path = "PodObservable Extension";
 			sourceTree = "<group>";
@@ -320,6 +319,7 @@
 				579E2FD82AA9522D001BF603 /* VideoZoomMode.swift */,
 				579E2FDA2AA952DB001BF603 /* VideoAutoplayMode.swift */,
 				5774BC632AAD49F2006747EE /* VideoLoadingState.swift */,
+				57A42D6F2AB5BF8E007E8F3A /* InactiveVariety.swift */,
 			);
 			path = Enumeration;
 			sourceTree = "<group>";
@@ -536,7 +536,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57FE86AD2AB578CB00FE1756 /* PodObservable+(Fetch).swift in Sources */,
 				579E2FD52AA71FBC001BF603 /* VideoSeekBarView.swift in Sources */,
 				579D509F2A90A33C00248D22 /* SeekRhombusView.swift in Sources */,
 				578908642AA0274B002B7CED /* TextStyleBodyView.swift in Sources */,
@@ -583,6 +582,7 @@
 				57FC99C72A742A6C00388422 /* RowData.swift in Sources */,
 				579E2FD92AA9522D001BF603 /* VideoZoomMode.swift in Sources */,
 				57DFD0CE2A88CA1000080546 /* RepeatState.swift in Sources */,
+				57A42D702AB5BF8E007E8F3A /* InactiveVariety.swift in Sources */,
 				5717C9B82A61ADAE007156BA /* RowActionStyle.swift in Sources */,
 				575732892A745FB100AD5AC4 /* PlayingState.swift in Sources */,
 				576A61AD2AA34C3000A10A0B /* StatusModel.swift in Sources */,
@@ -768,7 +768,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.8;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wonil-or-not.PodPod";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -807,7 +807,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.8;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wonil-or-not.PodPod";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
