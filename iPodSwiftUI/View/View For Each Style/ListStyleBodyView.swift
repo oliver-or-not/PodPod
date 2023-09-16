@@ -124,7 +124,7 @@ struct ListStyleBodyView: View {
 
 struct ListStyleBodyView_Previews: PreviewProvider {
     
-    static let pd = PageData(headerTitle: "iPod", pageBodyStyle: .list, rowDataArray: [
+    static let pd = PageData(headerTitle: "PodPod", pageBodyStyle: .list, rowDataArray: [
         RowData(text: "음악", actionStyle: .chevronMove, key: .music),
         RowData(text: "사진", actionStyle: .chevronMove, key: .photos),
         RowData(text: "비디오", actionStyle: .chevronMove, key: .videos),

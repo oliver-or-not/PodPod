@@ -63,8 +63,8 @@ final class PodObservable: ObservableObject {
         didSet {
             if userAllowedMediaRefreshNetworkLoading {
                 libraryUpdateSymbolState = .loading
-                videoHandler.fetchFavoriteVideoAssets {
-                    self.photoHandler.fetchFavoritePhotos {
+                videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: true) {
+                    self.photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: true) {
                         self.musicHandler.requestUpdateLibrary() {
                             self.musicHandler.requestUpdatePlaylists() {
                                 DispatchQueue.main.async {
@@ -308,22 +308,19 @@ final class PodObservable: ObservableObject {
         }
         batteryLevel = UIDevice.current.batteryLevel
         
-        //MARK: - music
-        
-        if dataModel.librarySongs == nil {
-            musicHandler.requestUpdateLibrary {}
-        }
-        if dataModel.playlists == nil {
-            musicHandler.requestUpdatePlaylists {}
-        }
-        
-        //MARK: - photo
-        
-        photoHandler.fetchFavoritePhotos {}
-        
-        //MARK: - video
-        
-        videoHandler.fetchFavoriteVideoAssets {}
+//        //MARK: - request music
+//
+//        if dataModel.librarySongs == nil {
+//            musicHandler.requestUpdateLibrary {}
+//        }
+//        if dataModel.playlists == nil {
+//            musicHandler.requestUpdatePlaylists {}
+//        }
+//        
+//        //MARK: - fetch photos and videos (network off)
+//        
+//        photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: false) {}
+//        videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: false) {}
         
         //MARK: - make the main page
         

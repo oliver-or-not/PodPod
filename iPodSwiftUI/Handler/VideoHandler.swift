@@ -21,7 +21,7 @@ final class VideoHandler {
     
     private init() {}
 
-    func fetchFavoriteVideoAssets(completion: @escaping () -> Void) {
+    func fetchFavoriteVideoAssets(networkAccessIsAllowed: Bool, completion: @escaping () -> Void) {
         DataModel.shared.favoriteVideoArray = []
         DataModel.shared.favoriteVideoThumbnailArray = []
         
@@ -48,7 +48,7 @@ final class VideoHandler {
         fetchResult.enumerateObjects { asset, index, _ in
             // getUIImage completion starts in order;  but works concurrently.
             // need to do countings below to preserve the order of photos
-            self.getUIImage(for: asset) { image in
+            self.getUIImage(for: asset, networkAccessIsAllowed: networkAccessIsAllowed) { image in
                 if let image = image {
                     tempThumbnailArray[index] = image
                     tempVideoArray[index] = asset
@@ -67,22 +67,16 @@ final class VideoHandler {
         }
     }
 
-    func getUIImage(for asset: PHAsset, completion: @escaping (UIImage?) -> Void) {
+    func getUIImage(for asset: PHAsset, networkAccessIsAllowed: Bool, completion: @escaping (UIImage?) -> Void) {
         let options = PHImageRequestOptions()
-        options.isNetworkAccessAllowed = true
-        
+        options.isNetworkAccessAllowed = networkAccessIsAllowed
+        options.deliveryMode = .highQualityFormat
+        options.resizeMode = .fast
         PHImageManager.default()
             .requestImage(for: asset, targetSize: CGSize(width: 400, height: 400), contentMode: .aspectFit, options: options) { image, _ in
                 if let image {
-                    if image.size.width >= 250 || image.size.height >= 250 {
                         completion(image)
                         return
-                    }
-                    // ignore low-resolution temporary image
-                    else {
-                        _ = 0
-                        return
-                    }
                 } else {
                     completion(nil)
                     return

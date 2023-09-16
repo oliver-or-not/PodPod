@@ -94,6 +94,7 @@
 		57FC99C32A7422F900388422 /* downInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC99C22A7422F900388422 /* downInt.swift */; };
 		57FC99C52A7426D500388422 /* PageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC99C42A7426D500388422 /* PageData.swift */; };
 		57FC99C72A742A6C00388422 /* RowData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FC99C62A742A6C00388422 /* RowData.swift */; };
+		57FE86AD2AB578CB00FE1756 /* PodObservable+(Fetch).swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FE86AC2AB578CB00FE1756 /* PodObservable+(Fetch).swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -186,6 +187,7 @@
 		57FC99C22A7422F900388422 /* downInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = downInt.swift; sourceTree = "<group>"; };
 		57FC99C42A7426D500388422 /* PageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageData.swift; sourceTree = "<group>"; };
 		57FC99C62A742A6C00388422 /* RowData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowData.swift; sourceTree = "<group>"; };
+		57FE86AC2AB578CB00FE1756 /* PodObservable+(Fetch).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PodObservable+(Fetch).swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +296,7 @@
 				576A61B42AA4B58800A10A0B /* PodObservable+(Gesture).swift */,
 				576A61B62AA4B71F00A10A0B /* PodObservable+(Volume).swift */,
 				576A61B82AA4B78200A10A0B /* PodObservable+(PageData).swift */,
+				57FE86AC2AB578CB00FE1756 /* PodObservable+(Fetch).swift */,
 			);
 			path = "PodObservable Extension";
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57FE86AD2AB578CB00FE1756 /* PodObservable+(Fetch).swift in Sources */,
 				579E2FD52AA71FBC001BF603 /* VideoSeekBarView.swift in Sources */,
 				579D509F2A90A33C00248D22 /* SeekRhombusView.swift in Sources */,
 				578908642AA0274B002B7CED /* TextStyleBodyView.swift in Sources */,

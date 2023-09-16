@@ -202,6 +202,7 @@ extension PodObservable {
     }
     
     func centerButtonTapped() {
+        print("pageData.headerTitle: \(pageData.headerTitle)")
         vibeHandler.heavyVibe(if: vibeIsActivated)
         if key == .nowPlaying && nowPlayingTransitionState == .stable {
             resetStableTimer_fromSeekToStable()
@@ -243,15 +244,23 @@ extension PodObservable {
                                 goRight(newPageKey: safeKey)
                             }
                         case .canPlay:
-                            goRight(newPageKey: safeKey)
+                            if dataModel.librarySongs?.count ?? 0 > 0 {
+                                goRight(newPageKey: safeKey)
+                            } else {
+                                _ = 0
+                            }
                         case .play:
-                            musicHandler.getUserSubscriptionAvailability { userSubscripts in
-                                if userSubscripts {
-                                    self.doCenterButtonAction_play()
-                                    self.goRight(newPageKey: safeKey)
-                                } else {
-                                    self.subscriptionAlertIsPresented = true
+                            if dataModel.librarySongs?.count ?? 0 > 0 {
+                                musicHandler.getUserSubscriptionAvailability { userSubscripts in
+                                    if userSubscripts {
+                                        self.doCenterButtonAction_play()
+                                        self.goRight(newPageKey: safeKey)
+                                    } else {
+                                        self.subscriptionAlertIsPresented = true
+                                    }
                                 }
+                            } else {
+                                _ = 0
                             }
                         case .shufflePlay:
                             musicHandler.getUserSubscriptionAvailability { userSubscripts in
@@ -314,55 +323,61 @@ extension PodObservable {
                         _ = 0
                 }
             case .photo:
-                if !photoDetailIsShown {
-                    photoDetailIsShown = true
+                if dataModel.favoritePhotoArray.count > 0 {
+                    if !photoDetailIsShown {
+                        photoDetailIsShown = true
+                    }
+                } else {
+                    _ = 0
                 }
             case .video:
-                if !videoDetailIsShown {
-                    if let focusedIndex {
-                        buttonsAreAvailable = false
-                        DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime) {
-                            self.buttonsAreAvailable = true
-                        }
-                        self.wheelProperty = .volume
-                        videoHandler.clearPlayer()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime) {
-                            self.videoHandler.videoIndex = focusedIndex
-                            self.videoPlayerIsVisible = true
-                            self.videoDetailIsShown = true
-                            self.videoPlayingStateSymbolIsVisible = true
-                            self.videoBatterySymbolIsVisible = true
-                            self.videoHandler.play(self.dataModel.favoriteVideoArray[focusedIndex])
-                            self.resetVideoSymbolTimer_short()
-                            
+                if dataModel.favoriteVideoThumbnailArray.count > 0 {
+                    if !videoDetailIsShown {
+                        if let focusedIndex {
+                            buttonsAreAvailable = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime) {
+                                self.buttonsAreAvailable = true
+                            }
+                            self.wheelProperty = .volume
+                            videoHandler.clearPlayer()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime) {
+                                self.videoHandler.videoIndex = focusedIndex
+                                self.videoPlayerIsVisible = true
+                                self.videoDetailIsShown = true
+                                self.videoPlayingStateSymbolIsVisible = true
+                                self.videoBatterySymbolIsVisible = true
+                                self.videoHandler.play(self.dataModel.favoriteVideoArray[focusedIndex])
+                                self.resetVideoSymbolTimer_short()
+                                
+                            }
                         }
                     }
-                }
-                // if video detail is shown
-                else {
-                    switch videoControlState {
-                        case .stable:
-                            videoControlState = .seek
-                            wheelProperty = .seekVideo
-                            videoBatterySymbolIsVisible = true
-                            videoSeekBarIsVisible = true
-                            resetVideoSymbolTimer_long()
-                        case .volume:
-                            videoControlState = .stable
-                            wheelProperty = .volume
-                            withAnimation(.linear(duration: DesignSystem.Time.videoSymbolFadeOutTime)) {
-                                videoPlayingStateSymbolIsVisible = false
-                                videoBatterySymbolIsVisible = false
-                                videoVolumeBarIsVisible = false
-                            }
-                        case .seek:
-                            videoControlState = .stable
-                            wheelProperty = .volume
-                            withAnimation(.linear(duration: DesignSystem.Time.videoSymbolFadeOutTime)) {
-                                videoPlayingStateSymbolIsVisible = false
-                                videoBatterySymbolIsVisible = false
-                                videoSeekBarIsVisible = false
-                            }
+                    // if video detail is shown
+                    else {
+                        switch videoControlState {
+                            case .stable:
+                                videoControlState = .seek
+                                wheelProperty = .seekVideo
+                                videoBatterySymbolIsVisible = true
+                                videoSeekBarIsVisible = true
+                                resetVideoSymbolTimer_long()
+                            case .volume:
+                                videoControlState = .stable
+                                wheelProperty = .volume
+                                withAnimation(.linear(duration: DesignSystem.Time.videoSymbolFadeOutTime)) {
+                                    videoPlayingStateSymbolIsVisible = false
+                                    videoBatterySymbolIsVisible = false
+                                    videoVolumeBarIsVisible = false
+                                }
+                            case .seek:
+                                videoControlState = .stable
+                                wheelProperty = .volume
+                                withAnimation(.linear(duration: DesignSystem.Time.videoSymbolFadeOutTime)) {
+                                    videoPlayingStateSymbolIsVisible = false
+                                    videoBatterySymbolIsVisible = false
+                                    videoSeekBarIsVisible = false
+                                }
+                        }
                     }
                 }
             case .nowPlayingVideo:
@@ -612,8 +627,8 @@ extension PodObservable {
         if let omitsDataAlert = UserDefaults.standard.object(forKey: "omitsDataAlert") as? Bool {
             if omitsDataAlert {
                 libraryUpdateSymbolState = .loading
-                videoHandler.fetchFavoriteVideoAssets {
-                    self.photoHandler.fetchFavoritePhotos {
+                videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: true) {
+                    self.photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: true) {
                         self.musicHandler.requestUpdateLibrary() {
                             self.musicHandler.requestUpdatePlaylists() {
                                 DispatchQueue.main.async {

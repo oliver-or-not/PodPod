@@ -121,6 +121,7 @@ extension PodObservable {
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = [RowData(text: "모두\t", actionStyle: .chevronMove, key: .chosenArtist, handlingProperty: .canPlay)]
                 guard let librarySongs = dataModel.librarySongs else {
+                    pd.rowDataArray = [RowData()]
                     return pd
                 }
                 
@@ -141,7 +142,7 @@ extension PodObservable {
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = [RowData(text: "모두\t", actionStyle: .chevronMove, key: .chosenAlbum, handlingProperty: .canPlay)]
                 guard let librarySongs = dataModel.librarySongs else {
-                    pd.rowDataArray!.append(RowData())
+                    pd.rowDataArray = [RowData()]
                     return pd
                 }
                 
@@ -183,7 +184,7 @@ extension PodObservable {
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = [RowData(text: "모두\t", actionStyle: .chevronMove, key: .chosenGenre, handlingProperty: .canPlay)]
                 guard let librarySongs = dataModel.librarySongs else {
-                    pd.rowDataArray!.append(RowData())
+                    pd.rowDataArray! = [RowData()]
                     return pd
                 }
                 
@@ -200,7 +201,7 @@ extension PodObservable {
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = [RowData(text: "모두\t", actionStyle: .chevronMove, key: .chosenComposer, handlingProperty: .canPlay)]
                 guard let librarySongs = dataModel.librarySongs else {
-                    pd.rowDataArray!.append(RowData())
+                    pd.rowDataArray = [RowData()]
                     return pd
                 }
                 
