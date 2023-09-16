@@ -70,75 +70,11 @@ final class PodObservable: ObservableObject {
         didSet {
             if userAllowedMediaRefreshNetworkLoading {
                 libraryUpdateSymbolState = .loading
-                videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: true) {
-                    self.photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: true) {
-                        self.musicHandler.requestUpdateLibrary() {
-                            self.musicHandler.requestUpdatePlaylists() {
-                                DispatchQueue.main.async {
-                                    self.libraryUpdateSymbolState = .done
-                                    if let sk = self.statusModel.pageSKDictionary[.songs] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.songs] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.playlists] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.playlists] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.composers] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.composers] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.genres] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.genres] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.artists] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.artists] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.albums] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.albums] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.chosenPlaylist] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.chosenPlaylist] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.chosenComposer] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.chosenComposer] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.chosenGenre] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.chosenGenre] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.chosenArtist] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.chosenArtist] = sk
-                                    }
-                                    if let sk = self.statusModel.pageSKDictionary[.chosenAlbum] {
-                                        sk.focusedIndex = 0
-                                        sk.discreteScrollMark = 0
-                                        self.statusModel.pageSKDictionary[.chosenAlbum] = sk
-                                    }
-                                }
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                    self.libraryUpdateSymbolState = .notShown
-                                }
-                            }
-                        }
-                    }
-                }
+                fetchCounter = 0
+                videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: true) { self.fetchCounter += 1 }
+                self.photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: true) { self.fetchCounter += 1 }
+                self.musicHandler.requestUpdateLibrary() { self.fetchCounter += 1 }
+                self.musicHandler.requestUpdatePlaylists() { self.fetchCounter += 1 }
                 userAllowedMediaRefreshNetworkLoading = false
             }
         }
@@ -286,7 +222,77 @@ final class PodObservable: ObservableObject {
     @Published var nowPlayingLowerOffsetTrigger = false
     @Published var nowPlayingUpperTextFlicker = true
     @Published var nowPlayingUpperTextOffsetTrigger = false
-    @Published var currentKeyIsNowPlayingVideo = false // need to slide header
+    // need to slide header
+    @Published var currentKeyIsNowPlayingVideo = false
+    // media refresh parallell task counter
+    @Published var fetchCounter = 0 {
+        didSet {
+            if fetchCounter >= 4 {
+                fetchCounter = 0
+                DispatchQueue.main.async {
+                    self.libraryUpdateSymbolState = .done
+                    if let sk = self.statusModel.pageSKDictionary[.songs] {
+                        sk.focusedIndex = 0
+                        sk.discreteScrollMark = 0
+                        self.statusModel.pageSKDictionary[.songs] = sk
+                    }
+                    if let sk = self.statusModel.pageSKDictionary[.playlists] {
+                        sk.focusedIndex = 0
+                        sk.discreteScrollMark = 0
+                        self.statusModel.pageSKDictionary[.playlists] = sk
+                    }
+                    if let sk = self.statusModel.pageSKDictionary[.composers] {
+                        sk.focusedIndex = 0
+                        sk.discreteScrollMark = 0
+                        self.statusModel.pageSKDictionary[.composers] = sk
+                    }
+                    if let sk = self.statusModel.pageSKDictionary[.genres] {
+                        sk.focusedIndex = 0
+                        sk.discreteScrollMark = 0
+                        self.statusModel.pageSKDictionary[.genres] = sk
+                    }
+                    if let sk = self.statusModel.pageSKDictionary[.artists] {
+                        sk.focusedIndex = 0
+                        sk.discreteScrollMark = 0
+                        self.statusModel.pageSKDictionary[.artists] = sk
+                    }
+                    if let sk = self.statusModel.pageSKDictionary[.albums] {
+                        sk.focusedIndex = 0
+                        sk.discreteScrollMark = 0
+                        self.statusModel.pageSKDictionary[.albums] = sk
+                    }
+                    if let sk = self.statusModel.pageSKDictionary[.chosenPlaylist] {
+                        sk.focusedIndex = 0
+                        sk.discreteScrollMark = 0
+                        self.statusModel.pageSKDictionary[.chosenPlaylist] = sk
+                    }
+                    if let sk = self.statusModel.pageSKDictionary[.chosenComposer] {
+                        sk.focusedIndex = 0
+                        sk.discreteScrollMark = 0
+                        self.statusModel.pageSKDictionary[.chosenComposer] = sk
+                    }
+                    if let sk = self.statusModel.pageSKDictionary[.chosenGenre] {
+                        sk.focusedIndex = 0
+                        sk.discreteScrollMark = 0
+                        self.statusModel.pageSKDictionary[.chosenGenre] = sk
+                    }
+                    if let sk = self.statusModel.pageSKDictionary[.chosenArtist] {
+                        sk.focusedIndex = 0
+                        sk.discreteScrollMark = 0
+                        self.statusModel.pageSKDictionary[.chosenArtist] = sk
+                    }
+                    if let sk = self.statusModel.pageSKDictionary[.chosenAlbum] {
+                        sk.focusedIndex = 0
+                        sk.discreteScrollMark = 0
+                        self.statusModel.pageSKDictionary[.chosenAlbum] = sk
+                    }
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.libraryUpdateSymbolState = .notShown
+                }
+            }
+        }
+    }
     
     //MARK: - timer
     
