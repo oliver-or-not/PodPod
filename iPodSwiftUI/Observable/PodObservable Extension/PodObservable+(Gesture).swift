@@ -202,7 +202,6 @@ extension PodObservable {
     }
     
     func centerButtonTapped() {
-        print("pageData.headerTitle: \(pageData.headerTitle)")
         vibeHandler.heavyVibe(if: vibeIsActivated)
         if key == .nowPlaying && nowPlayingTransitionState == .stable {
             resetStableTimer_fromSeekToStable()
@@ -958,32 +957,20 @@ extension PodObservable {
         resetHeaderTimeTimer()
         
         if [.playing, .paused].contains(playingState) {
-            if let timePassed {
-                if timePassed > 3.0 {
-                    musicHandler.musicPlayer.restartCurrentEntry()
-                } else {
-                    Task {
-                        do {
-                            try await musicHandler.musicPlayer.skipToPreviousEntry()
-                        } catch {
-                            print("PodObservable | leadingButtonTapped() | error backward-skipping music: \(error.localizedDescription)")
-                        }
+            if musicHandler.musicPlayer.playbackTime > 3.0 {
+                musicHandler.musicPlayer.restartCurrentEntry()
+            } else {
+                Task {
+                    do {
+                        try await musicHandler.musicPlayer.skipToPreviousEntry()
+                    } catch {
+                        print("PodObservable | leadingButtonTapped() | error backward-skipping music: \(error.localizedDescription)")
                     }
                 }
             }
         } else if ((key == .videos && videoDetailIsShown) || key == .nowPlayingVideo) && [.playingVideo, .pausedVideo, .stopped].contains(playingState) {
-            if let videoTimePassed {
-                if videoTimePassed > CMTime(value: 1800, timescale: 600) {
-                    videoHandler.seekToBeginning()
-                } else {
-                    self.videoLoadingState = .notLoading
-                    self.videoPlayerIsVisible = false
-                    videoHandler.playPrev()
-                    self.videoPlayerIsVisible = true
-                    self.videoPlayingStateSymbolIsVisible = true
-                    self.videoBatterySymbolIsVisible = true
-                    self.resetVideoSymbolTimer_short()
-                }
+            if videoHandler.player.currentTime() > CMTime(value: 1800, timescale: 600) {
+                videoHandler.seekToBeginning()
             } else {
                 self.videoLoadingState = .notLoading
                 self.videoPlayerIsVisible = false
@@ -993,6 +980,15 @@ extension PodObservable {
                 self.videoBatterySymbolIsVisible = true
                 self.resetVideoSymbolTimer_short()
             }
+        } else {
+            self.videoLoadingState = .notLoading
+            self.videoPlayerIsVisible = false
+            videoHandler.playPrev()
+            self.videoPlayerIsVisible = true
+            self.videoPlayingStateSymbolIsVisible = true
+            self.videoBatterySymbolIsVisible = true
+            self.resetVideoSymbolTimer_short()
+            
         }
     }
     

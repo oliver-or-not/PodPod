@@ -163,7 +163,7 @@ final class PodObservable: ObservableObject {
     @Published var alwaysShuffle = false
     @Published var shuffleIsActivated = false 
     @Published var currentSongIndex: Int?
-    @Published var timePassed: TimeInterval?
+    @Published var timePassed: TimeInterval? { didSet { print("timePassed is set") } }
     @Published var lineup: MusicItemCollection<Song>?
     
     @Published var currentSong: Song? {
@@ -223,7 +223,7 @@ final class PodObservable: ObservableObject {
     @Published var currentSongAlbumTitle: String?
     @Published var currentSongTotalTime: TimeInterval?
     
-    @Published var videoTimePassed: CMTime?
+    @Published var videoTimePassed: CMTime? { didSet { print("videoTimePassed is set") } }
     @Published var currentVideoTotalTime: CMTime?
     
     //MARK: - property for frontier page
@@ -317,19 +317,19 @@ final class PodObservable: ObservableObject {
         }
         batteryLevel = UIDevice.current.batteryLevel
         
-//        //MARK: - request music
-//
-//        if dataModel.librarySongs == nil {
-//            musicHandler.requestUpdateLibrary {}
-//        }
-//        if dataModel.playlists == nil {
-//            musicHandler.requestUpdatePlaylists {}
-//        }
-//        
-//        //MARK: - fetch photos and videos (network off)
-//        
-//        photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: false) {}
-//        videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: false) {}
+        //MARK: - request music
+
+        if dataModel.librarySongs == nil {
+            musicHandler.requestUpdateLibrary {}
+        }
+        if dataModel.playlists == nil {
+            musicHandler.requestUpdatePlaylists {}
+        }
+        
+        //MARK: - fetch photos and videos (network off)
+        
+        photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: false) {}
+        videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: false) {}
         
         //MARK: - make the main page
         
