@@ -26,8 +26,8 @@ class StatusModel {
     // 0...2: music, photos, videos
     // 3...7: playlists, artists, albums, songs, composers
     // 8: settings
-    // 9: shufflesongs
-    // 10: media refresh
+    // 9: media refresh
+    // 10: shufflesongs
     static let initialIndexOfSettings = 3
     static let indexOfSettingsInMainMenuSetting = 8
     

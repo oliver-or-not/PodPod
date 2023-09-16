@@ -34,10 +34,8 @@ extension PodObservable {
                 pd.rowDataArray! += getPageData(.music).rowDataArray!
                 pd.rowDataArray! += [
                     RowData(text: "설정", actionStyle: .chevronMove, key: .settings),
+                    RowData(text: "미디어 새로고침", actionStyle: .change, handlingProperty: .mediaRefresh),
                     RowData(text: "노래 임의 재생", actionStyle: .emptyMove, key: .nowPlaying, handlingProperty: .shufflePlay)
-                ]
-                pd.rowDataArray! += [
-                    RowData(text: "미디어 새로고침", actionStyle: .change, handlingProperty: .mediaRefresh)
                 ]
                 
                 var tempArray: [RowData] = []

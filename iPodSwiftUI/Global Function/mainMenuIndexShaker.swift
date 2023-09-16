@@ -27,7 +27,7 @@ func mainMenuIndexShaker(_ n: Int) -> Int {
         case 7: // videos
             return 2
         case 8: // shufflesongs
-            return 9
+            return 10
         default:
             return 0
     }
