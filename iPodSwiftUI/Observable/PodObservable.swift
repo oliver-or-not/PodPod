@@ -163,7 +163,7 @@ final class PodObservable: ObservableObject {
     @Published var alwaysShuffle = false
     @Published var shuffleIsActivated = false 
     @Published var currentSongIndex: Int?
-    @Published var timePassed: TimeInterval? { didSet { print("timePassed is set") } }
+    @Published var timePassed: TimeInterval?
     @Published var lineup: MusicItemCollection<Song>?
     
     @Published var currentSong: Song? {
@@ -223,7 +223,7 @@ final class PodObservable: ObservableObject {
     @Published var currentSongAlbumTitle: String?
     @Published var currentSongTotalTime: TimeInterval?
     
-    @Published var videoTimePassed: CMTime? { didSet { print("videoTimePassed is set") } }
+    @Published var videoTimePassed: CMTime?
     @Published var currentVideoTotalTime: CMTime?
     
     //MARK: - property for frontier page

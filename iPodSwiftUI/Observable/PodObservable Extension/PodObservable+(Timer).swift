@@ -11,7 +11,7 @@ import SwiftUI
 
 extension PodObservable {
     
-    //MARK: - handle timer
+    //MARK: - reset timer
     
     func resetHeaderTimeTimer() {
         headerTimeTimer?.invalidate()
@@ -98,6 +98,8 @@ extension PodObservable {
             }
         }
     }
+    
+    //MARK: - set refresher
     
     func setPlayInfoRefresher() {
         playInfoRefresher = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
@@ -295,7 +297,6 @@ extension PodObservable {
     
     func setBatteryInfoRefresher() {
         batteryInfoRefresher = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
-                        
             switch UIDevice.current.batteryState {
                 case .unplugged:
                     if self.batteryState != .unplugged {
