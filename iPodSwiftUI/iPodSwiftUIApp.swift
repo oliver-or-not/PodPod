@@ -7,14 +7,6 @@
 
 import SwiftUI
 
-enum InactiveVariety {
-    case initial
-    case fromActive
-    case fromBackground
-}
-
-var inactiveVariety: InactiveVariety = .initial
-
 @main
 struct iPodSwiftUIApp: App {
     @Environment(\.scenePhase) private var scenePhase
@@ -26,10 +18,10 @@ struct iPodSwiftUIApp: App {
         .onChange(of: scenePhase) { newScenePhase in
             switch newScenePhase {
                 case .active:
-                    inactiveVariety = .fromActive
+                    StatusModel.shared.inactiveVariety = .fromActive
                     _ = 0
                 case .inactive:
-                    switch inactiveVariety {
+                    switch StatusModel.shared.inactiveVariety {
                         case .initial:
                             _ = 0
                         case .fromActive:
@@ -41,7 +33,7 @@ struct iPodSwiftUIApp: App {
                             PodObservable.shared.batteryInfoRefresher?.fire()
                     }
                 case .background:
-                    inactiveVariety = .fromBackground
+                    StatusModel.shared.inactiveVariety = .fromBackground
                     PodObservable.shared.playInfoRefresher?.invalidate()
                     PodObservable.shared.batteryInfoRefresher?.invalidate()
                 @unknown default:

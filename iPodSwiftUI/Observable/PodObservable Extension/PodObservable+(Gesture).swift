@@ -243,13 +243,11 @@ extension PodObservable {
                                 goRight(newPageKey: safeKey)
                             }
                         case .canPlay:
-                            if dataModel.librarySongs?.count ?? 0 > 0 {
+//                            if dataModel.librarySongs?.count ?? 0 > 0 {
                                 goRight(newPageKey: safeKey)
-                            } else {
-                                _ = 0
-                            }
+//                            }
                         case .play:
-                            if dataModel.librarySongs?.count ?? 0 > 0 {
+//                            if dataModel.librarySongs?.count ?? 0 > 0 {
                                 musicHandler.getUserSubscriptionAvailability { userSubscripts in
                                     if userSubscripts {
                                         self.doCenterButtonAction_play()
@@ -258,9 +256,7 @@ extension PodObservable {
                                         self.subscriptionAlertIsPresented = true
                                     }
                                 }
-                            } else {
-                                _ = 0
-                            }
+//                            }
                         case .shufflePlay:
                             musicHandler.getUserSubscriptionAvailability { userSubscripts in
                                 if userSubscripts {

@@ -318,6 +318,9 @@ final class PodObservable: ObservableObject {
         batteryLevel = UIDevice.current.batteryLevel
         
         //MARK: - request music
+        
+        // need this line to activate MusicKit; dont know why
+        timePassed = musicHandler.musicPlayer.playbackTime
 
         if dataModel.librarySongs == nil {
             musicHandler.requestUpdateLibrary {}
