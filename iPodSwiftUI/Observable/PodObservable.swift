@@ -71,10 +71,26 @@ final class PodObservable: ObservableObject {
             if userAllowedMediaRefreshNetworkLoading {
                 libraryUpdateSymbolState = .loading
                 fetchCounter = 0
-                videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: true) { self.fetchCounter += 1 }
-                self.photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: true) { self.fetchCounter += 1 }
-                self.musicHandler.requestUpdateLibrary() { self.fetchCounter += 1 }
-                self.musicHandler.requestUpdatePlaylists() { self.fetchCounter += 1 }
+                videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: true) {
+                    DispatchQueue.main.async {
+                        self.fetchCounter += 1
+                    }
+                }
+                photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: true) {
+                    DispatchQueue.main.async {
+                        self.fetchCounter += 1
+                    }
+                }
+                musicHandler.requestUpdateLibrary() {
+                    DispatchQueue.main.async {
+                        self.fetchCounter += 1
+                    }
+                }
+                musicHandler.requestUpdatePlaylists() {
+                    DispatchQueue.main.async {
+                        self.fetchCounter += 1
+                    }
+                }
                 userAllowedMediaRefreshNetworkLoading = false
             }
         }
@@ -228,7 +244,9 @@ final class PodObservable: ObservableObject {
     @Published var fetchCounter = 0 {
         didSet {
             if fetchCounter >= 4 {
-                fetchCounter = 0
+                DispatchQueue.main.async {
+                    self.fetchCounter = 0
+                }
                 DispatchQueue.main.async {
                     self.libraryUpdateSymbolState = .done
                     if let sk = self.statusModel.pageSKDictionary[.songs] {

@@ -625,10 +625,26 @@ extension PodObservable {
             if omitsDataAlert {
                 libraryUpdateSymbolState = .loading
                 fetchCounter = 0
-                videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: true) { self.fetchCounter += 1 }
-                photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: true) { self.fetchCounter += 1 }
-                musicHandler.requestUpdateLibrary() { self.fetchCounter += 1 }
-                musicHandler.requestUpdatePlaylists() { self.fetchCounter += 1 }
+                videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: true) {
+                    DispatchQueue.main.async {
+                        self.fetchCounter += 1
+                    }
+                }
+                photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: true) {
+                    DispatchQueue.main.async {
+                        self.fetchCounter += 1
+                    }
+                }
+                musicHandler.requestUpdateLibrary() {
+                    DispatchQueue.main.async {
+                        self.fetchCounter += 1
+                    }
+                }
+                musicHandler.requestUpdatePlaylists() {
+                    DispatchQueue.main.async {
+                        self.fetchCounter += 1
+                    }
+                }
             } else {
                 mediaRefreshNetworkAlertIsPresented = true
             }
