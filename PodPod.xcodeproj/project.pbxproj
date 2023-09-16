@@ -72,6 +72,7 @@
 		57A42D742AB5DF9E007E8F3A /* PodObservable+(Fetch).swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A42D732AB5DF9E007E8F3A /* PodObservable+(Fetch).swift */; };
 		57A42D762AB5EC06007E8F3A /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A42D752AB5EC06007E8F3A /* NetworkHandler.swift */; };
 		57A42D782AB60722007E8F3A /* WheelDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A42D772AB60722007E8F3A /* WheelDirection.swift */; };
+		57A42D7C2AB6332C007E8F3A /* DotsProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A42D7B2AB6332C007E8F3A /* DotsProgressView.swift */; };
 		57A746312A7E42E2007BD76D /* MusicHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A746302A7E42E2007BD76D /* MusicHandler.swift */; };
 		57C65E292A8A0BCB0048F149 /* getTimeString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C65E282A8A0BCB0048F149 /* getTimeString.swift */; };
 		57C856EA2A91A93B0036F371 /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C856E92A91A93B0036F371 /* BatteryState.swift */; };
@@ -168,6 +169,7 @@
 		57A42D732AB5DF9E007E8F3A /* PodObservable+(Fetch).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PodObservable+(Fetch).swift"; sourceTree = "<group>"; };
 		57A42D752AB5EC06007E8F3A /* NetworkHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		57A42D772AB60722007E8F3A /* WheelDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelDirection.swift; sourceTree = "<group>"; };
+		57A42D7B2AB6332C007E8F3A /* DotsProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotsProgressView.swift; sourceTree = "<group>"; };
 		57A746302A7E42E2007BD76D /* MusicHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicHandler.swift; sourceTree = "<group>"; };
 		57C65E282A8A0BCB0048F149 /* getTimeString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getTimeString.swift; sourceTree = "<group>"; };
 		57C856E92A91A93B0036F371 /* BatteryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryState.swift; sourceTree = "<group>"; };
@@ -441,6 +443,7 @@
 				5704FC932A9352B600233066 /* Header Components */,
 				5704FC942A9352C000233066 /* NowPlaying Components */,
 				579E2FCB2AA71E50001BF603 /* Video Components */,
+				57A42D7B2AB6332C007E8F3A /* DotsProgressView.swift */,
 			);
 			path = "Screen Components";
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				57C856F42A91BF1A0036F371 /* HeaderBatteryUnpluggedSymbolView.swift in Sources */,
 				579D509D2A90A23B00248D22 /* NowPlayingLowerSeekBarView.swift in Sources */,
 				5704FC972A93575A00233066 /* mainMenuIndexShaker.swift in Sources */,
+				57A42D7C2AB6332C007E8F3A /* DotsProgressView.swift in Sources */,
 				57867DA52A3CC7D500129450 /* DesignSystem.swift in Sources */,
 				5726AC1E2A7B7A6D00129FAD /* DiscreteScrollBarView.swift in Sources */,
 				570863C12A8A1F4C00B575BB /* MPVolumeView+.swift in Sources */,
@@ -780,7 +784,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wonil-or-not.PodPod";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -819,7 +823,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wonil-or-not.PodPod";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
