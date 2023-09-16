@@ -292,6 +292,13 @@ final class PodObservable: ObservableObject {
             }
         }
     }
+    var wheelChangeSummation: CGFloat = 1.0 {
+        didSet {
+            wheelAccelerationFactor = min(max(downInt(log2(wheelChangeSummation) * 1.4) - 2, 1), 10)
+        }
+    }
+    var wheelAccelerationFactor: Int = 1
+    var prevWheelDirection: WheelDirection = .down
     
     //MARK: - timer
     
@@ -300,6 +307,7 @@ final class PodObservable: ObservableObject {
     var videoSymbolTimer: Timer?
     var playInfoRefresher: Timer?
     var batteryInfoRefresher: Timer?
+    var wheelAccelerationTimer: Timer?
 
     //MARK: - initializer
     
