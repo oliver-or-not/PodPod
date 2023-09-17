@@ -316,7 +316,9 @@ extension PodObservable {
                     return pd
                 }
                 
-                for song in filteredSongs {
+                let filteredSongsInDiscAndTrackOrder = filteredSongs.sorted(by: discAndTrackSortRule)
+                
+                for song in filteredSongsInDiscAndTrackOrder {
                     pd.rowDataArray!.append(RowData(text: song.title, actionStyle: .emptyMove, key: .nowPlaying, handlingProperty: .play, song: song))
                 }
                 
