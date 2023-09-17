@@ -313,63 +313,6 @@ final class PodObservable: ObservableObject {
     
     private init() {
         
-        //MARK: - volume and battery
-        
-        volume = AVAudioSession.sharedInstance().outputVolume
-        
-        UIDevice.current.isBatteryMonitoringEnabled = true
-        switch UIDevice.current.batteryState {
-            case .unplugged:
-                batteryState = .unplugged
-            case .charging:
-                batteryState = .charging
-            case .full:
-                batteryState = .full
-            default:
-                batteryState = .unknown
-        }
-        batteryLevel = UIDevice.current.batteryLevel
-        
-        //MARK: - request music
-        
-        // need this line to activate MusicKit; dont know why
-        timePassed = musicHandler.musicPlayer.playbackTime
-
-        if dataModel.librarySongs == nil {
-            musicHandler.requestUpdateLibrary {}
-        }
-        if dataModel.playlists == nil {
-            musicHandler.requestUpdatePlaylists {}
-        }
-        
-        //MARK: - fetch photos and videos (network off)
-
-        photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: false) {}
-        videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: false) {}
-        
-        //MARK: - make the main page
-        
-        key = .main
-        pageData = getPageData(.main)
-        wheelProperty = .focusedIndex
-        focusedIndex = 0
-        discreteScrollMark = 0
-        continuousScrollMark = nil
-        
-        statusModel.pageKeyArray = [.main]
-        currentRowCount = getPageData(.main).rowDataArray!.count
-        
-        //MARK: - use wheelValue
-        
-        // will sink between each frame while dragging
-        // Combine을 사용하여 "wheelValue"의 변경을 감시하고, 변경될 때마다 동작 수행
-        wheelValuePublisher
-            .sink { [weak self] newValue in
-                self?.handleWheelValueChange(newValue: newValue, prevValue: self?.previousWheelValue)
-                self?.previousWheelValue = newValue // 직전 값 갱신
-            }
-            .store(in: &cancellables)
-        
         //MARK: - user default
         
         if let wantsToSeeTimeInHeaderFromUserDefault = UserDefaults.standard.object(forKey: "wantsToSeeTimeInHeader") as? Bool {
@@ -465,6 +408,63 @@ final class PodObservable: ObservableObject {
             videoAutoplayMode = .off
             UserDefaults.standard.set(videoAutoplayMode.rawValue, forKey: "videoAutoplayMode.RawValue")
         }
+        
+        //MARK: - volume and battery
+        
+        volume = AVAudioSession.sharedInstance().outputVolume
+        
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        switch UIDevice.current.batteryState {
+            case .unplugged:
+                batteryState = .unplugged
+            case .charging:
+                batteryState = .charging
+            case .full:
+                batteryState = .full
+            default:
+                batteryState = .unknown
+        }
+        batteryLevel = UIDevice.current.batteryLevel
+        
+        //MARK: - request music
+        
+        // need this line to activate MusicKit; dont know why
+        timePassed = musicHandler.musicPlayer.playbackTime
+
+        if dataModel.librarySongs == nil {
+            musicHandler.requestUpdateLibrary {}
+        }
+        if dataModel.playlists == nil {
+            musicHandler.requestUpdatePlaylists {}
+        }
+        
+        //MARK: - fetch photos and videos (network off)
+
+        photoHandler.fetchFavoritePhotos(networkAccessIsAllowed: false) {}
+        videoHandler.fetchFavoriteVideoAssets(networkAccessIsAllowed: false) {}
+        
+        //MARK: - make the main page
+        
+        key = .main
+        pageData = getPageData(.main)
+        wheelProperty = .focusedIndex
+        focusedIndex = 0
+        discreteScrollMark = 0
+        continuousScrollMark = nil
+        
+        statusModel.pageKeyArray = [.main]
+        currentRowCount = getPageData(.main).rowDataArray!.count
+        
+        //MARK: - use wheelValue
+        
+        // will sink between each frame while dragging
+        // Combine을 사용하여 "wheelValue"의 변경을 감시하고, 변경될 때마다 동작 수행
+        wheelValuePublisher
+            .sink { [weak self] newValue in
+                self?.handleWheelValueChange(newValue: newValue, prevValue: self?.previousWheelValue)
+                self?.previousWheelValue = newValue // 직전 값 갱신
+            }
+            .store(in: &cancellables)
             
         //MARK: -  set refresher
         
