@@ -241,13 +241,13 @@ extension DesignSystem.Soft.Dimension {
     
     static var photoHorizontalNum: Int = 6
     static var photoVerticalNum: Int = 5
-    static var photoBorderWidth: CGFloat = 2.6
+    static var photoBorderWidth: CGFloat = 2.6 // ^^^
     
     //MARK: - video
     
     static var videoThumbnailHorizontalNum: Int = 4
     static var videoThumbnailVerticalNum: Int = 3
-    static var videoThumbnailBorderWidth: CGFloat = 4.5
+    static var videoThumbnailBorderWidth: CGFloat = 4.5 // ^^^
     
     static var videoFontSize: CGFloat {
         w / 19.88
