@@ -299,11 +299,7 @@ final class PodObservable: ObservableObject {
     }
     var wheelAccelerationFactor: Int = 1
     var prevWheelDirection: WheelDirection = .down
-    @Published var needsAnimatedView = true {
-        didSet {
-            print("needsAnimatedView: \(needsAnimatedView)") // ^^^
-        }
-    }
+    @Published var needsAnimatedView = true
     
     //MARK: - timer
     
