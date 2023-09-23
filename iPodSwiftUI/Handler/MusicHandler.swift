@@ -163,7 +163,7 @@ final class MusicHandler {
     //MARK: - filter
 
     func doPlaylistFilter(chosenPlaylist: Playlist?) {
-        if let chosenPlaylist {
+        if let chosenPlaylist { 
             if let entries = chosenPlaylist.entries {
                 var tempSongArray: [Song] = []
                 for entry in entries {
@@ -174,6 +174,10 @@ final class MusicHandler {
                     }
                 }
                 DataModel.shared.filteredSongs = MusicItemCollection<Song>(tempSongArray)
+            }
+            // if entries is nil
+            else {
+                DataModel.shared.filteredSongs = []
             }
         }
     }

@@ -17,5 +17,4 @@ final class PageData {
         self.headerTitle = headerTitle
         self.rowDataArray = rowDataArray
     }
-    
 }

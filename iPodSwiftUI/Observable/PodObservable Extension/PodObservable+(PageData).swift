@@ -101,6 +101,17 @@ extension PodObservable {
             
             //MARK: - page data | .music
                 
+                /*
+                 ~.music page key flow~
+                 .artists > .chosenArtist > .chosenAlbum
+                 .artists > .chosenAlbum
+                 .albums > .chosenAlbum
+                 .genres > .chosenGenre > .chosenArtist > .chosenAlbum
+                 .genres > .chosenGenre > .chosenAlbum
+                 .composers > .chosenComposer > .chosenAlbum
+                 .composers > .chosenAlbum
+                 */
+                
             case .playlists:
                 let pd = PageData()
                 pd.headerTitle = "재생목록"
