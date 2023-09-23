@@ -148,6 +148,18 @@ struct GestureView: View {
                                 resetAfterEndOfDrag()
                             }
                     )
+                    .gesture(
+                        MagnifyGesture()
+                            .onEnded { _ in
+                                resetAfterEndOfDrag()
+                            }
+                    )
+                    .gesture(
+                        RotateGesture()
+                            .onEnded { _ in
+                                resetAfterEndOfDrag()
+                            }
+                    )
             }
         }
     }

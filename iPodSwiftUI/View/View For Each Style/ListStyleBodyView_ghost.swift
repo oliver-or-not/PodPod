@@ -26,6 +26,7 @@ struct ListStyleBodyView_ghost: View {
     var mainMenuBoolArray: [Bool]
     
     private var libraryCount = DataModel.shared.librarySongs?.count ?? 0
+    private var playlistCount = DataModel.shared.playlists?.count ?? 0
     
     private var nowPlayingFontSize: CGFloat {
         DesignSystem.Soft.Dimension.nowPlayingFontSize
@@ -53,45 +54,43 @@ struct ListStyleBodyView_ghost: View {
     
     var body: some View {
         Group {
-            if libraryCount == 0 && [.playlists, .chosenPlaylist, .composers, .albums, .artists, .genres, .songs, .chosenGenre, .chosenComposer, .chosenArtist, .chosenAlbum].contains(key) {
-                if [.composers, .albums, .artists, .genres, .songs, .chosenGenre, .chosenComposer, .chosenArtist, .chosenAlbum].contains(key) {
-                    ZStack {
-                        Color(.white)
+            if libraryCount == 0 && [.composers, .albums, .artists, .genres, .songs, .chosenGenre, .chosenComposer, .chosenArtist, .chosenAlbum].contains(key) {
+                ZStack {
+                    Color(.white)
+                    
+                    HStack(spacing: 0) {
+                        Spacer()
+                            .frame(width: basicIndentation)
                         
-                        HStack(spacing: 0) {
-                            Spacer()
-                                .frame(width: basicIndentation)
-                            
-                            Text("표시할 노래가 없습니다.\n\n1. Apple Music을 구독하고\n보관함에 노래를 추가하세요.\n2. 첫 화면에서 미디어를 새로고침하세요.")
-                                .multilineTextAlignment(.center)
-                                .font(.system(size: nowPlayingFontSize, weight: .semibold))
-                                .foregroundColor(.black)
-                            
-                            Spacer()
-                                .frame(width: basicIndentation)
-                        }
-                    }
-                    .frame(width: DesignSystem.Soft.Dimension.w, height: DesignSystem.Soft.Dimension.bodyHeight)
-                }
-                else if [.playlists, .chosenPlaylist].contains(key) {
-                    ZStack {
-                        Color(.white)
+                        Text("표시할 노래가 없습니다.\n\n1. Apple Music을 구독하고\n보관함에 노래를 추가하세요.\n2. 첫 화면에서 미디어를 새로고침하세요.")
+                            .multilineTextAlignment(.center)
+                            .font(.system(size: nowPlayingFontSize, weight: .semibold))
+                            .foregroundColor(.black)
                         
-                        HStack(spacing: 0) {
-                            Spacer()
-                                .frame(width: basicIndentation)
-                            
-                            Text("표시할 재생목록이 없습니다.\n\n1. Apple Music을 구독하고\n보관함에 플레이리스트를 추가하세요.\n2. 첫 화면에서 미디어를 새로고침하세요.")
-                                .multilineTextAlignment(.center)
-                                .font(.system(size: nowPlayingFontSize, weight: .semibold))
-                                .foregroundColor(.black)
-                            
-                            Spacer()
-                                .frame(width: basicIndentation)
-                        }
+                        Spacer()
+                            .frame(width: basicIndentation)
                     }
-                    .frame(width: DesignSystem.Soft.Dimension.w, height: DesignSystem.Soft.Dimension.bodyHeight)
                 }
+                .frame(width: DesignSystem.Soft.Dimension.w, height: DesignSystem.Soft.Dimension.bodyHeight)
+            }
+            else if playlistCount == 0 && [.playlists, .chosenPlaylist].contains(key) {
+                ZStack {
+                    Color(.white)
+                    
+                    HStack(spacing: 0) {
+                        Spacer()
+                            .frame(width: basicIndentation)
+                        
+                        Text("표시할 재생목록이 없습니다.\n\n1. Apple Music을 구독하고\n보관함에 플레이리스트를 추가하세요.\n2. 첫 화면에서 미디어를 새로고침하세요.")
+                            .multilineTextAlignment(.center)
+                            .font(.system(size: nowPlayingFontSize, weight: .semibold))
+                            .foregroundColor(.black)
+                        
+                        Spacer()
+                            .frame(width: basicIndentation)
+                    }
+                }
+                .frame(width: DesignSystem.Soft.Dimension.w, height: DesignSystem.Soft.Dimension.bodyHeight)
             }
             else {
                 ZStack {

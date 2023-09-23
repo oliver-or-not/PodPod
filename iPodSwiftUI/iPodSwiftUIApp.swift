@@ -15,7 +15,7 @@ struct iPodSwiftUIApp: App {
         WindowGroup {
             DeviceView()
         }
-        .onChange(of: scenePhase) { newScenePhase in
+        .onChange(of: scenePhase) { oldScenePhase, newScenePhase in
             switch newScenePhase {
                 case .active:
                     StatusModel.shared.inactiveVariety = .fromActive

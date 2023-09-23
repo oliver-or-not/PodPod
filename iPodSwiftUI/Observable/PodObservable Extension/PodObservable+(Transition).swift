@@ -110,17 +110,17 @@ extension PodObservable {
         
         pageData = getPageData(newPageKey)
         
-        // skip .chosenAlbum page when there is only one album
-        if key == .albums || key == .chosenComposer || key == .chosenArtist {
-            if let rowDataArray = pageData.rowDataArray, let librarySongs = dataModel.librarySongs {
-                if rowDataArray.count == 1 && rowDataArray[0].text != "모두\t" && librarySongs.count > 0 {
-                    _ = statusModel.pageKeyArray.popLast()
-                    statusModel.chosenAlbum = rowDataArray[0].text
-                    // ghostPageSK will not be redefined by this(below) line
-                    doThingsBeforeGoingRight(newPageKey: .chosenAlbum)
-                }
-            }
-        }
+//        // skip .chosenAlbum page when there is only one album
+//        if key == .albums || key == .chosenComposer || key == .chosenArtist {
+//            if let rowDataArray = pageData.rowDataArray, let librarySongs = dataModel.librarySongs {
+//                if rowDataArray.count == 1 && rowDataArray[0].text != "모두\t" && librarySongs.count > 0 {
+//                    _ = statusModel.pageKeyArray.popLast()
+//                    statusModel.chosenAlbum = rowDataArray[0].text
+//                    // ghostPageSK will not be redefined by this(below) line
+//                    doThingsBeforeGoingRight(newPageKey: .chosenAlbum)
+//                }
+//            }
+//        }
         
         // reset nowPlayingTransitionState
         if key == .nowPlaying {
