@@ -240,6 +240,20 @@ extension PodObservable {
             return
         }
         
+        if [.composers, .albums, .artists, .genres, .songs, .chosenGenre, .chosenComposer, .chosenArtist, .chosenAlbum].contains(key) {
+            let libraryCount = DataModel.shared.librarySongs?.count ?? 0
+            if libraryCount == 0 {
+                return
+            }
+        }
+        
+        if [.playlists, .chosenPlaylist].contains(key) {
+            let playlistCount = DataModel.shared.playlists?.count ?? 0
+            if playlistCount == 0 {
+                return
+            }
+        }
+        
         switch pageData.pageBodyStyle {
             case .list:
                 guard let safeRowDataArray = pageData.rowDataArray, let focusedIndex = focusedIndex else {
@@ -267,11 +281,8 @@ extension PodObservable {
                                 goRight(newPageKey: safeKey)
                             }
                         case .canPlay:
-//                            if dataModel.librarySongs?.count ?? 0 > 0 {
                                 goRight(newPageKey: safeKey)
-//                            }
                         case .play:
-//                            if dataModel.librarySongs?.count ?? 0 > 0 {
                                 musicHandler.getUserSubscriptionAvailability { userSubscripts in
                                     if userSubscripts {
                                         self.doCenterButtonAction_play()
@@ -280,7 +291,6 @@ extension PodObservable {
                                         self.subscriptionAlertIsPresented = true
                                     }
                                 }
-//                            }
                         case .shufflePlay:
                             musicHandler.getUserSubscriptionAvailability { userSubscripts in
                                 if userSubscripts {

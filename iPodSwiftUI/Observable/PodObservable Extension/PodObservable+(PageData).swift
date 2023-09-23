@@ -131,17 +131,13 @@ extension PodObservable {
                 pd.headerTitle = "아티스트"
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = [RowData(text: "모두\t", actionStyle: .chevronMove, key: .chosenArtist, handlingProperty: .canPlay)]
-                guard let librarySongs = dataModel.librarySongs else {
+                guard let librarySongs = dataModel.librarySongs, librarySongs.count > 0 else {
                     pd.rowDataArray = [RowData()]
                     return pd
                 }
                 
                 var artistArray = musicHandler.getArtistArray(from: librarySongs)
                 artistArray.sort(by: sortRule)
-                
-                if artistArray.count == 1 {
-                    pd.rowDataArray = []
-                }
                 
                 for artist in artistArray {
                     pd.rowDataArray!.append(RowData(text: artist, actionStyle: .chevronMove, key: .chosenArtist, handlingProperty: .canPlay))
@@ -152,17 +148,13 @@ extension PodObservable {
                 pd.headerTitle = "앨범"
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = [RowData(text: "모두\t", actionStyle: .chevronMove, key: .chosenAlbum, handlingProperty: .canPlay)]
-                guard let librarySongs = dataModel.librarySongs else {
+                guard let librarySongs = dataModel.librarySongs, librarySongs.count > 0 else {
                     pd.rowDataArray = [RowData()]
                     return pd
                 }
                 
                 var albumArray = musicHandler.getAlbumArray(from: librarySongs)
                 albumArray.sort(by: sortRule)
-                
-                if albumArray.count == 1 {
-                    pd.rowDataArray = []
-                }
                 
                 for album in albumArray {
                     pd.rowDataArray!.append(RowData(text: album, actionStyle: .chevronMove, key: .chosenAlbum, handlingProperty: .canPlay))
@@ -174,12 +166,7 @@ extension PodObservable {
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = []
                 
-                guard let librarySongs = dataModel.librarySongs else {
-                    pd.rowDataArray!.append(RowData())
-                    return pd
-                }
-                
-                guard librarySongs.count > 0 else {
+                guard let librarySongs = dataModel.librarySongs, librarySongs.count > 0 else {
                     pd.rowDataArray!.append(RowData())
                     return pd
                 }
@@ -189,12 +176,12 @@ extension PodObservable {
                 }
                 
                 return pd
-            case .genres: // "모두\t" row always exists
+            case .genres:
                 let pd = PageData()
                 pd.headerTitle = "장르"
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = [RowData(text: "모두\t", actionStyle: .chevronMove, key: .chosenGenre, handlingProperty: .canPlay)]
-                guard let librarySongs = dataModel.librarySongs else {
+                guard let librarySongs = dataModel.librarySongs, librarySongs.count > 0 else {
                     pd.rowDataArray! = [RowData()]
                     return pd
                 }
@@ -206,12 +193,12 @@ extension PodObservable {
                     pd.rowDataArray!.append(RowData(text: genre, actionStyle: .chevronMove, key: .chosenGenre, handlingProperty: .canPlay))
                 }
                 return pd
-            case .composers: // "모두\t" row always exists here
+            case .composers:
                 let pd = PageData()
                 pd.headerTitle = "작곡가"
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = [RowData(text: "모두\t", actionStyle: .chevronMove, key: .chosenComposer, handlingProperty: .canPlay)]
-                guard let librarySongs = dataModel.librarySongs else {
+                guard let librarySongs = dataModel.librarySongs, librarySongs.count > 0 else {
                     pd.rowDataArray = [RowData()]
                     return pd
                 }
@@ -229,12 +216,7 @@ extension PodObservable {
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = []
                 
-                guard let filteredSongs = dataModel.filteredSongs else {
-                    pd.rowDataArray!.append(RowData())
-                    return pd
-                }
-                
-                guard filteredSongs.count > 0 else {
+                guard let filteredSongs = dataModel.filteredSongs, filteredSongs.count > 0 else {
                     pd.rowDataArray!.append(RowData())
                     return pd
                 }
@@ -252,17 +234,13 @@ extension PodObservable {
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = [RowData(text: "모두\t", actionStyle: .chevronMove, key: .chosenAlbum, handlingProperty: .canPlay)]
                 
-                guard let filteredSongs = dataModel.filteredSongs else {
+                guard let filteredSongs = dataModel.filteredSongs, filteredSongs.count > 0 else {
                     pd.rowDataArray!.append(RowData())
                     return pd
                 }
                 
                 var albumArray = musicHandler.getAlbumArray(from: filteredSongs)
                 albumArray.sort(by: sortRule)
-                
-                if albumArray.count == 1 {
-                    pd.rowDataArray = []
-                }
                 
                 for album in albumArray {
                     pd.rowDataArray!.append(RowData(text: album, actionStyle: .chevronMove, key: .chosenAlbum, handlingProperty: .canPlay))
@@ -273,17 +251,13 @@ extension PodObservable {
                 pd.headerTitle = statusModel.chosenGenre ?? "모든 아티스트"
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = [RowData(text: "모두\t", actionStyle: .chevronMove, key: .chosenArtist, handlingProperty: .canPlay)]
-                guard let filteredSongs = dataModel.filteredSongs else {
+                guard let filteredSongs = dataModel.filteredSongs, filteredSongs.count > 0 else {
                     pd.rowDataArray!.append(RowData())
                     return pd
                 }
                 
                 var artistArray = musicHandler.getArtistArray(from: filteredSongs)
                 artistArray.sort(by: sortRule)
-                
-                if artistArray.count == 1 {
-                    pd.rowDataArray = []
-                }
                 
                 for artist in artistArray {
                     pd.rowDataArray!.append(RowData(text: artist, actionStyle: .chevronMove, key: .chosenArtist, handlingProperty: .canPlay))
@@ -295,17 +269,13 @@ extension PodObservable {
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = [RowData(text: "모두\t", actionStyle: .chevronMove, key: .chosenAlbum, handlingProperty: .canPlay)]
                 
-                guard let filteredSongs = dataModel.filteredSongs else {
+                guard let filteredSongs = dataModel.filteredSongs, filteredSongs.count > 0 else {
                     pd.rowDataArray!.append(RowData())
                     return pd
                 }
                 
                 var albumArray = musicHandler.getAlbumArray(from: filteredSongs)
                 albumArray.sort(by: sortRule)
-                
-                if albumArray.count == 1 {
-                    pd.rowDataArray = []
-                }
                 
                 for album in albumArray {
                     pd.rowDataArray!.append(RowData(text: album, actionStyle: .chevronMove, key: .chosenAlbum, handlingProperty: .canPlay))
@@ -317,13 +287,15 @@ extension PodObservable {
                 pd.pageBodyStyle = .list
                 pd.rowDataArray = []
                 
-                guard let filteredSongs = dataModel.filteredSongs else {
+                guard let filteredSongs = dataModel.filteredSongs, filteredSongs.count > 0 else {
                     pd.rowDataArray!.append(RowData())
                     return pd
                 }
                 
-                guard filteredSongs.count > 0 else {
-                    pd.rowDataArray!.append(RowData())
+                guard statusModel.chosenAlbum != nil else {
+                    for song in filteredSongs {
+                        pd.rowDataArray!.append(RowData(text: song.title, actionStyle: .emptyMove, key: .nowPlaying, handlingProperty: .play, song: song))
+                    }
                     return pd
                 }
                 
