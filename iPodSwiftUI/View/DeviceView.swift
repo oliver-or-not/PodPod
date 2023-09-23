@@ -43,12 +43,6 @@ struct DeviceView: View {
                 .ignoresSafeArea()
                 
 				VStack(spacing: 0) {
-//					 아이폰의 위아래 safe area 높이 비교하고, 아래쪽이 더 길면 위에 그만큼 공백을 더해준다.
-                    if geometry.safeAreaInsets.top < geometry.safeAreaInsets.bottom {
-                        Spacer()
-                            .frame(height: geometry.safeAreaInsets.bottom - geometry.safeAreaInsets.top)
-                    }
-					
 					// 화면 주변 검은 영역과 ScreenView의 ZStack
 					ZStack {
 						RoundedRectangle(cornerRadius: DesignSystem.Hard.Dimension.iPodScreenBoundaryCornerRadius)
@@ -64,17 +58,8 @@ struct DeviceView: View {
 					
 					// 클릭휠
                     WheelView(deviceColor: deviceColor)
-					
-					// 실물 iPod 하단과 상단의 여백 차이를 반영하기 위한 Spacer
-                    Spacer()
-						.frame(height: DesignSystem.Hard.Dimension.topBottomDifference)
-					
-//					 아이폰의 위아래 safe area 높이 비교하고, 위쪽이 더 길면 아래에 그만큼 공백을 더해준다.
-					if geometry.safeAreaInsets.top > geometry.safeAreaInsets.bottom {
-                        Spacer()
-							.frame(height: geometry.safeAreaInsets.top - geometry.safeAreaInsets.bottom)
-					}
 				}
+                .offset(y: (geometry.safeAreaInsets.bottom - geometry.safeAreaInsets.top - DesignSystem.Hard.Dimension.topBottomDifference) * 0.5)
 
 				GestureView()
 					.environmentObject(podObservable)

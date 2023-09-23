@@ -139,11 +139,11 @@ extension DesignSystem.Hard.Dimension {
     }
     
     static var wheelDragInnerRadius: CGFloat {
-        centerButtonRadius * 0.8
+        centerButtonRadius * 0.6
     }
     
     static var wheelDragOuterRadius: CGFloat {
-        wheelRadius * 1.07
+        wheelRadius * 1.15
     }
     
     static var seekingAreaRadius: CGFloat {
@@ -241,13 +241,17 @@ extension DesignSystem.Soft.Dimension {
     
     static var photoHorizontalNum: Int = 6
     static var photoVerticalNum: Int = 5
-    static var photoBorderWidth: CGFloat = w / 123.0
+    static var photoBorderWidth: CGFloat {
+        w / 123.0
+    }
     
     //MARK: - video
     
     static var videoThumbnailHorizontalNum: Int = 4
     static var videoThumbnailVerticalNum: Int = 3
-    static var videoThumbnailBorderWidth: CGFloat = w / 71.06
+    static var videoThumbnailBorderWidth: CGFloat {
+        w / 71.06
+    }
     
     static var videoFontSize: CGFloat {
         w / 19.88
