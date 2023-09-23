@@ -105,11 +105,8 @@ struct NowPlayingComplexBodyView: View {
             }
             // when lineupCount == 0
             else {
-                Image(systemName: "ellipsis")
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor(.gray)
-                    .frame(width: DesignSystem.Soft.Dimension.w * 0.1)
+                DotsProgressView(brightBack: true)
+                    .frame(width: DesignSystem.Soft.Dimension.w * 0.1, height: DesignSystem.Soft.Dimension.w * 0.1) 
             }
         }
         .frame(width: DesignSystem.Soft.Dimension.w, height: DesignSystem.Soft.Dimension.bodyHeight)
