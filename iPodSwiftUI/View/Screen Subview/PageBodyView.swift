@@ -31,7 +31,8 @@ struct PageBodyView: View {
                             videoZoomMode: podObservable.videoZoomMode,
                             videoAutoplayMode: podObservable.videoAutoplayMode,
                             libraryUpdateSymbolState: podObservable.libraryUpdateSymbolState,
-                            mainMenuBoolArray: podObservable.mainMenuBoolArray
+                            mainMenuBoolArray: podObservable.mainMenuBoolArray,
+                            needsAnimatedView: podObservable.needsAnimatedView
                         )
                     case .nowPlaying:
                         NowPlayingStyleBodyStackView(
@@ -53,7 +54,8 @@ struct PageBodyView: View {
                             bodyOffsetTrigger: podObservable.nowPlayingBodyOffsetTrigger,
                             lowerOffsetTrigger: podObservable.nowPlayingLowerOffsetTrigger,
                             upperTextFlicker: podObservable.nowPlayingUpperTextFlicker,
-                            upperTextOffsetTrigger: podObservable.nowPlayingUpperTextOffsetTrigger
+                            upperTextOffsetTrigger: podObservable.nowPlayingUpperTextOffsetTrigger,
+                            needsAnimatedView: podObservable.needsAnimatedView
                         )
                     case .photo:
                         PhotoStyleBodyStackView(focusedIndex: podObservable.focusedIndex ?? 0, discreteScrollMark: podObservable.discreteScrollMark ?? 0, detailIsShown: podObservable.photoDetailIsShown)
@@ -102,7 +104,7 @@ struct PageBodyView: View {
             else {
                 switch podObservable.pageData_ghost.pageBodyStyle {
                     case .list:
-                        ListStyleBodyView_ghost(
+                        ListStyleBodyView(
                             key: podObservable.key_ghost,
                             pageData: podObservable.pageData_ghost,
                             focusedIndex: podObservable.focusedIndex_ghost,
@@ -115,7 +117,8 @@ struct PageBodyView: View {
                             videoZoomMode: podObservable.videoZoomMode,
                             videoAutoplayMode: podObservable.videoAutoplayMode,
                             libraryUpdateSymbolState: podObservable.libraryUpdateSymbolState,
-                            mainMenuBoolArray: podObservable.mainMenuBoolArray
+                            mainMenuBoolArray: podObservable.mainMenuBoolArray,
+                            needsAnimatedView: false
                         )
                     case .nowPlaying:
                         NowPlayingStyleBodyStackView(
@@ -137,7 +140,8 @@ struct PageBodyView: View {
                             bodyOffsetTrigger: podObservable.nowPlayingBodyOffsetTrigger,
                             lowerOffsetTrigger: podObservable.nowPlayingLowerOffsetTrigger,
                             upperTextFlicker: podObservable.nowPlayingUpperTextFlicker,
-                            upperTextOffsetTrigger: podObservable.nowPlayingUpperTextOffsetTrigger
+                            upperTextOffsetTrigger: podObservable.nowPlayingUpperTextOffsetTrigger,
+                            needsAnimatedView: podObservable.needsAnimatedView
                         )
                     case .photo:
                         PhotoStyleBodyStackView(focusedIndex: podObservable.focusedIndex_ghost ?? 0, discreteScrollMark: podObservable.discreteScrollMark_ghost ?? 0, detailIsShown: podObservable.photoDetailIsShown)

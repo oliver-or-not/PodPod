@@ -167,12 +167,16 @@ extension PodObservable {
                     }
                 case .volume:
                     if getVolumeCompletionIsDone {
+                        let prevVolume = min(max(0.0, baseVolume + Float(pv) / 360 * 0.6), 1.0)
                         let newVolume = min(max(0.0, baseVolume + Float(nv) / 360 * 0.6), 1.0)
                         setVolume(newVolume)
-                        if downInt(CGFloat(newVolume) * CGFloat(DesignSystem.Soft.Dimension.soundVibeNumberThroughWholeSoundBar)) != downInt(CGFloat(volume) * CGFloat(DesignSystem.Soft.Dimension.soundVibeNumberThroughWholeSoundBar)) {
+                        if downInt(CGFloat(newVolume) * CGFloat(DesignSystem.Soft.Dimension.soundVibeNumberThroughWholeSoundBar)) != downInt(CGFloat(prevVolume) * CGFloat(DesignSystem.Soft.Dimension.soundVibeNumberThroughWholeSoundBar)) {
                             vibeHandler.mediumVibe(if: vibeIsActivated)
                         }
-                        volume = newVolume
+                        
+                        if nowPlayingTransitionState == .volume || [.nowPlayingVideo, .videos].contains(key) {
+                            volume = newVolume
+                        }
                     }
                 case .seek:
                     seekIsUsed = true

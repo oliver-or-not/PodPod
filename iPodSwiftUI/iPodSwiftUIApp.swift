@@ -31,11 +31,14 @@ struct iPodSwiftUIApp: App {
                             PodObservable.shared.setBatteryInfoRefresher()
                             PodObservable.shared.playInfoRefresher?.fire()
                             PodObservable.shared.batteryInfoRefresher?.fire()
+                            PodObservable.shared.needsAnimatedView = true
+                            PodObservable.shared.nowPlayingUpperTextFlick()
                     }
                 case .background:
                     StatusModel.shared.inactiveVariety = .fromBackground
                     PodObservable.shared.playInfoRefresher?.invalidate()
                     PodObservable.shared.batteryInfoRefresher?.invalidate()
+                    PodObservable.shared.needsAnimatedView = false
                 @unknown default:
                     _ = 0
             }
