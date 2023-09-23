@@ -38,6 +38,8 @@ struct NowPlayingStyleBodyStackView: View {
     var upperTextFlicker: Bool
     var upperTextOffsetTrigger: Bool
     
+    var needsAnimatedView: Bool
+    
     private var initialOffsetX: CGFloat {
         switch transitionState {
             case .fullArtworkToStable, .fullArtwork:
@@ -82,7 +84,8 @@ struct NowPlayingStyleBodyStackView: View {
                     transitionState: transitionState,
                     lowerOffsetTrigger: lowerOffsetTrigger,
                     upperTextFlicker: upperTextFlicker,
-                    upperTextOffsetTrigger: upperTextOffsetTrigger)
+                    upperTextOffsetTrigger: upperTextOffsetTrigger,
+                    needsAnimatedView: needsAnimatedView)
                 NowPlayingFullArtworkBodyView(
                     currentSongArtwork: currentSongArtwork,
                     currentArtworkUIImage_full: currentArtworkUIImage_full
@@ -103,6 +106,6 @@ struct NowPlayingStyleBodyStackView: View {
 
 struct NowPlayingStyleBodyStackView_Previews: PreviewProvider {
     static var previews: some View {
-        NowPlayingStyleBodyStackView(playingState: .playing, currentSongIndex: 0, lineupCount: 2, repeatState: .all, shuffleIsActivated: true, currentSongArtwork: nil, currentSongTitle: "야생화", currentSongArtistName: "박효신", currentSongAlbumTitle: "야생화", timePassed: 80.0, totalTime: 220.0, volume: 0.3, transitionState: .stable, bodyOffsetTrigger: false, lowerOffsetTrigger: false, upperTextFlicker: true, upperTextOffsetTrigger: false)
+        NowPlayingStyleBodyStackView(playingState: .playing, currentSongIndex: 0, lineupCount: 2, repeatState: .all, shuffleIsActivated: true, currentSongArtwork: nil, currentSongTitle: "야생화", currentSongArtistName: "박효신", currentSongAlbumTitle: "야생화", timePassed: 80.0, totalTime: 220.0, volume: 0.3, transitionState: .stable, bodyOffsetTrigger: false, lowerOffsetTrigger: false, upperTextFlicker: true, upperTextOffsetTrigger: false, needsAnimatedView: true)
     }
 }

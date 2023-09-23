@@ -33,6 +33,8 @@ struct NowPlayingComplexBodyView: View {
     var upperTextFlicker: Bool
     var upperTextOffsetTrigger: Bool
     
+    var needsAnimatedView: Bool
+    
     var body: some View {
         ZStack {
             Color(.white)
@@ -49,7 +51,8 @@ struct NowPlayingComplexBodyView: View {
                     currentSongArtistName: currentSongArtistName,
                     currentSongAlbumTitle: currentSongAlbumTitle,
                     upperTextFlicker: upperTextFlicker,
-                    upperTextOffsetTrigger: upperTextOffsetTrigger
+                    upperTextOffsetTrigger: upperTextOffsetTrigger,
+                    needsAnimatedView: needsAnimatedView
                 )
                 .offset(y: DesignSystem.Soft.Dimension.bodyHeight * -0.15)
                 
@@ -116,6 +119,6 @@ struct NowPlayingComplexBodyView: View {
 
 struct NowPlayingComplexBodyView_Previews: PreviewProvider {
     static var previews: some View {
-        NowPlayingComplexBodyView(playingState: .playing, currentSongIndex: 1, lineupCount: 3, repeatState: .all, shuffleIsActivated: true, currentSongArtwork: nil, currentSongTitle: "야생화", currentSongArtistName: "박효신", currentSongAlbumTitle: "야생화", volume: 0.3, timePassed: 80, totalTime: 220, transitionState: .stableToVolume, lowerOffsetTrigger: false, upperTextFlicker: true, upperTextOffsetTrigger: false)
+        NowPlayingComplexBodyView(playingState: .playing, currentSongIndex: 1, lineupCount: 3, repeatState: .all, shuffleIsActivated: true, currentSongArtwork: nil, currentSongTitle: "야생화", currentSongArtistName: "박효신", currentSongAlbumTitle: "야생화", volume: 0.3, timePassed: 80, totalTime: 220, transitionState: .stableToVolume, lowerOffsetTrigger: false, upperTextFlicker: true, upperTextOffsetTrigger: false, needsAnimatedView: true)
     }
 }

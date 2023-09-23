@@ -171,8 +171,8 @@ final class PodObservable: ObservableObject {
     // start location of continuous scroll 'range' of visible area
     @Published var continuousScrollMark: CGFloat?
     @Published var nowPlayingTransitionState: NowPlayingTransitionState = .stable {
-        didSet {
-            if nowPlayingTransitionState == .stable {
+        didSet(prev) {
+            if prev == .fullArtworkToStable && nowPlayingTransitionState == .stable {
                 DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.nowPlayingUpperTextLagTime) {
                     self.nowPlayingUpperTextFlick()
                 }
@@ -299,6 +299,11 @@ final class PodObservable: ObservableObject {
     }
     var wheelAccelerationFactor: Int = 1
     var prevWheelDirection: WheelDirection = .down
+    @Published var needsAnimatedView = true {
+        didSet {
+            print("needsAnimatedView: \(needsAnimatedView)") // ^^^
+        }
+    }
     
     //MARK: - timer
     
