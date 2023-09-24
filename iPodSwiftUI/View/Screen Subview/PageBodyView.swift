@@ -141,7 +141,7 @@ struct PageBodyView: View {
                             lowerOffsetTrigger: podObservable.nowPlayingLowerOffsetTrigger,
                             upperTextFlicker: podObservable.nowPlayingUpperTextFlicker,
                             upperTextOffsetTrigger: podObservable.nowPlayingUpperTextOffsetTrigger,
-                            needsAnimatedView: podObservable.needsAnimatedView
+                            needsAnimatedView: false
                         )
                     case .photo:
                         PhotoStyleBodyStackView(focusedIndex: podObservable.focusedIndex_ghost ?? 0, discreteScrollMark: podObservable.discreteScrollMark_ghost ?? 0, detailIsShown: podObservable.photoDetailIsShown)

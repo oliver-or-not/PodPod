@@ -102,7 +102,7 @@ final class PodObservable: ObservableObject {
     @Published var currentSong: Song? {
         didSet {
             if key == .nowPlaying {
-                nowPlayingUpperTextFlick()
+                nowPlayingUpperTextFlick(needsReset: true)
             }
         }
     }
@@ -174,7 +174,7 @@ final class PodObservable: ObservableObject {
         didSet(prev) {
             if prev == .fullArtworkToStable && nowPlayingTransitionState == .stable {
                 DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.nowPlayingUpperTextLagTime) {
-                    self.nowPlayingUpperTextFlick()
+                    self.nowPlayingUpperTextFlick(needsReset: true)
                 }
             }
         }
@@ -480,13 +480,15 @@ final class PodObservable: ObservableObject {
     
     //MARK: - manual refresh method
     
-    func nowPlayingUpperTextFlick() {
+    func nowPlayingUpperTextFlick(needsReset: Bool) {
         nowPlayingUpperTextFlickCounter += 1
         let capturedCounter = nowPlayingUpperTextFlickCounter
         nowPlayingUpperTextOffsetTrigger = false
-        nowPlayingUpperTextFlicker = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            self.nowPlayingUpperTextFlicker = true
+        if needsReset {
+            nowPlayingUpperTextFlicker = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                self.nowPlayingUpperTextFlicker = true
+            }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.nowPlayingUpperTextLagTime) {
             if capturedCounter == self.nowPlayingUpperTextFlickCounter {
