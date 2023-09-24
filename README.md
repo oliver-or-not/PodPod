@@ -19,7 +19,7 @@ PodPod
 </div></br>
 
 <div>
-<img width = "200" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/1ca418c9-5352-4760-9bdd-5ffedf927ad1">
-<img width = "200" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/9fe10692-6c67-42fc-aa78-4d01cfae2185">
+<img width = "200" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/09125014-e316-4323-86bc-e15f937d4ddc">
+<img width = "200" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/2ffe9a46-6949-4a07-b8ec-f08e678563cc">
 <img width = "200" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/c31810f4-92e8-42a8-8370-d125df2c54f4">
 </div>
