@@ -13,13 +13,11 @@ PodPod
 
 ### Examples
 <div>
-<img width = "200" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/8295de6d-0ad6-41fb-9ddd-1ed52b4bae87">
-<img width = "200" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/d4977ba4-ec46-4903-8a53-fa8f2c0a16c7">
-<img width = "200" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/c84fe0a5-0844-4117-aed9-10cd62f81385">
+<img width = "300" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/8295de6d-0ad6-41fb-9ddd-1ed52b4bae87">
+<img width = "300" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/d4977ba4-ec46-4903-8a53-fa8f2c0a16c7">
 </div></br>
 
 <div>
-<img width = "200" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/09125014-e316-4323-86bc-e15f937d4ddc">
-<img width = "200" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/2ffe9a46-6949-4a07-b8ec-f08e678563cc">
-<img width = "200" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/c31810f4-92e8-42a8-8370-d125df2c54f4">
+<img width = "300" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/c84fe0a5-0844-4117-aed9-10cd62f81385">
+<img width = "300" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/c31810f4-92e8-42a8-8370-d125df2c54f4">
 </div>
