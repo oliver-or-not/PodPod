@@ -418,5 +418,5 @@ extension DesignSystem.Time {
 //MARK: - DesignSystem > String
 
 extension DesignSystem.String {
-    static let appName = "PodPod"
+    static let appName = "Ponytail"
 }
