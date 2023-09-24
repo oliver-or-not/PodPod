@@ -54,7 +54,7 @@ struct NowPlayingComplexBodyView: View {
                     upperTextOffsetTrigger: upperTextOffsetTrigger,
                     needsAnimatedView: needsAnimatedView
                 )
-                .offset(y: DesignSystem.Soft.Dimension.bodyHeight * -0.095)
+                .offset(y: DesignSystem.Soft.Dimension.bodyHeight * -0.15)
                 
                 Group {
                     switch transitionState {
@@ -104,7 +104,7 @@ struct NowPlayingComplexBodyView: View {
                             DummyPageBodyView()
                     }
                 }
-                .offset(y: DesignSystem.Soft.Dimension.bodyHeight * 0.39)
+                .offset(y: DesignSystem.Soft.Dimension.bodyHeight * 0.35)
             }
             // when lineupCount == 0
             else {

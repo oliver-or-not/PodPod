@@ -42,21 +42,21 @@ extension DesignSystem.Hard.Dimension {
 	
 	//MARK: - iPod screen
     
+	static var iPodScreenBoundaryWidth: CGFloat {
+		w * 0.851
+	}
+	static var iPodScreenBoundaryHeight: CGFloat {
+		w * 0.646
+	}
 	static var iPodScreenBoundaryCornerRadius: CGFloat {
 		w * 0.015
 	}
 	static var iPodScreenWidth: CGFloat {
-        w * 0.820
+        w * 0.820 // 0.811
 	}
 	static var iPodScreenHeight: CGFloat {
-        w * 0.615 * 1.5 // biggerScreen
+        w * 0.615 // 0.608
 	}
-    static var iPodScreenBoundaryWidth: CGFloat {
-        iPodScreenWidth + w * 0.031 // biggerScreen
-    }
-    static var iPodScreenBoundaryHeight: CGFloat {
-        iPodScreenHeight + w * 0.031 // biggerScreen
-    }
 	
 	//MARK: - distance
     
@@ -224,7 +224,7 @@ extension DesignSystem.Soft.Dimension {
     
     //MARK: - body
     
-    static var rangeOfRows: Int = 14
+    static var rangeOfRows: Int = 9
     
     static var bodyHeight: CGFloat {
         h / CGFloat(rangeOfRows + 1) * CGFloat(rangeOfRows)
@@ -240,7 +240,7 @@ extension DesignSystem.Soft.Dimension {
     //MARK: - photo
     
     static var photoHorizontalNum: Int = 6
-    static var photoVerticalNum: Int = 7
+    static var photoVerticalNum: Int = 5
     static var photoBorderWidth: CGFloat {
         w / 123.0
     }
@@ -248,7 +248,7 @@ extension DesignSystem.Soft.Dimension {
     //MARK: - video
     
     static var videoThumbnailHorizontalNum: Int = 4
-    static var videoThumbnailVerticalNum: Int = 5
+    static var videoThumbnailVerticalNum: Int = 3
     static var videoThumbnailBorderWidth: CGFloat {
         w / 71.06
     }
@@ -276,11 +276,11 @@ extension DesignSystem.Soft.Dimension {
     }
     
     static var nowPlayingAlbumImageLength: CGFloat {
-        w / 3.22 * 1.3
+        w / 3.22
     }
     
     static var fullArtworkAlbumImageLength: CGFloat {
-        min(bodyHeight * 0.936, w * 0.936)
+        bodyHeight * 0.936
     }
     
     //MARK: - horizontal bar
@@ -418,5 +418,5 @@ extension DesignSystem.Time {
 //MARK: - DesignSystem > String
 
 extension DesignSystem.String {
-    static let appName = "Ponytail"
+    static let appName = "PodPod"
 }

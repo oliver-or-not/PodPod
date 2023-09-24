@@ -38,7 +38,7 @@ struct NowPlayingLowerVolumeBarView: View {
                     .frame(height: DesignSystem.Soft.Dimension.volumeBarHeight * 1.07)
             }
             Spacer()
-                .frame(height: DesignSystem.Soft.Dimension.w * 0.75 * 0.9 / 7.5)
+                .frame(height: DesignSystem.Soft.Dimension.bodyHeight / 7.5)
         }
         .frame(width: DesignSystem.Soft.Dimension.w)
     }

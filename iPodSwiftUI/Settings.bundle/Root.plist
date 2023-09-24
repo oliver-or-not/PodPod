@@ -54,7 +54,7 @@
 			<key>Key</key>
 			<string>mainMenuTitle</string>
 			<key>DefaultValue</key>
-			<string>Ponytail</string>
+			<string>PodPod</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>KeyboardType</key>
