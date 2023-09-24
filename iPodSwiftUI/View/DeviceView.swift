@@ -27,7 +27,7 @@ struct DeviceView: View {
 		GeometryReader { geometry in
             
 			ZStack {
-                // 기기 바탕색
+                // background color of device
                 Group {
                     switch deviceColor {
                         case "wb":
@@ -43,7 +43,7 @@ struct DeviceView: View {
                 .ignoresSafeArea()
                 
 				VStack(spacing: 0) {
-					// 화면 주변 검은 영역과 ScreenView의 ZStack
+					// ZStack of screen boundary and ScreenView
 					ZStack {
 						RoundedRectangle(cornerRadius: DesignSystem.Hard.Dimension.iPodScreenBoundaryCornerRadius)
                             .foregroundColor(DesignSystem.Hard.Color.iPodScreenBoundary)
@@ -52,15 +52,16 @@ struct DeviceView: View {
 							.environmentObject(podObservable)
 					}
 					
-					// 화면과 클릭휠 사이의 간격
+                    // distance between screen boundary and wheel
 					Spacer()
 						.frame(height: DesignSystem.Hard.Dimension.screenWheelDistance)
 					
-					// 클릭휠
+					// wheel
                     WheelView(deviceColor: deviceColor)
 				}
                 .offset(y: (geometry.safeAreaInsets.bottom - geometry.safeAreaInsets.top - DesignSystem.Hard.Dimension.topBottomDifference) * 0.5)
 
+                // transparent view managing gestures
 				GestureView()
 					.environmentObject(podObservable)
 			}
