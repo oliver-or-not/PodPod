@@ -248,6 +248,13 @@ struct NowPlayingUpperView: View {
                                                 .clipped()
                                                 .animation(.linear(duration: DesignSystem.Time.nowPlayingUpperTextSlidingAnimationTimePerWidth * (naturalSize.width + DesignSystem.Soft.Dimension.rowTextSlidingIndentation) / DesignSystem.Soft.Dimension.w ).delay(DesignSystem.Time.nowPlayingUpperTextRestTime).repeatForever(autoreverses: false), value: upperTextOffsetTrigger)
                                             }
+                                            // if doesn't need animated view
+                                            else {
+                                                Text(currentSongTitle)
+                                                    .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
+                                                    .foregroundColor(.black)
+                                                    .lineLimit(1)
+                                            }
                                         }
                                         // if not truncated
                                         else {
@@ -314,6 +321,13 @@ struct NowPlayingUpperView: View {
                                                 .frame(width: adjustedSize.width)
                                                 .clipped()
                                                 .animation(.linear(duration: DesignSystem.Time.nowPlayingUpperTextSlidingAnimationTimePerWidth * (naturalSize.width + DesignSystem.Soft.Dimension.rowTextSlidingIndentation) / DesignSystem.Soft.Dimension.w ).delay(DesignSystem.Time.nowPlayingUpperTextRestTime).repeatForever(autoreverses: false), value: upperTextOffsetTrigger)
+                                            }
+                                            // if doesn't need animated view
+                                            else {
+                                                Text(currentSongTitle)
+                                                    .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
+                                                    .foregroundColor(.black)
+                                                    .lineLimit(1)
                                             }
                                         }
                                         // if not truncated

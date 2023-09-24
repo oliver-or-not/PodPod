@@ -281,7 +281,11 @@ extension PodObservable {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + DesignSystem.Time.lagTime + DesignSystem.Time.slidingAnimationTime) {
                                     self.videoHandler.restart()
                                 }
-                            } else {
+                            } else if safeKey == .nowPlaying {
+                                goRight(newPageKey: safeKey)
+                                nowPlayingUpperTextFlick(needsReset: false)
+                            }
+                            else {
                                 goRight(newPageKey: safeKey)
                             }
                         case .canPlay:
