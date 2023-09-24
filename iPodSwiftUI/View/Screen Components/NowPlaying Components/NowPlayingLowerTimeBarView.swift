@@ -28,7 +28,7 @@ struct NowPlayingLowerTimeBarView: View {
                 .frame(width: DesignSystem.Soft.Dimension.timeBarWidth, height: DesignSystem.Soft.Dimension.timeBarHeight)
             
             Spacer()
-                .frame(height: DesignSystem.Soft.Dimension.h * 0.044)
+                .frame(height: DesignSystem.Soft.Dimension.w * 0.75 * 0.044)
             
             // numeric expression of time
             HStack(spacing: 0) {

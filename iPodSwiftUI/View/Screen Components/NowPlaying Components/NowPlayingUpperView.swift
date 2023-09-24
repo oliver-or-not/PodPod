@@ -60,96 +60,16 @@ struct NowPlayingUpperView: View {
             HStack(spacing: 0) {
                 Spacer()
                     .frame(width: DesignSystem.Soft.Dimension.nowPlayingHorizontalIndentation)
-                Group {
-                    // album image, song Title, artist name, album name
-                    if currentArtworkUIImage_thumb != nil {
-                        HStack(spacing: 0) {
-                            Image(systemName: "music.note")
-                                .resizable()
-                                .scaledToFit()
-                                .foregroundColor(DesignSystem.Soft.Color.albumPlaceholderNote)
-                                .padding(DesignSystem.Soft.Dimension.nowPlayingAlbumImageLength / 4)
-                                .frame(width: DesignSystem.Soft.Dimension.nowPlayingAlbumImageLength, height: DesignSystem.Soft.Dimension.nowPlayingAlbumImageLength)
-                                .background(DesignSystem.Soft.Color.albumPlaceholderBackground)
-                            
-                            Spacer()
-                                .frame(width: DesignSystem.Soft.Dimension.w / 23.88)
-                            Group {
-                                if upperTextFlicker {
-                                    VStack(alignment: .leading, spacing: 0) {
-                                        // song title
-                                        Text(currentSongTitle)
-                                            .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
-                                            .foregroundColor(.black)
-                                            .lineLimit(1)
-                                            .readSize { size in
-                                                adjustedSize = size
-                                            }
-                                            .layoutPriority(-1)
-                                        
-                                        Spacer()
-                                            .frame(height: DesignSystem.Soft.Dimension.w / 30.81)
-                                        
-                                        // artist name
-                                        Text(currentSongArtistName)
-                                            .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
-                                            .foregroundColor(.black)
-                                            .lineLimit(1)
-                                        
-                                        Spacer()
-                                            .frame(height: DesignSystem.Soft.Dimension.w / 30.81)
-                                        
-                                        // album title
-                                        Text(currentSongAlbumTitle)
-                                            .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
-                                            .foregroundColor(.black)
-                                            .lineLimit(1)
-                                    }
-                                    Spacer()
-                                        .frame(minWidth: 0)
-                                        .layoutPriority(-2)
-                                }
-                            }
-                        }
+                
+                Text(currentSongTitle)
+                    .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
+                    .foregroundColor(.black)
+                    .lineLimit(1)
+                    .readSize { size in
+                        adjustedSize = size
                     }
-                    // artwork uiimage is nil
-                    else {
-                        Group {
-                            if upperTextFlicker {
-                                VStack(alignment: .center, spacing: 0) {
-                                    // song title
-                                    Text(currentSongTitle)
-                                        .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
-                                        .foregroundColor(.black)
-                                        .lineLimit(1)
-                                        .readSize { size in
-                                            adjustedSize = size
-                                        }
-                                        .layoutPriority(-1)
-                                    
-                                    Spacer()
-                                        .frame(height: DesignSystem.Soft.Dimension.w / 30.81)
-                                    
-                                    // artist name
-                                    Text(currentSongArtistName)
-                                        .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
-                                        .foregroundColor(.black)
-                                        .lineLimit(1)
-                                    
-                                    Spacer()
-                                        .frame(height: DesignSystem.Soft.Dimension.w / 30.81)
-                                    
-                                    // album title
-                                    Text(currentSongAlbumTitle)
-                                        .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
-                                        .foregroundColor(.black)
-                                        .lineLimit(1)
-                                }
-                            }
-                        }
-                        .frame(height: DesignSystem.Soft.Dimension.nowPlayingAlbumImageLength)
-                    }
-                }
+                    .layoutPriority(-1)
+                
                 Spacer()
                     .frame(width: DesignSystem.Soft.Dimension.nowPlayingHorizontalIndentation)
             }
@@ -172,10 +92,14 @@ struct NowPlayingUpperView: View {
             .frame(width: DesignSystem.Soft.Dimension.w)
             .hidden()
             
+            // visible
             HStack(spacing: 0) {
                 Spacer()
                     .frame(width: DesignSystem.Soft.Dimension.nowPlayingHorizontalIndentation)
                 VStack(spacing: 0) {
+                    Spacer()
+                        .frame(height: DesignSystem.Soft.Dimension.w * 0.75 / 25.84 * 1.8)
+                    
                     // playlist indices, repeat, shuffle
                     HStack(spacing: 0) {
                         Text("\(currentSongIndex + 1) / \(lineupCount)")
@@ -207,160 +131,91 @@ struct NowPlayingUpperView: View {
                     }
                     
                     Spacer()
-                        .frame(height: DesignSystem.Soft.Dimension.h / 25.84)
+                        .frame(height: DesignSystem.Soft.Dimension.w * 0.75 / 25.84 * 0.7)
                     
                     // album image, song Title, artist name, album name
-                    if let uiimage = currentArtworkUIImage_thumb {
-                        HStack(spacing: 0) {
+                    VStack(spacing: 0) {
+                        if let uiimage = currentArtworkUIImage_thumb {
                             Image(uiImage: uiimage)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: DesignSystem.Soft.Dimension.nowPlayingAlbumImageLength, height: DesignSystem.Soft.Dimension.nowPlayingAlbumImageLength)
                                 .border(DesignSystem.Soft.Color.albumBorder, width: DesignSystem.Soft.Dimension.basicThinValue)
-                            
                             Spacer()
-                                .frame(width: DesignSystem.Soft.Dimension.w / 23.88)
-                            Group {
-                                if upperTextFlicker {
-                                    VStack(alignment: .leading, spacing: 0) {
-                                        // song title
-                                        if isTruncated {
-                                            if needsAnimatedView {
-                                                HStack(spacing: 0) {
-                                                    Text(currentSongTitle)
-                                                        .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
-                                                        .foregroundColor(.black)
-                                                        .lineLimit(1)
-                                                        .fixedSize(horizontal: true, vertical: false)
-                                                    
-                                                    Spacer()
-                                                        .frame(width: DesignSystem.Soft.Dimension.rowTextSlidingIndentation)
-                                                    
-                                                    Text(currentSongTitle)
-                                                        .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
-                                                        .foregroundColor(.black)
-                                                        .lineLimit(1)
-                                                        .fixedSize(horizontal: true, vertical: false)
-                                                }
-                                                .offset(x: naturalSize.width - adjustedSize.width * 0.5 + DesignSystem.Soft.Dimension.rowTextSlidingIndentation * 0.5)
-                                                .offset(x: upperTextOffsetTrigger ? -naturalSize.width - DesignSystem.Soft.Dimension.rowTextSlidingIndentation : 0)
-                                                .frame(width: adjustedSize.width)
-                                                .clipped()
-                                                .animation(.linear(duration: DesignSystem.Time.nowPlayingUpperTextSlidingAnimationTimePerWidth * (naturalSize.width + DesignSystem.Soft.Dimension.rowTextSlidingIndentation) / DesignSystem.Soft.Dimension.w ).delay(DesignSystem.Time.nowPlayingUpperTextRestTime).repeatForever(autoreverses: false), value: upperTextOffsetTrigger)
-                                            }
-                                            // if doesn't need animated view
-                                            else {
+                                .frame(height: DesignSystem.Soft.Dimension.w * 0.75 / 25.84)
+                        }
+                        
+                        Group {
+                            if upperTextFlicker {
+                                VStack(alignment: .center, spacing: 0) {
+                                    // song title
+                                    if isTruncated {
+                                        if needsAnimatedView {
+                                            HStack(spacing: 0) {
                                                 Text(currentSongTitle)
                                                     .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
                                                     .foregroundColor(.black)
                                                     .lineLimit(1)
+                                                    .fixedSize(horizontal: true, vertical: false)
+                                                
+                                                Spacer()
+                                                    .frame(width: DesignSystem.Soft.Dimension.rowTextSlidingIndentation)
+                                                
+                                                Text(currentSongTitle)
+                                                    .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
+                                                    .foregroundColor(.black)
+                                                    .lineLimit(1)
+                                                    .fixedSize(horizontal: true, vertical: false)
                                             }
+                                            .offset(x: naturalSize.width - adjustedSize.width * 0.5 + DesignSystem.Soft.Dimension.rowTextSlidingIndentation * 0.5)
+                                            .offset(x: upperTextOffsetTrigger ? -naturalSize.width - DesignSystem.Soft.Dimension.rowTextSlidingIndentation : 0)
+                                            .frame(width: adjustedSize.width)
+                                            .clipped()
+                                            .animation(.linear(duration: DesignSystem.Time.nowPlayingUpperTextSlidingAnimationTimePerWidth * (naturalSize.width + DesignSystem.Soft.Dimension.rowTextSlidingIndentation) / DesignSystem.Soft.Dimension.w ).delay(DesignSystem.Time.nowPlayingUpperTextRestTime).repeatForever(autoreverses: false), value: upperTextOffsetTrigger)
                                         }
-                                        // if not truncated
+                                        // if doesn't need animated view
                                         else {
                                             Text(currentSongTitle)
                                                 .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
                                                 .foregroundColor(.black)
                                                 .lineLimit(1)
                                         }
-                                        
-                                        Spacer()
-                                            .frame(height: DesignSystem.Soft.Dimension.w / 30.81)
-                                        
-                                        // artist name
-                                        Text(currentSongArtistName)
-                                            .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
-                                            .foregroundColor(.black)
-                                            .lineLimit(1)
-                                        
-                                        Spacer()
-                                            .frame(height: DesignSystem.Soft.Dimension.w / 30.81)
-                                        
-                                        // album title
-                                        Text(currentSongAlbumTitle)
+                                    }
+                                    // if not truncated
+                                    else {
+                                        Text(currentSongTitle)
                                             .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
                                             .foregroundColor(.black)
                                             .lineLimit(1)
                                     }
+                                    
                                     Spacer()
-                                        .frame(minWidth: 0)
-                                        .layoutPriority(-1)
-                                }
-                                else {
+                                        .frame(height: DesignSystem.Soft.Dimension.w / 30.81)
+                                    
+                                    // artist name
+                                    Text(currentSongArtistName)
+                                        .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
+                                        .foregroundColor(.black)
+                                        .lineLimit(1)
+                                    
                                     Spacer()
+                                        .frame(height: DesignSystem.Soft.Dimension.w / 30.81)
+                                    
+                                    // album title
+                                    Text(currentSongAlbumTitle)
+                                        .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
+                                        .foregroundColor(.black)
+                                        .lineLimit(1)
                                 }
                             }
-                        }
-                    }
-                    else {
-                        HStack(spacing: 0) {
-                            Group {
-                                if upperTextFlicker {
-                                    VStack(alignment: .center, spacing: 0) {
-                                        // song title
-                                        if isTruncated {
-                                            if needsAnimatedView {
-                                                HStack(spacing: 0) {
-                                                    Text(currentSongTitle)
-                                                        .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
-                                                        .foregroundColor(.black)
-                                                        .lineLimit(1)
-                                                        .fixedSize(horizontal: true, vertical: false)
-                                                    
-                                                    Spacer()
-                                                        .frame(width: DesignSystem.Soft.Dimension.rowTextSlidingIndentation)
-                                                    
-                                                    Text(currentSongTitle)
-                                                        .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
-                                                        .foregroundColor(.black)
-                                                        .lineLimit(1)
-                                                        .fixedSize(horizontal: true, vertical: false)
-                                                }
-                                                .offset(x: naturalSize.width - adjustedSize.width * 0.5 + DesignSystem.Soft.Dimension.rowTextSlidingIndentation * 0.5)
-                                                .offset(x: upperTextOffsetTrigger ? -naturalSize.width - DesignSystem.Soft.Dimension.rowTextSlidingIndentation : 0)
-                                                .frame(width: adjustedSize.width)
-                                                .clipped()
-                                                .animation(.linear(duration: DesignSystem.Time.nowPlayingUpperTextSlidingAnimationTimePerWidth * (naturalSize.width + DesignSystem.Soft.Dimension.rowTextSlidingIndentation) / DesignSystem.Soft.Dimension.w ).delay(DesignSystem.Time.nowPlayingUpperTextRestTime).repeatForever(autoreverses: false), value: upperTextOffsetTrigger)
-                                            }
-                                            // if doesn't need animated view
-                                            else {
-                                                Text(currentSongTitle)
-                                                    .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
-                                                    .foregroundColor(.black)
-                                                    .lineLimit(1)
-                                            }
-                                        }
-                                        // if not truncated
-                                        else {
-                                            Text(currentSongTitle)
-                                                .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
-                                                .foregroundColor(.black)
-                                                .lineLimit(1)
-                                        }
-                                        
-                                        Spacer()
-                                            .frame(height: DesignSystem.Soft.Dimension.w / 30.81)
-                                        
-                                        // artist name
-                                        Text(currentSongArtistName)
-                                            .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
-                                            .foregroundColor(.black)
-                                            .lineLimit(1)
-                                        
-                                        Spacer()
-                                            .frame(height: DesignSystem.Soft.Dimension.w / 30.81)
-                                        
-                                        // album title
-                                        Text(currentSongAlbumTitle)
-                                            .font(.system(size: DesignSystem.Soft.Dimension.nowPlayingFontSize, weight: .semibold))
-                                            .foregroundColor(.black)
-                                            .lineLimit(1)
-                                    }
-                                }
+                            else {
+                                Color(.red)
+                                    .opacity(0.000001)
                             }
                         }
-                        .frame(height: DesignSystem.Soft.Dimension.nowPlayingAlbumImageLength)
+                        .frame(height: DesignSystem.Soft.Dimension.nowPlayingAlbumImageLength * 0.65)
                     }
+                    .frame(height: DesignSystem.Soft.Dimension.w * 0.75 / 25.84 + DesignSystem.Soft.Dimension.nowPlayingAlbumImageLength * 1.65)
                 }
                 Spacer()
                     .frame(width: DesignSystem.Soft.Dimension.nowPlayingHorizontalIndentation)
