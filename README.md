@@ -15,11 +15,11 @@
 
 ### Examples
 <div>
-<img width = "300" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/8295de6d-0ad6-41fb-9ddd-1ed52b4bae87">
-<img width = "300" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/d4977ba4-ec46-4903-8a53-fa8f2c0a16c7">
+<img width = "300" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/6b0e4b8f-8e97-4060-82d4-d5ecf254600d">
+<img width = "300" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/1e71a9f2-5fe3-4067-ac22-d0541b5a443a">
 </div></br>
 
 <div>
-<img width = "300" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/c84fe0a5-0844-4117-aed9-10cd62f81385">
-<img width = "300" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/c31810f4-92e8-42a8-8370-d125df2c54f4">
+<img width = "300" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/f31a1106-d576-4c50-b076-c730d771c349">
+<img width = "300" src = "https://github.com/oliver-or-not/PodPod/assets/107789649/464e3d51-53f0-4e4e-ab2e-040829145d44">
 </div>
