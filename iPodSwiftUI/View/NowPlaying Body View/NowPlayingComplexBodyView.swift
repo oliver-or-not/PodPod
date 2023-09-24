@@ -54,7 +54,7 @@ struct NowPlayingComplexBodyView: View {
                     upperTextOffsetTrigger: upperTextOffsetTrigger,
                     needsAnimatedView: needsAnimatedView
                 )
-                .offset(y: DesignSystem.Soft.Dimension.bodyHeight * -0.12)
+                .offset(y: DesignSystem.Soft.Dimension.bodyHeight * -0.095)
                 
                 Group {
                     switch transitionState {

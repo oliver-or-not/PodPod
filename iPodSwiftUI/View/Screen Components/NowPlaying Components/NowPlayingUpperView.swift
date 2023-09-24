@@ -97,9 +97,6 @@ struct NowPlayingUpperView: View {
                 Spacer()
                     .frame(width: DesignSystem.Soft.Dimension.nowPlayingHorizontalIndentation)
                 VStack(spacing: 0) {
-                    Spacer()
-                        .frame(height: DesignSystem.Soft.Dimension.w * 0.75 / 25.84 * 1.8)
-                    
                     // playlist indices, repeat, shuffle
                     HStack(spacing: 0) {
                         Text("\(currentSongIndex + 1) / \(lineupCount)")
