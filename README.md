@@ -1,4 +1,4 @@
-# PodPod
+# PodPod for Apple Music: iPod-like Music Player
 ### PodPod
 애플 뮤직과 연동되는 음악 플레이어 앱입니다.</br>
 음악 기능과 별개로, 사진 앱의 즐겨찾는 사진과 영상을 감상할 수 있습니다.</br></br>
