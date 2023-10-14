@@ -70,6 +70,7 @@ struct NowPlayingUpperView: View {
                                 .foregroundColor(DesignSystem.Soft.Color.albumPlaceholderNote)
                                 .padding(DesignSystem.Soft.Dimension.nowPlayingAlbumImageLength / 4)
                                 .frame(width: DesignSystem.Soft.Dimension.nowPlayingAlbumImageLength, height: DesignSystem.Soft.Dimension.nowPlayingAlbumImageLength)
+                                .clipped()
                                 .background(DesignSystem.Soft.Color.albumPlaceholderBackground)
                             
                             Spacer()
@@ -216,6 +217,7 @@ struct NowPlayingUpperView: View {
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: DesignSystem.Soft.Dimension.nowPlayingAlbumImageLength, height: DesignSystem.Soft.Dimension.nowPlayingAlbumImageLength)
+                                .clipped()
                                 .border(DesignSystem.Soft.Color.albumBorder, width: DesignSystem.Soft.Dimension.basicThinValue)
                             
                             Spacer()
