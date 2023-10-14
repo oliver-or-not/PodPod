@@ -12,7 +12,6 @@ import MediaPlayer
 import MusicKit
 import SwiftUI
 
-
 struct DeviceView: View {
     @StateObject var podObservable = PodObservable.shared
         
