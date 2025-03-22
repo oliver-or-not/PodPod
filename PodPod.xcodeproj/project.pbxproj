@@ -774,7 +774,7 @@
 				INFOPLIST_FILE = iPodSwiftUI/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PodPod;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
-				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Apple Music의 음악을 재생하려면 접근을 허용해주세요.";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "컨텐츠 재생을 위해 접근합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진 뷰어 기능을 사용하려면 모든 사진에 대한 접근을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -788,7 +788,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.8;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.wonil-or-not.PodPod";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wonil-or-not.PodPodPublic";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -814,7 +814,7 @@
 				INFOPLIST_FILE = iPodSwiftUI/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PodPod;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
-				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Apple Music의 음악을 재생하려면 접근을 허용해주세요.";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "컨텐츠 재생을 위해 접근합니다.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진 뷰어 기능을 사용하려면 모든 사진에 대한 접근을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -828,7 +828,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.8;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.wonil-or-not.PodPod";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wonil-or-not.PodPodPublic";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
